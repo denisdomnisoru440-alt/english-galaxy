@@ -1,0 +1,12 @@
+pages:
+  stage: deploy
+  script:
+    - mkdir -p public
+    - cp vocab.html public/index.html
+    - cp sw.js public/
+    - cp galaxy_tutor.html public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
