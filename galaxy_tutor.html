@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Galaxy Tutor — учись на своём приложении</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#0b0e1a;color:#e2e4f0;min-height:100vh;display:flex}
+.sb{width:200px;background:#0f1422;border-right:1px solid rgba(124,92,252,.12);padding:16px;overflow-y:auto;flex-shrink:0}
+.sb h2{font-size:13px;color:#7c5cfc;margin-bottom:12px}
+.sb ul{list-style:none}
+.sb ul li{padding:9px 12px;border-radius:8px;font-size:12px;color:#8892b0;cursor:pointer;margin-bottom:3px;transition:all .2s}
+.sb ul li:hover{background:rgba(124,92,252,.08);color:#e2e4f0}
+.sb ul li.act{background:rgba(124,92,252,.15);color:#7c5cfc;font-weight:600}
+.main{flex:1;display:flex;flex-direction:column;min-width:0}
+.top{padding:12px 20px;background:rgba(11,14,26,.85);border-bottom:1px solid rgba(124,92,252,.1);display:flex;align-items:center;gap:10px}
+.top .ttl{font-size:15px;font-weight:700;background:linear-gradient(135deg,#7c5cfc,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.top .spc{flex:1}
+.top .loc{font-size:11px;color:#6c7293;font-family:monospace}
+.cont{flex:1;overflow-y:auto;padding:20px}
+.cont h3{font-size:17px;font-weight:700;margin-bottom:10px}
+.cont .exp{font-size:14px;color:#b0b6d0;line-height:1.7;margin-bottom:14px}
+.cont .exp code{background:rgba(124,92,252,.1);padding:2px 6px;border-radius:4px;font-size:13px;color:#a5b4fc;font-family:monospace}
+.code-wrap{background:#060a14;border:1px solid rgba(124,92,252,.1);border-radius:12px;margin:12px 0;overflow:hidden}
+.code-wrap .ch{background:#0a0f1e;padding:6px 14px;font-size:10px;color:#6c7293;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid rgba(124,92,252,.06)}
+.code-wrap pre{padding:14px 16px;font-family:'Cascadia Code',monospace;font-size:12px;line-height:1.6;overflow-x:auto;white-space:pre;color:#c8d0e0}
+.code-wrap pre .cm{color:#6c7293;font-style:italic}
+.code-wrap pre .kw{color:#c792ea}
+.code-wrap pre .fn{color:#82aaff}
+.code-wrap pre .str{color:#c3e88d}
+.code-wrap pre .num{color:#f78c6c}
+.code-wrap pre .op{color:#89ddff}
+.code-wrap pre .hl{background:rgba(124,92,252,.12);display:inline-block;width:100%}
+.try-it{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:12px;padding:16px;margin:16px 0}
+.try-it .lbl{font-size:11px;color:#10b981;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.03em}
+.try-it textarea{width:100%;background:#060a14;border:1px solid rgba(124,92,252,.1);border-radius:8px;color:#e2e4f0;font-family:'Cascadia Code',monospace;font-size:12px;padding:10px;outline:none;resize:vertical;min-height:60px;tab-size:2}
+.try-it button{background:#7c5cfc;border:none;border-radius:6px;color:#fff;font-size:11px;font-weight:600;padding:6px 14px;cursor:pointer;margin-top:6px}
+.try-it button:hover{background:#6d4ff2}
+.try-it .res{background:#060a14;border-radius:6px;padding:8px 10px;margin-top:6px;font-size:12px;color:#6ee7b7;min-height:20px;white-space:pre-wrap}
+.page-btn{background:#10b981;border:none;border-radius:8px;color:#fff;font-size:12px;font-weight:600;padding:7px 18px;cursor:pointer}
+.page-btn:hover{background:#059669}
+</style>
+</head>
+<body>
+
+<div class="sb" id="sb">
+  <h2>&#128218; Устройство vocab.html</h2>
+  <ul id="lessList"></ul>
+</div>
+
+<div class="main">
+  <div class="top">
+    <span class="ttl">&#9733; Galaxy Tutor</span>
+    <span id="subtitle" style="font-size:12px;color:#8892b0"></span>
+    <div class="spc"></div>
+    <span class="loc" id="location"></span>
+  </div>
+  <div class="cont" id="content"></div>
+</div>
+
+<script>
+var LESSONS = [
+  {
+    title: 'Как устроен файл',
+    loc: 'весь файл',
+    exp: 'Твой <code>vocab.html</code> — это один файл, внутри которого три языка:<br><br>' +
+      '<b>1. HTML (строки 1–223)</b> — разметка: шапка, страницы, кнопки внизу. Браузер читает это как "что показать на экране".<br><br>' +
+      '<b>2. CSS (строки 16–195)</b> — стили внутри тега &lt;style&gt;: цвета, размеры, анимации.<br><br>' +
+      '<b>3. JavaScript (строки 224–конец)</b> — код внутри &lt;script&gt;: логика, квизы, сохранение слов.<br><br>' +
+      'Браузер читает файл сверху вниз: сначала HTML, потом применяет CSS, потом запускает JavaScript.',
+    code: ''
+  },
+  {
+    title: 'HTML шапка (header)',
+    loc: 'строки 198–204',
+    exp: 'Шапка — это верхняя полоска с названием и кнопкой темы:<br><br>' +
+      '<code>&lt;div class="hdr"&gt;</code> — контейнер шапки<br>' +
+      '<code>&lt;span class="star"&gt;</code> — звёздочка слева<br>' +
+      '<code>&lt;span class="ttl"&gt;English Galaxy&lt;/span&gt;</code> — название<br>' +
+      '<code>&lt;button onclick="toggleTheme()"&gt;</code> — кнопка смены темы<br><br>' +
+      'Классы (<code>class="hdr"</code>) нужны чтобы CSS знал к чему применять стили. ' +
+      '<code>onclick</code> — команда "при клике запусти функцию".',
+    code: '// Шапка в твоём файле (строка 198):\n<div class="hdr">\n  <span class="star">&#9733;</span>\n  <span class="ttl">English Galaxy</span>\n  <div class="spc"></div>\n  <button class="tb" onclick="toggleTheme()">&#9788;</button>\n</div>'
+  },
+  {
+    title: 'Страницы (pages)',
+    loc: 'строки 206–214',
+    exp: 'Внутри <code>class="scr"</code> лежат 6 страниц. Каждая — это <code>&lt;div class="page"&gt;</code>:<br><br>' +
+      '<code>id="browse"</code> — Browse (слова)<br>' +
+      '<code>id="quiz"</code> — Quiz (тест по словам)<br>' +
+      '<code>id="grammar"</code> — Grammar (грамматика)<br>' +
+      '<code>id="history"</code> — History (история)<br>' +
+      '<code>id="random"</code> — Random (случайное слово)<br>' +
+      '<code>id="mywords"</code> — My Words (мои слова)<br><br>' +
+      'В каждый момент видна только одна страница — та у которой <code>class="page on"</code>. ' +
+      'Класс <code>on</code> добавляется/убирается функцией <code>switchTab()</code>.',
+    code: '// Страницы в твоём файле:\n<div class="scr">\n  <div class="page on" id="browse"></div>\n  <div class="page" id="quiz"></div>\n  <div class="page" id="grammar"></div>\n  <div class="page" id="history"></div>\n  <div class="page" id="random"></div>\n  <div class="page" id="mywords"></div>\n</div>'
+  },
+  {
+    title: 'Нижняя навигация',
+    loc: 'строки 215–223',
+    exp: 'Снизу — панель навигации <code>class="bnav"</code>. Каждая кнопка — ссылка <code>&lt;a&gt;</code> с атрибутом <code>data-tab</code>:<br><br>' +
+      'Когда ты кликаешь, вызывается <code>switchTab("browse")</code>. Эта функция:<br><br>' +
+      '1. Убирает <code>class="on"</code> со всех страниц (они прячутся)<br>' +
+      '2. Добавляет <code>class="on"</code> к выбранной (она показывается)<br>' +
+      '3. Запускает функцию для этой страницы — например <code>renderBrowse()</code><br><br>' +
+      'Попробуй сам: открой вкладку Quiz, а потом посмотри как меняется класс у страниц.',
+    code: '// Кнопки навигации:\n<a class="act" data-tab="browse" onclick="switchTab(\'browse\')">\n  <span class="ic">&#128214;</span>Browse\n</a>\n<a data-tab="quiz" onclick="switchTab(\'quiz\')">\n  <span class="ic">&#9989;</span>Quiz\n</a>'
+  },
+  {
+    title: 'CSS — цвета и темы',
+    loc: 'строки 16–195',
+    exp: 'CSS — это правила вида "что к чему применять":<br><br>' +
+      '<code>.hdr { background: #060a14; }</code> — "у элемента с классом hdr сделай фон чёрным"<br><br>' +
+      'В твоём файле есть два набора стилей:<br>' +
+      '— Обычные (для тёмной темы): <code>body { background: #060a14; color: #e8eaf0; }</code><br>' +
+      '— Для светлой темы: <code>body.light { background: #f0f8ff; color: #0f172a; }</code><br><br>' +
+      'Когда ты нажимаешь кнопку темы, JS добавляет/убирает класс <code>light</code> у body, ' +
+      'и браузер сам подбирает нужные цвета.',
+    code: '// Как работает смена темы:\nbody { background: #060a14; color: #e8eaf0; }\nbody.light { background: #f0f8ff; color: #0f172a; }'
+  },
+  {
+    title: 'JavaScript — переменные',
+    loc: 'строки 224–330',
+    exp: 'В начале скрипта объявлены главные переменные:<br><br>' +
+      '<code>var G = [];</code> — массив со ВСЕМИ словами и категориями. ' +
+      'Внутри него A1, A2, B1... Grammar, Phrasal Verbs. Каждая категория — объект с id и словами.<br><br>' +
+      '<code>var CC = {...};</code> — объект с цветами для каждой категории. ' +
+      'Например A1 → зелёный, B2 → оранжевый.<br><br>' +
+      '<code>var CI = 0;</code> — индекс выбранной категории (какая сейчас открыта).<br><br>' +
+      'Переменная — это "контейнер с именем". В массиве можно хранить много значений. ' +
+      'В объекте — пары "ключ: значение".',
+    code: '// Главные переменные:\nvar G = [];              // все слова\nvar CC = {\n  "A1": "#10b981",\n  "B1": "#eab308",\n  "C2": "#a855f7"\n};\nvar CI = 0;  // текущая категория'
+  },
+  {
+    title: 'JavaScript — renderBrowse()',
+    loc: 'строки 375–430',
+    exp: 'Когда ты открываешь вкладку Browse, вызывается <code>renderBrowse()</code>. Она перерисовывает страницу:<br><br>' +
+      '1. Читает, что введено в поиск<br>' +
+      '2. Берёт слова из текущей категории <code>G[CI]</code><br>' +
+      '3. Строит HTML для каждой кнопки-категории сверху<br>' +
+      '4. Для каждого слова создаёт блок <code>&lt;div class="wi"&gt;</code> со словом, переводом, кнопкой аудио и звёздочкой<br>' +
+      '5. Вставляет весь HTML в <code>document.getElementById("browse")</code><br><br>' +
+      '<code>innerHTML</code> — это команда "замени всё внутри элемента на новый HTML". ' +
+      'То есть каждый раз страница строится заново из строк.',
+    code: '// Упрощённая версия renderBrowse():\nfunction renderBrowse(){\n  var g = G[CI];           // текущая категория\n  var h = "";                // пустая строка\n  for(var i = 0; i < g.words.length; i++){\n    var w = g.words[i][0];   // слово\n    var tr = g.words[i][1];  // перевод\n    h += "<div class=\'wi\'>" + w + "</div>";\n  }\n  document.getElementById("browse").innerHTML = h;\n}'
+  },
+  {
+    title: 'localStorage — My Words',
+    loc: 'строки 290–325',
+    exp: '<code>localStorage</code> — это "карман" в браузере, где данные хранятся даже после закрытия страницы.<br><br>' +
+      'My Words работает так:<br><br>' +
+      '— <code>getStudyWords()</code> — достаёт массив слов из localStorage<br>' +
+      '— <code>saveStudyWords(arr)</code> — сохраняет массив обратно<br>' +
+      '— <code>isStudyWord(w, g)</code> — проверяет, есть ли слово в избранном<br>' +
+      '— <code>toggleStudyWord(w, g)</code> — добавляет или удаляет слово<br><br>' +
+      'Когда ты кликаешь звёздочку, <code>toggleBMK()</code> вызывает <code>toggleStudyWord()</code>, ' +
+      'та меняет localStorage, и звёздочка становится жёлтой или пустой. Всё!',
+    code: '// Как работает My Words:\nfunction getStudyWords(){\n  var data = localStorage.getItem("eg_study_words");\n  return JSON.parse(data || "[]");\n}\nfunction toggleStudyWord(w, g){\n  var sw = getStudyWords();\n  for(var i = 0; i < sw.length; i++){\n    if(sw[i].w === w && sw[i].g === g){\n      sw.splice(i, 1);  // удалить\n      saveStudyWords(sw);\n      return false;\n    }\n  }\n  sw.push({w:w, g:g});  // добавить\n  saveStudyWords(sw);\n  return true;\n}'
+  },
+  {
+    title: 'Как добавить кнопку',
+    loc: 'пример',
+    exp: 'Допустим, хочешь добавить кнопку "Сбросить всё" на вкладке Browse.<br><br>' +
+      '<b>1. HTML:</b> Добавь кнопку в <code>renderBrowse()</code> перед закрывающим <code>h+=...</code>.<br><br>' +
+      '<code>&lt;button onclick="resetAll()"&gt;Сбросить&lt;/button&gt;</code><br><br>' +
+      '<b>2. JavaScript:</b> Напиши функцию:<br><br>' +
+      '<code>function resetAll(){<br>&nbsp;&nbsp;if(confirm("Точно?")){<br>&nbsp;&nbsp;&nbsp;&nbsp;localStorage.clear();<br>&nbsp;&nbsp;&nbsp;&nbsp;renderBrowse();<br>&nbsp;&nbsp;}<br>}</code><br><br>' +
+      '<b>3. CSS:</b> Можешь добавить стиль для новой кнопки, а можешь использовать готовый класс <code>.tb</code>.',
+    code: '// Пример добавления кнопки:\n// 1. HTML: вставить в renderBrowse()\nh += \'<button class="tb" onclick="resetAll()">Сбросить</button>\';\n\n// 2. JavaScript: написать функцию\nfunction resetAll(){\n  if(confirm("Удалить всё?")){\n    localStorage.clear();\n    renderBrowse();\n  }\n}\n\n// 3. Готово! Кнопка появится на странице.'
+  },
+  {
+    title: 'Как работает Quiz',
+    loc: 'строки 435–560',
+    exp: 'Quiz — это тест по словам. Вкратце:<br><br>' +
+      '1. <code>renderQuiz()</code> показывает список категорий (кнопки с галочками)<br>' +
+      '2. Когда выбраны категории и нажато Start, <code>startQuiz()</code> собирает слова из выбранных категорий<br>' +
+      '3. Перемешивает их, показывает по одному: слово → перевод → кнопки "Знал" / "Не знал"<br>' +
+      '4. В конце — статистика: сколько правильно/неправильно<br><br>' +
+      'Ключевые переменные:<br>' +
+      '<code>Q_SEL</code> — какие категории выбраны<br>' +
+      '<code>Q_WORDS</code> — массив слов для теста<br>' +
+      '<code>QI</code> — индекс текущего вопроса<br>' +
+      '<code>Q_CORRECT / Q_WRONG</code> — счётчик правильных/неправильных',
+    code: '// Упрощённая логика Quiz:\nvar Q_WORDS = [];\nvar QI = 0, Q_CORRECT = 0, Q_WRONG = 0;\n\nfunction startQuiz(){\n  Q_WORDS = [];\n  QI = 0; Q_CORRECT = 0; Q_WRONG = 0;\n  // собираем слова из выбранных категорий\n  showQ();\n}\nfunction showQ(){\n  var w = Q_WORDS[QI];\n  // показать слово и кнопки\n}\nfunction answerQ(know){\n  if(know) Q_CORRECT++; else Q_WRONG++;\n  QI++;\n  showQ();\n}'
+  },
+  {
+    title: 'Где что менять',
+    loc: 'шпаргалка',
+    exp: 'Короткая шпаргалка — что где искать в твоём файле:<br><br>' +
+      '🔹 <b>Строки 16–195</b> — CSS: цвета, шрифты, размеры<br>' +
+      '🔹 <b>Строки 198–223</b> — HTML: шапка, страницы, навигация<br>' +
+      '🔹 <b>Строки 224–252</b> — данные: все слова и категории<br>' +
+      '🔹 <b>Строки 287–357</b> — My Words: localStorage, звёздочки<br>' +
+      '🔹 <b>Строки 375–430</b> — Browse: отображение слов, поиск<br>' +
+      '🔹 <b>Строки 435–560</b> — Quiz: тестирование слов<br>' +
+      '🔹 <b>Строки 560–830</b> — Grammar: грамматика<br>' +
+      '🔹 <b>Строки 835–932</b> — My Words вкладка (список + практика)<br>' +
+      '🔹 <b>Строки 934–конец</b> — Audio, тема, статистика, экспорт<br><br>' +
+      'Хочешь что-то поменять — говори, покажу как именно.',
+    code: ''
+  }
+];
+
+var CI = 0;
+
+function renderList(){
+  var h = '';
+  for(var i=0;i<LESSONS.length;i++){
+    h += '<li class="' + (i===CI?'act':'') + '" onclick="goLesson('+i+')">' + LESSONS[i].title + '</li>';
+  }
+  document.getElementById('lessList').innerHTML = h;
+}
+
+function goLesson(i){
+  CI = i;
+  renderList();
+  render();
+}
+
+function render(){
+  var l = LESSONS[CI];
+  document.getElementById('subtitle').textContent = l.title;
+  document.getElementById('location').textContent = l.loc || '';
+  var h = '<h3>' + l.title + '</h3>';
+  h += '<div class="exp">' + l.exp + '</div>';
+  if(l.code){
+    h += '<div class="code-wrap"><div class="ch">&#9001;&#9000; Код из твоего файла</div><pre>' + l.code + '</pre></div>';
+  }
+  h += '<div class="try-it">';
+  h += '<div class="lbl">&#9998; Попробуй сам</div>';
+  h += '<textarea id="tryCode" placeholder="Напиши свой код здесь..."></textarea>';
+  h += '<div style="margin-top:6px"><button onclick="runTry()">&#9654; Выполнить</button></div>';
+  h += '<div class="res" id="tryResult"></div>';
+  h += '</div>';
+  document.getElementById('content').innerHTML = h;
+  var tryBox = document.getElementById('tryCode');
+  if(tryBox) tryBox.value = localStorage.getItem('gt_try_' + CI) || '';
+}
+
+function runTry(){
+  var code = document.getElementById('tryCode').value;
+  localStorage.setItem('gt_try_' + CI, code);
+  var out = document.getElementById('tryResult');
+  out.textContent = '';
+  var lines = [];
+  var origLog = console.log;
+  console.log = function(){
+    var args = Array.from(arguments).map(function(a){ return String(a); });
+    lines.push(args.join(' '));
+  };
+  try {
+    eval(code);
+    console.log = origLog;
+    out.textContent = lines.join('\n') || '✓ Выполнено без ошибок';
+  } catch(e){
+    console.log = origLog;
+    out.textContent = '✗ Ошибка: ' + e.message;
+  }
+}
+
+renderList();
+render();
+</script>
+</body>
+</html>

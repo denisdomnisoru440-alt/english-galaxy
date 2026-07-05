@@ -1,0 +1,1 @@
+{"api_key": "your-groq-api-key-here", "api_endpoint": "https://api.groq.com/openai/v1/chat/completions", "ai_model": "mixtral-8x7b-32768", "resolution": "Maximized"}
