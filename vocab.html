@@ -230,7 +230,7 @@ body.light .mbitem .txt .ww{color:#1e293b}
 <span class="yr" id="yr"></span>
 <span class="yr" id="streak" style="margin-left:6px;font-size:10px"></span>
 <div class="spc"></div>
-<button class="tb" id="themeBtn" onclick="toggleTheme()">&#9788;</button>
+<button class="tb" id="themeBtn" onclick="toggleTheme()">&#9790;</button>
 </div>
 <div class="scr">
 <div class="page on" id="browse"></div>
@@ -1041,12 +1041,12 @@ function autoTheme(){
   var theme=lsGet('eg_theme');
   if(theme=='light')document.body.classList.add('light');else document.body.classList.remove('light');
   var btn=document.getElementById('themeBtn');
-  if(btn)btn.textContent=(theme=='light')?'&#9790;':'&#9788;';
+  if(btn)btn.textContent=(theme=='light')?'&#9788;':'&#9790;';
 }
 function toggleTheme(){
   var b=document.body;b.classList.toggle('light');
   var is=b.classList.contains('light');
-  document.getElementById('themeBtn').textContent=is?'&#9790;':'&#9788;';
+  document.getElementById('themeBtn').textContent=is?'&#9788;':'&#9790;';
   lsSet('eg_theme', is?'light':'dark');
   lsSet('eg_theme_man', '1');
 }
