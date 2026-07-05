@@ -1358,18 +1358,33 @@ function startMWQuizTracked() {
   // Replace ansMW with tracked version for this session
   window.ansMW = function(c) { ansMWTracked(c); };
 }
+// ====== MY WORDS KNOWN FILTER ======
+var MW_KNOWN_FILTER = 'all';
 // ====== MODIFY My Words practice buttons to use tracked version ======
 var origRenderMyWords = renderMyWords;
 renderMyWords = function() {
-  var words = getStudyWordsFull();
-  var h = '<div style="font-size:13px;font-weight:700;color:#eab308;margin-bottom:6px">&#128151; My Words <span style="font-weight:400;color:#6c7293;font-size:10px">('+words.length+')</span></div>';
+  var allWords = getStudyWordsFull();
+  var words = [];
+  for(var i=0;i<allWords.length;i++){
+    var k=getKnown(allWords[i].w,allWords[i].g);
+    if(MW_KNOWN_FILTER=='all')words.push(allWords[i]);
+    else if(MW_KNOWN_FILTER=='known'&&k===true)words.push(allWords[i]);
+    else if(MW_KNOWN_FILTER=='notknown'&&k===false)words.push(allWords[i]);
+  }
+  var h = '<div style="font-size:13px;font-weight:700;color:#eab308;margin-bottom:6px">&#128151; My Words <span style="font-weight:400;color:#6c7293;font-size:10px">('+words.length+'/'+allWords.length+')</span></div>';
   h += '<div style="display:flex;gap:4px;margin-bottom:8px">';
   h += '<button onclick="startMWQuizTracked()" style="flex:1;background:linear-gradient(135deg,#eab308,#f97316);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:10px;cursor:pointer;touch-action:manipulation">&#9654; Practice All</button>';
   h += '<button onclick="clearMyWords()" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 10px;cursor:pointer">&#128465;</button>';
   h += '</div>';
+  h += '<div class="kfilt" id="mwfilt">';
+  h += '<button class="'+(MW_KNOWN_FILTER=='all'?'act':'')+'" onclick="MW_KNOWN_FILTER=\'all\';renderMyWords()">All</button>';
+  h += '<button class="'+(MW_KNOWN_FILTER=='known'?'act':'')+'" onclick="MW_KNOWN_FILTER=\'known\';renderMyWords()">&#10004; Known</button>';
+  h += '<button class="'+(MW_KNOWN_FILTER=='notknown'?'act':'')+'" onclick="MW_KNOWN_FILTER=\'notknown\';renderMyWords()">&#10068; Not known</button>';
+  h += '</div>';
   if(!words.length){
     h += '<div style="background:#11162e;border-radius:12px;padding:24px;text-align:center;color:#4a5278;font-size:13px">';
-    h += '&#11088; No words yet<br><span style="font-size:11px">Browse words and tap the star &#9734; or swipe right to add them here!</span></div>';
+    if(allWords.length)h+='No words match the filter.';else h+='&#11088; No words yet<br><span style="font-size:11px">Browse words and tap the star &#9734; or swipe right to add them here!</span>';
+    h+='</div>';
     document.getElementById('mywords').innerHTML = h;
     return;
   }
@@ -1380,8 +1395,10 @@ renderMyWords = function() {
     var ds = d.toLocaleDateString();
     var esc = w.w.replace(/'/g,"\\'");
     var wesc = w.w.replace(/"/g,"&quot;");
+    var kn=getKnown(w.w,w.g);var knc=kn===true?'kno':(kn===false?'knn':'');var knt=kn===true?'✓':(kn===false?'✗':'?');
     h += '<div class="srem" onclick="speak(\''+esc+'\')">';
     h += '<div style="display:flex;align-items:center">';
+    h += '<span class="kic '+knc+'" data-w="'+wesc+'" data-g="'+w.g+'" onclick="event.stopPropagation();toggleKnown(this);renderMyWords()" style="flex-shrink:0;margin-right:6px">'+knt+'</span>';
     h += '<div style="flex:1"><span class="rw">'+w.w+'</span> <span class="rg">('+w.g+')</span></div>';
     h += '<button class="bmk" data-w="'+wesc+'" data-g="'+w.g+'" onclick="event.stopPropagation();removeMW(this)" style="color:#ef4444;font-size:14px">&#10060;</button>';
     h += '</div>';
