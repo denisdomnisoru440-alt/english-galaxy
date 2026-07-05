@@ -15,7 +15,7 @@
 <script>if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(function(){})</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;-webkit-touch-callout:none;overscroll-behavior:none}
-body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#060a14;color:#e8eaf0;min-height:100dvh;overflow-x:hidden;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(124,92,252,.12),transparent),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(16,185,129,.06),transparent);animation:breathe 8s ease-in-out infinite}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#060a14;color:#e8eaf0;height:100dvh;overflow:hidden;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(124,92,252,.12),transparent),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(16,185,129,.06),transparent);animation:breathe 8s ease-in-out infinite}
 body.light{background:#f0f8ff;color:#0f172a;background-image:radial-gradient(ellipse 80% 50% at 50% -20%,rgba(99,102,241,.08),transparent),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(16,185,129,.04),transparent)}
 @keyframes breathe{0%,100%{opacity:1}50%{opacity:.92}}
 ::selection{background:rgba(124,92,252,.35);color:#fff}
