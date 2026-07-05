@@ -200,6 +200,27 @@ body.light .srem .rw{color:#1e293b}
 .wi.sm .chk.on{color:#10b981}
 .wi.sm.sel{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2);border-left-color:#10b981}
 @media(prefers-reduced-motion:reduce){.wi{animation:none}.am{animation:none}.page.on{animation:none}}
+.moverlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;animation:pageIn .3s}
+.mbox{background:#0f132e;border:1px solid rgba(124,92,252,.2);border-radius:20px;padding:20px;max-width:420px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+body.light .mbox{background:#f0f4ff;border-color:rgba(99,102,241,.2)}
+.mbhd{font-size:16px;font-weight:800;color:#10b981;margin-bottom:2px}
+.mbsb{font-size:11px;color:#6c7293;margin-bottom:10px}
+.mbitem{display:flex;align-items:center;background:rgba(17,22,46,.6);border:1px solid rgba(124,92,252,.08);border-radius:10px;padding:8px 10px;margin-bottom:4px;transition:opacity .3s}
+body.light .mbitem{background:rgba(248,250,252,.8);border-color:rgba(148,163,184,.15)}
+.mbitem .txt{flex:1}
+.mbitem .txt .ww{font-weight:600;font-size:13px;color:#e8eaf0}
+body.light .mbitem .txt .ww{color:#1e293b}
+.mbitem .txt .gg{font-size:10px;color:#6c7293}
+.mbitem .txt .trr{font-size:11px;color:#10b981}
+.mbbtns{display:flex;gap:6px;margin-top:8px}
+.mbbtn{flex:1;border-radius:10px;font-size:11px;font-weight:700;padding:8px;cursor:pointer;touch-action:manipulation;text-align:center;transition:all .2s}
+.mbbtn:hover{transform:translateY(-1px)}
+.mbbtn.keep{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);color:#10b981}
+.mbbtn.remove{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);color:#ef4444}
+.mbbtn.close{background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.15);color:#7c5cfc;flex:0;padding:8px 12px}
+.mwact{display:flex;gap:4px;margin:4px 0;flex-wrap:wrap}
+.mwact .mk{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);border-radius:8px;color:#10b981;font-size:10px;font-weight:700;padding:6px 10px;cursor:pointer;touch-action:manipulation}
+.mwact .mr{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:8px;color:#ef4444;font-size:10px;font-weight:700;padding:6px 10px;cursor:pointer;touch-action:manipulation}
 </style>
 </head>
 <body>
@@ -1249,6 +1270,179 @@ function showReview(){
   }
   document.getElementById('reviewTab').innerHTML=h;
 }
+// ====== KNOWN WORDS MANAGEMENT (after quiz / practice) ======
+var KNOWN_WORDS_DATA = [];
+function getCorrectWordsFromQuiz(){
+  var correct=[];
+  for(var i=0;i<QW.length;i++){
+    var found=false;
+    for(var j=0;j<QWW.length;j++){if(QW[i].w===QWW[j].w&&QW[i].g===QWW[j].g){found=true;break;}}
+    if(!found)correct.push(QW[i]);
+  }
+  return correct;
+}
+function promptKnownWordsManagement(){
+  var correct=getCorrectWordsFromQuiz();
+  var inMyWords=[];
+  for(var i=0;i<correct.length;i++){if(isStudyWord(correct[i].w,correct[i].g))inMyWords.push(correct[i]);}
+  if(inMyWords.length===0){alert('No known words found in My Words.');return;}
+  showKnownWordsDialog(inMyWords);
+}
+function showKnownWordsDialog(words){
+  KNOWN_WORDS_DATA=words;
+  var existing=document.getElementById('knownModal');if(existing)existing.remove();
+  var h='<div id="knownModal" class="moverlay"><div class="mbox">';
+  h+='<div class="mbhd">&#10004; Known Words in My Words</div>';
+  h+='<div class="mbsb">You got these right in the quiz. What to do with them?</div>';
+  for(var i=0;i<words.length;i++){
+    var tr=words[i].r.indexOf(' \u2014 ')>-1?words[i].r.split(' \u2014 ')[0].trim():words[i].r;
+    h+='<div id="kw_'+i+'" class="mbitem">';
+    h+='<div class="txt"><span class="ww">'+words[i].w+'</span> <span class="gg">('+words[i].g+')</span><br><span class="trr">'+tr+'</span></div>';
+    h+='<div class="mwact"><button id="kwk_'+i+'" class="mk" onclick="keepKnownWord('+i+')">&#128190; Keep</button>';
+    h+='<button id="kwr_'+i+'" class="mr" onclick="removeKnownWord('+i+')">&#128465; Remove</button></div>';
+    h+='</div>';
+  }
+  h+='<div class="mbbtns">';
+  h+='<button class="mbbtn keep" onclick="keepAllKnownWords()">&#128190; Keep All</button>';
+  h+='<button class="mbbtn remove" onclick="removeAllKnownWords()">&#128465; Remove All</button>';
+  h+='<button class="mbbtn close" onclick="closeKnownModal()">&#10006;</button>';
+  h+='</div></div></div>';
+  document.body.insertAdjacentHTML('beforeend',h);
+}
+function keepKnownWord(i){
+  var el=document.getElementById('kw_'+i);if(el)el.style.opacity='0.4';
+  var btn=document.getElementById('kwk_'+i);if(btn){btn.disabled=true;btn.innerHTML='&#10004; Kept';}
+  var btn2=document.getElementById('kwr_'+i);if(btn2)btn2.disabled=true;
+  if(KNOWN_WORDS_DATA[i])setKnown(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g,true);
+}
+function removeKnownWord(i){
+  var el=document.getElementById('kw_'+i);if(el)el.style.opacity='0.4';
+  var btn=document.getElementById('kwk_'+i);if(btn)btn.disabled=true;
+  var btn2=document.getElementById('kwr_'+i);if(btn2){btn2.disabled=true;btn2.innerHTML='&#10004; Removed';}
+  if(KNOWN_WORDS_DATA[i]){toggleStudyWord(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g);setKnown(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g,null);}
+}
+function keepAllKnownWords(){for(var i=0;i<KNOWN_WORDS_DATA.length;i++)setKnown(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g,true);closeKnownModal();}
+function removeAllKnownWords(){for(var i=0;i<KNOWN_WORDS_DATA.length;i++){toggleStudyWord(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g);setKnown(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g,null);}closeKnownModal();}
+function closeKnownModal(){var el=document.getElementById('knownModal');if(el)el.remove();}
+
+// ====== MY WORDS PRACTICE: track correct words for management ======
+var MW_CORRECT_WORDS = [];
+var origAnsMW = ansMW;
+function trackCorrectInMW() {
+  MW_CORRECT_WORDS = [];
+  for (var i = 0; i < MW_WORDS.length; i++) MW_CORRECT_WORDS.push(false);
+}
+function ansMWTracked(c) {
+  if (c) { MW_CORRECT++; MW_CORRECT_WORDS[MW_QI] = true; updateScore(MW_WORDS[MW_QI].w, MW_WORDS[MW_QI].g, true); }
+  else { MW_WRONG++; MW_CORRECT_WORDS[MW_QI] = false; updateScore(MW_WORDS[MW_QI].w, MW_WORDS[MW_QI].g, false); }
+  MW_QI++; showMWQ();
+}
+function promptMWKnownWords() {
+  var inMyWords = [];
+  for (var i = 0; i < MW_WORDS.length; i++) {
+    if (MW_CORRECT_WORDS[i] && isStudyWord(MW_WORDS[i].w, MW_WORDS[i].g)) {
+      inMyWords.push(MW_WORDS[i]);
+    }
+  }
+  if (inMyWords.length === 0) { alert('No known words to manage.'); return; }
+  showKnownWordsDialog(inMyWords);
+}
+// Override ansMW to track correct words
+function startMWQuizTracked() {
+  MW_WORDS = getStudyWordsFull();
+  if (MW_WORDS.length < 2) { alert('Add at least 2 words to practice!'); return; }
+  shuffle(MW_WORDS);
+  MW_QI = 0; MW_CORRECT = 0; MW_WRONG = 0;
+  trackCorrectInMW();
+  showMWQ();
+  // Replace ansMW with tracked version for this session
+  window.ansMW = function(c) { ansMWTracked(c); };
+}
+// ====== MODIFY My Words practice buttons to use tracked version ======
+var origRenderMyWords = renderMyWords;
+renderMyWords = function() {
+  var words = getStudyWordsFull();
+  var h = '<div style="font-size:13px;font-weight:700;color:#eab308;margin-bottom:6px">&#128151; My Words <span style="font-weight:400;color:#6c7293;font-size:10px">('+words.length+')</span></div>';
+  h += '<div style="display:flex;gap:4px;margin-bottom:8px">';
+  h += '<button onclick="startMWQuizTracked()" style="flex:1;background:linear-gradient(135deg,#eab308,#f97316);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:10px;cursor:pointer;touch-action:manipulation">&#9654; Practice All</button>';
+  h += '<button onclick="clearMyWords()" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 10px;cursor:pointer">&#128465;</button>';
+  h += '</div>';
+  if(!words.length){
+    h += '<div style="background:#11162e;border-radius:12px;padding:24px;text-align:center;color:#4a5278;font-size:13px">';
+    h += '&#11088; No words yet<br><span style="font-size:11px">Browse words and tap the star &#9734; or swipe right to add them here!</span></div>';
+    document.getElementById('mywords').innerHTML = h;
+    return;
+  }
+  h += '<div id="mwlist">';
+  for(var i = 0; i < words.length; i++){
+    var w = words[i], tr = w.r.indexOf(' \u2014 ') > -1 ? w.r.split(' \u2014 ')[0].trim() : w.r;
+    var d = new Date(w.added);
+    var ds = d.toLocaleDateString();
+    var esc = w.w.replace(/'/g,"\\'");
+    var wesc = w.w.replace(/"/g,"&quot;");
+    h += '<div class="srem" onclick="speak(\''+esc+'\')">';
+    h += '<div style="display:flex;align-items:center">';
+    h += '<div style="flex:1"><span class="rw">'+w.w+'</span> <span class="rg">('+w.g+')</span></div>';
+    h += '<button class="bmk" data-w="'+wesc+'" data-g="'+w.g+'" onclick="event.stopPropagation();removeMW(this)" style="color:#ef4444;font-size:14px">&#10060;</button>';
+    h += '</div>';
+    h += '<div class="rr">'+tr+'</div>';
+    h += '<div style="font-size:9px;color:#4a5278;margin-top:2px">added '+ds+'</div>';
+    h += '</div>';
+  }
+  h += '</div>';
+  h += '<div id="mwcard" style="margin-top:6px"></div>';
+  document.getElementById('mywords').innerHTML = h;
+};
+
+// ====== MODIFY quiz results to include manage known words button ======
+var origShowQR = showQR;
+showQR = function() {
+  if(QTIMER_ID){clearInterval(QTIMER_ID);QTIMER_ID=0;}
+  var tot=QC+QWR+QSK;var pc=tot?Math.round(QC/tot*100):0;
+  var h='<div class="qcard">';
+  h+='<div style="font-size:22px;font-weight:700">Quiz Complete!</div>';
+  h+='<div style="font-size:28px;color:#00d4aa;margin:8px 0">'+pc+'%</div>';
+  if(QTIMER>0)h+='<div style="font-size:10px;color:#7c5cfc;margin-bottom:4px">&#9202; '+fmtTime(QTIMER)+'</div>';
+  h+='<div style="font-size:12px;color:#8892b0;margin-bottom:8px">&#10004; '+QC+'  &#10008; '+QWR+'  &#9199; '+QSK+'</div>';
+  if(QC>0){
+   h+='<div style="background:#0d1f1a;border-radius:8px;padding:8px 10px;margin-bottom:6px;text-align:left">';
+   h+='<div style="font-size:11px;color:#6c7293;margin-bottom:4px">&#9989; Знаю ('+QC+'):</div>';
+   for(var i=0,n=0;i<QW.length&&n<20;i++){var found=false;for(var j=0;j<QWW.length;j++){if(QW[i].w===QWW[j].w&&QW[i].g===QWW[j].g){found=true;break}}if(!found){var r=QW[i].r.split(' \u2014 ')[0].trim();h+='<div style="font-size:11px;color:#10b981">'+QW[i].w+' — '+r+'</div>';n++}}
+   if(n>=20)h+='<div style="font-size:10px;color:#4a5278">...</div>';
+   h+='</div>';
+  }
+  if(QWW.length>0){
+   h+='<div style="background:#1f0d0d;border-radius:8px;padding:8px 10px;margin-bottom:6px;text-align:left">';
+   h+='<div style="font-size:11px;color:#6c7293;margin-bottom:4px">&#10060; Надо выучить ('+QWW.length+'):</div>';
+   for(var i=0;i<QWW.length;i++){var r=QWW[i].r.split(' \u2014 ')[0].trim();h+='<div style="font-size:12px;color:#f87171;padding:3px 0">'+QWW[i].w+' — <span style="color:#fbbf24">'+r+'</span> <span style="font-size:9px;color:#6c7293">('+QWW[i].g+')</span></div>'}
+   h+='</div>';
+  }
+  if(QC>0){
+   h+='<button onclick="promptKnownWordsManagement()" style="background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.2);border-radius:8px;color:#eab308;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:4px;touch-action:manipulation">&#128151; Manage known words in My Words</button> ';
+  }
+   if(QWW.length>0){h+='<button onclick="addWrongToMW(\'quiz\')" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:4px;touch-action:manipulation">&#10133; Add wrong to My Words</button>';}
+    h+='<button onclick="startQ()" style="background:#7c5cfc;border:none;border-radius:12px;color:#fff;font-size:14px;font-weight:600;padding:10px 24px;cursor:pointer;margin-top:6px;touch-action:manipulation">&#8634; Try Again</button>';
+   h+='</div>';
+   document.getElementById('qcard').innerHTML=h;
+  saveQuizResult();
+};
+
+// ====== MODIFY My Words practice results to include manage known words button ======
+var origShowMWRes = showMWRes;
+showMWRes = function() {
+  var tot=MW_CORRECT+MW_WRONG,pc=tot?Math.round(MW_CORRECT/tot*100):0;
+  var h='<div style="background:#11162e;border:1px solid #1e2350;border-radius:16px;padding:20px;text-align:center">';
+  h+='<div style="font-size:20px;font-weight:700">Practice Done!</div>';
+  h+='<div style="font-size:28px;color:#00d4aa;margin:6px 0">'+pc+'%</div>';
+  h+='<div style="font-size:12px;color:#8892b0">&#10004; '+MW_CORRECT+'  &#10008; '+MW_WRONG+'</div>';
+  if(MW_CORRECT>0){
+    h+='<button onclick="promptMWKnownWords()" style="background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.2);border-radius:8px;color:#eab308;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:6px;touch-action:manipulation">&#128151; Manage known words in My Words</button>';
+  }
+  h+='<div style="margin-top:6px"><button onclick="startMWQuizTracked()" style="background:#7c5cfc;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;padding:8px 20px;cursor:pointer;touch-action:manipulation">&#8634; Again</button></div>';
+  h+='</div>';
+  document.getElementById('mwcard').innerHTML=h;
+};
+
 renderBrowse();
 </script>
 </body>
