@@ -228,7 +228,6 @@ body.light .mbitem .txt .ww{color:#1e293b}
 <span class="star">&#9733;</span>
 <span class="ttl">English Galaxy</span>
 <span class="yr" id="yr"></span>
-<span class="yr" id="streak" style="margin-left:6px;font-size:10px"></span>
 <div class="spc"></div>
 <button class="tb" id="themeBtn" onclick="toggleTheme()">&#9790;</button>
 </div>
@@ -248,7 +247,7 @@ body.light .mbitem .txt .ww{color:#1e293b}
 
 <a data-tab="history" onclick="switchTab('history')"><span class="ic">&#128202;</span>History</a>
 <a data-tab="random" onclick="switchTab('random')"><span class="ic">&#127922;</span>Random</a>
-<a data-tab="mywords" onclick="switchTab('mywords')"><span class="ic">&#128151;</span>My Words</a>
+<a data-tab="mywords" onclick="switchTab('mywords')"><span class="ic">&#128221;</span>My Words</a>
 </div>
 <script>
 window.onerror=function(m,u,l){document.body.innerHTML='<div style="color:#ef4444;padding:20px;font-family:monospace;white-space:pre-wrap">Error: '+m+'\nline: '+l+'<br><br>'+u+'</div>'};
@@ -406,9 +405,7 @@ function getStudyWordsFull(){
 }
 var CI = 0, mode = 'browse', SORT_MODE = 'default', SELECT_MODE = false, SELECTED_WORDS = {};
 var THEME = lsGet('eg_theme', 'dark');
-document.getElementById('yr').textContent = 'E'+new Date().getFullYear();
 autoTheme();
-renderStreak();
 
 function switchTab(tab){
  mode=tab;
@@ -927,7 +924,7 @@ function addWrongToMW(source){
 }
 function renderMyWords(){
   var words=getStudyWordsFull();
-  var h='<div style="font-size:13px;font-weight:700;color:#eab308;margin-bottom:6px">&#128151; My Words <span style="font-weight:400;color:#6c7293;font-size:10px">('+words.length+')</span></div>';
+  var h='<div style="font-size:13px;font-weight:700;color:#eab308;margin-bottom:6px">&#128221; My Words <span style="font-weight:400;color:#6c7293;font-size:10px">('+words.length+')</span></div>';
   h+='<div style="display:flex;gap:4px;margin-bottom:8px">';
   h+='<button onclick="startMWQuiz()" style="flex:1;background:linear-gradient(135deg,#eab308,#f97316);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:10px;cursor:pointer;touch-action:manipulation">&#9654; Practice All</button>';
   h+='<button onclick="clearMyWords()" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 10px;cursor:pointer">&#128465;</button>';
@@ -1371,7 +1368,7 @@ renderMyWords = function() {
     else if(MW_KNOWN_FILTER=='known'&&k===true)words.push(allWords[i]);
     else if(MW_KNOWN_FILTER=='notknown'&&k===false)words.push(allWords[i]);
   }
-  var h = '<div style="font-size:13px;font-weight:700;color:#eab308;margin-bottom:6px">&#128151; My Words <span style="font-weight:400;color:#6c7293;font-size:10px">('+words.length+'/'+allWords.length+')</span></div>';
+  var h = '<div style="font-size:13px;font-weight:700;color:#eab308;margin-bottom:6px">&#128221; My Words <span style="font-weight:400;color:#6c7293;font-size:10px">('+words.length+'/'+allWords.length+')</span></div>';
   h += '<div style="display:flex;gap:4px;margin-bottom:8px">';
   h += '<button onclick="startMWQuizTracked()" style="flex:1;background:linear-gradient(135deg,#eab308,#f97316);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:10px;cursor:pointer;touch-action:manipulation">&#9654; Practice All</button>';
   h += '<button onclick="clearMyWords()" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 10px;cursor:pointer">&#128465;</button>';
@@ -1435,7 +1432,7 @@ showQR = function() {
    h+='</div>';
   }
   if(QC>0){
-   h+='<button onclick="promptKnownWordsManagement()" style="background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.2);border-radius:8px;color:#eab308;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:4px;touch-action:manipulation">&#128151; Manage known words in My Words</button> ';
+   h+='<button onclick="promptKnownWordsManagement()" style="background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.2);border-radius:8px;color:#eab308;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:4px;touch-action:manipulation">&#128203; Manage known words in My Words</button> ';
   }
    if(QWW.length>0){h+='<button onclick="addWrongToMW(\'quiz\')" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:4px;touch-action:manipulation">&#10133; Add wrong to My Words</button>';}
     h+='<button onclick="startQ()" style="background:#7c5cfc;border:none;border-radius:12px;color:#fff;font-size:14px;font-weight:600;padding:10px 24px;cursor:pointer;margin-top:6px;touch-action:manipulation">&#8634; Try Again</button>';
@@ -1453,7 +1450,7 @@ showMWRes = function() {
   h+='<div style="font-size:28px;color:#00d4aa;margin:6px 0">'+pc+'%</div>';
   h+='<div style="font-size:12px;color:#8892b0">&#10004; '+MW_CORRECT+'  &#10008; '+MW_WRONG+'</div>';
   if(MW_CORRECT>0){
-    h+='<button onclick="promptMWKnownWords()" style="background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.2);border-radius:8px;color:#eab308;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:6px;touch-action:manipulation">&#128151; Manage known words in My Words</button>';
+    h+='<button onclick="promptMWKnownWords()" style="background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.2);border-radius:8px;color:#eab308;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:6px;touch-action:manipulation">&#128203; Manage known words in My Words</button>';
   }
   h+='<div style="margin-top:6px"><button onclick="startMWQuizTracked()" style="background:#7c5cfc;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;padding:8px 20px;cursor:pointer;touch-action:manipulation">&#8634; Again</button></div>';
   h+='</div>';
