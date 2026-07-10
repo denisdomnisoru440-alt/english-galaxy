@@ -430,63 +430,10 @@ function switchTab(tab){
  var navs=document.querySelectorAll('.bnav a');
  for(var i=0;i<navs.length;i++)navs[i].classList.remove('act');
  document.querySelector('.bnav a[data-tab="'+tab+'"]').classList.add('act');
-  if(tab=='browse')
-function renderSyncTo(t){
-  var el=document.getElementById(t);
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
-  var total=0;
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
-  var kb=(total/1024).toFixed(1);
-  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
-  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
-  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
-  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
-  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
-  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
-  h+='</div>';
-  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
-  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
-  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
-  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
-  el.innerHTML=h;
-}
-function exportData(){
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
-  var data={version:1,exported:new Date().toISOString(),data:{}};
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
-  var json=JSON.stringify(data);
-  var blob=new Blob([json],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
-  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
-}
-function importData(e){
-  var file=e.target.files[0];if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(ev){
-    try{
-      var data=JSON.parse(ev.target.result);
-      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
-      var count=0;var keys=Object.keys(data.data);
-      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
-      var dt=new Date(data.exported);
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
-      setTimeout(function(){location.reload();},1200);
-    }catch(ex){
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
-    }
-  };
-  reader.readAsText(file);e.target.value='';
-}
-
-renderBrowse();
-  else if(tab=='quiz')renderQuiz();
-  else if(tab=='grammar')renderGrammar();
-   else if(tab=='me')renderMe();
+ if(tab=='browse')renderBrowse();
+ else if(tab=='quiz')renderQuiz();
+ else if(tab=='grammar')renderGrammar();
+ else if(tab=='me')renderMe();
 }
 var meSub=null;
 var ME_T='meInner';
@@ -588,60 +535,8 @@ function renderBrowse(){
   document.getElementById('st').textContent=wl.length+' words | '+tr+' translated | ✓'+knownCount+' ✗'+notKnownCount;
   if(items.length>0)sl(items[0]);else sl(-1);
 }
-function sw(i){CI=i;LAST_S='';
-function renderSyncTo(t){
-  var el=document.getElementById(t);
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
-  var total=0;
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
-  var kb=(total/1024).toFixed(1);
-  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
-  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
-  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
-  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
-  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
-  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
-  h+='</div>';
-  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
-  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
-  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
-  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
-  el.innerHTML=h;
-}
-function exportData(){
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
-  var data={version:1,exported:new Date().toISOString(),data:{}};
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
-  var json=JSON.stringify(data);
-  var blob=new Blob([json],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
-  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
-}
-function importData(e){
-  var file=e.target.files[0];if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(ev){
-    try{
-      var data=JSON.parse(ev.target.result);
-      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
-      var count=0;var keys=Object.keys(data.data);
-      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
-      var dt=new Date(data.exported);
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
-      setTimeout(function(){location.reload();},1200);
-    }catch(ex){
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
-    }
-  };
-  reader.readAsText(file);e.target.value='';
-}
+function sw(i){CI=i;LAST_S='';renderBrowse();}
 
-renderBrowse();}
 function renderGlobalSearch(s){
   var results=[];
   var totalAll=0;
@@ -846,10 +741,8 @@ function saveQuizResult(){
 }
 
 function renderHistory(){
-  var h='<div class="sttab"><button class="act" id="htab0" onclick="switchHTab(0)">&#128202; Stats</button><button id="htab1" onclick="switchHTab(1)">&#128221; Review</button><button id="htab2" onclick="switchHTab(2)">&#128214; History</button></div>';
-  h+='<div id="statsTab"></div><div id="reviewTab" class="hid"></div>';
-  h+='<div id="histList">';
-  var history=lsGetObj('eg_quiz_history', []);
+  var h='';
+var history=lsGetObj('eg_quiz_history', []);
   h+='<div style="font-size:13px;font-weight:700;color:#7c5cfc;margin-bottom:6px">Quiz History';
   if(history.length)h+=' <span style="font-weight:400;font-size:10px;color:#6c7293">('+history.length+')</span>';
   h+='</div>';
@@ -886,15 +779,7 @@ function renderHistory(){
     h+='<button onclick="if(confirm(\'Clear all history?\')){lsRemove(\'eg_quiz_history\');renderHistory()}" style="flex:0;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 10px;cursor:pointer">&#128465;</button>';
     h+='</div>';
   }
-  h+='</div>';
   document.getElementById(ME_T).innerHTML=h;
-}
-function switchHTab(i){
-  document.getElementById(ME_T).style.display=i===0?'block':'none';
-  document.getElementById('reviewTab').style.display=i===1?'block':'none';
-  document.getElementById('histList').style.display=i===2?'block':'none';
-  var btns=document.querySelectorAll('.sttab button');
-  for(var b=0;b<btns.length;b++)btns[b].classList.toggle('act',b===i);
 }
 
 function exportHistory(){
@@ -1147,353 +1032,18 @@ function removeMW(el){
   var w=el.dataset.w,g=el.dataset.g;
   toggleStudyWord(w,g);
   renderMyWords();
-  if(mode=='browse')
-function renderSyncTo(t){
-  var el=document.getElementById(t);
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
-  var total=0;
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
-  var kb=(total/1024).toFixed(1);
-  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
-  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
-  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
-  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
-  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
-  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
-  h+='</div>';
-  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
-  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
-  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
-  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
-  el.innerHTML=h;
-}
-function exportData(){
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
-  var data={version:1,exported:new Date().toISOString(),data:{}};
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
-  var json=JSON.stringify(data);
-  var blob=new Blob([json],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
-  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
-}
-function importData(e){
-  var file=e.target.files[0];if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(ev){
-    try{
-      var data=JSON.parse(ev.target.result);
-      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
-      var count=0;var keys=Object.keys(data.data);
-      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
-      var dt=new Date(data.exported);
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
-      setTimeout(function(){location.reload();},1200);
-    }catch(ex){
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
-    }
-  };
-  reader.readAsText(file);e.target.value='';
-}
-
-renderBrowse();
+  if(mode=='browse')renderBrowse();
 }
 function clearMyWords(){
   if(!confirm('Remove all words from My Words?'))return;
   saveStudyWords([]);
   renderMyWords();
-  if(mode=='browse')
-function renderSyncTo(t){
-  var el=document.getElementById(t);
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
-  var total=0;
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
-  var kb=(total/1024).toFixed(1);
-  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
-  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
-  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
-  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
-  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
-  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
-  h+='</div>';
-  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
-  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
-  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
-  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
-  el.innerHTML=h;
-}
-function exportData(){
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
-  var data={version:1,exported:new Date().toISOString(),data:{}};
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
-  var json=JSON.stringify(data);
-  var blob=new Blob([json],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
-  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
-}
-function importData(e){
-  var file=e.target.files[0];if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(ev){
-    try{
-      var data=JSON.parse(ev.target.result);
-      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
-      var count=0;var keys=Object.keys(data.data);
-      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
-      var dt=new Date(data.exported);
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
-      setTimeout(function(){location.reload();},1200);
-    }catch(ex){
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
-    }
-  };
-  reader.readAsText(file);e.target.value='';
-}
-
-renderBrowse();
-}
-function startMWQuiz(){
-  MW_WORDS=getStudyWordsFull();
-  if(MW_WORDS.length<2){alert('Add at least 2 words to practice!');return;}
-  shuffle(MW_WORDS);
-  MW_QI=0;MW_CORRECT=0;MW_WRONG=0;
-  showMWQ();
-}
-function showMWQ(){
-  if(MW_QI>=MW_WORDS.length){showMWRes();return;}
-  var w=MW_WORDS[MW_QI],pct=MW_QI/MW_WORDS.length*100;
-  var tr=w.r.indexOf(' \u2014 ')>-1?w.r.split(' \u2014 ')[0].trim():w.r;
-  var c='#eab308';
-  var h='<div id="mwcardinner" style="background:#11162e;border:1px solid #1e2350;border-radius:16px;padding:16px;text-align:center;min-height:140px">';
-  h+='<div class="qbar"><div class="qbarf" style="width:'+pct+'%;background:'+c+'"></div></div>';
-  h+='<div style="font-size:10px;color:#6c7293;text-align:right;margin-bottom:4px">'+(MW_QI+1)+'/'+MW_WORDS.length+'</div>';
-  h+='<div style="font-size:10px;color:'+c+';font-weight:700;margin-bottom:4px">'+w.g+'</div>';
-  h+='<div style="font-size:24px;font-weight:800;padding:4px 0">'+w.w+'</div>';
-  h+='<div id="mwtrans" style="display:none;font-size:14px;color:#10b981;padding:6px 0">'+tr+'</div>';
-  h+='<div style="margin-top:6px">';
-  h+='<button class="qflip" id="mwflip" onclick="flipMW()" style="font-size:12px;padding:8px 20px;min-width:120px">&#9654; Show Answer</button>';
-  h+='</div>';
-  h+='<div id="mwfb" style="display:none;margin-top:6px">';
-  h+='<button class="qbtn" style="background:#10b981" onclick="ansMW(true)">&#10004; Know</button> ';
-  h+='<button class="qbtn" style="background:#ef4444" onclick="ansMW(false)">&#10008; Again</button>';
-  h+='</div>';
-  h+='<div style="font-size:11px;color:#6c7293;margin-top:6px">&#10004; '+MW_CORRECT+'  &#10008; '+MW_WRONG+'</div>';
-  h+='</div>';
-  document.getElementById('mwcard').innerHTML=h;
-  MW_FLIPPED=false;
-}
-var MW_FLIPPED=false;
-function flipMW(){
-  if(MW_FLIPPED)return;MW_FLIPPED=true;
-  document.getElementById('mwtrans').style.display='block';
-  document.getElementById('mwflip').style.display='none';
-  document.getElementById('mwfb').style.display='block';
-}
-function ansMW(c){
-  if(c){MW_CORRECT++;updateScore(MW_WORDS[MW_QI].w,MW_WORDS[MW_QI].g,true);}
-  else{MW_WRONG++;updateScore(MW_WORDS[MW_QI].w,MW_WORDS[MW_QI].g,false);}
-  MW_QI++;showMWQ();
-}
-function showMWRes(){
-  var tot=MW_CORRECT+MW_WRONG,pc=tot?Math.round(MW_CORRECT/tot*100):0;
-  var h='<div style="background:#11162e;border:1px solid #1e2350;border-radius:16px;padding:20px;text-align:center">';
-  h+='<div style="font-size:20px;font-weight:700">Practice Done!</div>';
-  h+='<div style="font-size:28px;color:#00d4aa;margin:6px 0">'+pc+'%</div>';
-  h+='<div style="font-size:12px;color:#8892b0">&#10004; '+MW_CORRECT+'  &#10008; '+MW_WRONG+'</div>';
-  h+='<button onclick="startMWQuiz()" style="background:#7c5cfc;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;padding:8px 20px;cursor:pointer;margin-top:6px">&#8634; Again</button>';
-  h+='</div>';
-  document.getElementById('mwcard').innerHTML=h;
-}
-
-// ====== FEATURE: Audio (Web Speech API) ======
-function speak(text, lang){
-  if(!window.speechSynthesis)return;
-  window.speechSynthesis.cancel();
-  var u=new SpeechSynthesisUtterance(text);
-  u.lang=lang||'en-US';u.rate=0.9;u.pitch=1;
-  window.speechSynthesis.speak(u);
-}
-
-// ====== FEATURE: Auto Theme ======
-function autoTheme(){
-  var h=new Date().getHours();
-  var auto=(h>=7&&h<20)?'dark':'light';
-  var cur=lsGet('eg_theme', 'dark');
-  if(!lsGet('eg_theme_man')){lsSet('eg_theme',auto);}
-  var theme=lsGet('eg_theme');
-  if(theme=='light')document.body.classList.add('light');else document.body.classList.remove('light');
-  var btn=document.getElementById('themeBtn');
-  if(btn)btn.textContent=(theme=='light')?'&#9788;':'&#9790;';
-}
-function toggleTheme(){
-  var b=document.body;b.classList.toggle('light');
-  var is=b.classList.contains('light');
-  document.getElementById('themeBtn').textContent=is?'&#9788;':'&#9790;';
-  lsSet('eg_theme', is?'light':'dark');
-  lsSet('eg_theme_man', '1');
-}
-
-// ====== FEATURE: Spaced Repetition (Word Scores) ======
-function getWordKey(w,g){return (g||'')+':'+w;}
-function getScore(w,g){
-  var s=lsGetObj('eg_scores', {});
-  return s[getWordKey(w,g)]||0;
-}
-function updateScore(w,g,correct){
-  var s=lsGetObj('eg_scores', {});
-  var k=getWordKey(w,g);
-  var cur=s[k]||0;
-  if(correct){s[k]=Math.max(0,cur-1);}else{s[k]=Math.min(10,cur+3);}
-  lsSetObj('eg_scores', s);
-}
-function getReviewWords(count){
-  var s=lsGetObj('eg_scores', {});
-  var high=[];for(var k in s){if(s[k]>0){var p=k.indexOf(':');var g=k.substring(0,p),w=k.substring(p+1);high.push({w:w,g:g,score:s[k]});}}
-  high.sort(function(a,b){return b.score-a.score});
-  if(count===undefined)count=Math.min(20,high.length);
-  var result=[];var used={};
-  for(var i=0;i<high.length&&result.length<count;i++){
-    var k=getWordKey(high[i].w,high[i].g);
-    for(var gi=0;gi<G.length;gi++){
-      if(G[gi].id!=high[i].g)continue;
-      for(var j=0;j<G[gi].words.length;j++){
-        if(G[gi].words[j][0]==high[i].w&&!used[k]){
-          result.push({w:G[gi].words[j][0],r:G[gi].words[j][1],g:G[gi].id});
-          used[k]=true;break;
-        }
-      }
-    }
-  }
-  return result;
-}
-
-// ====== FEATURE: Daily Stats & Streak ======
-function getDayKey(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
-function getStats(){return lsGetObj('eg_daily_stats', {});}
-function saveStats(correct,wrong){
-  if(!correct&&!wrong)return;
-  var s=getStats();var dk=getDayKey();
-  if(!s[dk])s[dk]={c:0,w:0};
-  s[dk].c+=correct||0;s[dk].w+=wrong||0;
-  lsSetObj('eg_daily_stats', s);
-  updateStreak();
-}
-function getStreak(){
-  var s=getStats();var streak=0;var d=new Date();
-  for(var i=0;i<365;i++){
-    var y=d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
-    if(s[y]&&(s[y].c||s[y].w)){streak++;d.setDate(d.getDate()-1);}else break;
-  }
-  return streak;
-}
-function renderStreak(){
-  var el=document.getElementById('streak');
-  if(el){var s=getStreak();el.textContent=s>0?'&#128293; '+s:'&#128293; 0';}
-}
-function renderStats(){
-  var s=getStats();
-  var h='<div style="font-size:13px;font-weight:700;color:#7c5cfc;margin-bottom:6px">&#128200; Statistics</div>';
-  var keys=Object.keys(s).sort();keys=keys.slice(-30);
-  if(!keys.length){h+='<div class="emp">No data yet. Complete some quizzes!</div>';document.getElementById(ME_T).innerHTML=h;return;}
-  var days=keys.length;
-  var totC=0,totW=0,allW=0,today='---';
-  for(var i=0;i<keys.length;i++){var d=s[keys[i]];totC+=d.c||0;totW+=d.w||0;allW+=d.c+d.w;}
-  if(s[getDayKey()]){var td=s[getDayKey()];today=td.c+' / '+(td.c+td.w)+' ('+(td.c+td.w?Math.round(td.c/(td.c+td.w)*100):0)+'%)';}
-  var best=0;for(var i=0;i<keys.length;i++){var p=((s[keys[i]].c||0)+(s[keys[i]].w||0))?Math.round((s[keys[i]].c||0)/((s[keys[i]].c||0)+(s[keys[i]].w||0))*100):0;if(p>best)best=p;}
-  h+='<div style="display:flex;gap:10px;margin-bottom:10px">';
-  var streak=getStreak();
-  h+='<div style="flex:1;background:rgba(17,22,46,.5);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(234,179,8,.08)"><div style="font-size:20px;font-weight:800;color:#eab308">'+streak+'</div><div style="font-size:9px;color:#6c7293">&#128293; Streak</div></div>';
-  h+='<div style="flex:1;background:rgba(17,22,46,.5);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(124,92,252,.08)"><div style="font-size:20px;font-weight:800;color:#7c5cfc">'+days+'</div><div style="font-size:9px;color:#6c7293">Days Active</div></div>';
-  h+='<div style="flex:1;background:rgba(17,22,46,.5);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(16,185,129,.08)"><div style="font-size:20px;font-weight:800;color:#10b981">'+totC+'</div><div style="font-size:9px;color:#6c7293">Correct</div></div>';
-  h+='<div style="flex:1;background:rgba(17,22,46,.5);border-radius:12px;padding:10px;text-align:center;border:1px solid rgba(239,68,68,.08)"><div style="font-size:20px;font-weight:800;color:#ef4444">'+totW+'</div><div style="font-size:9px;color:#6c7293">Wrong</div></div>';
-  h+='</div>';
-  h+='<div style="font-size:10px;color:#6c7293;margin-bottom:4px">Today: <b style="color:#e8eaf0">'+today+'</b> | Best day: <b style="color:#10b981">'+best+'%</b> | Total accuracy: <b style="color:#e8eaf0">'+(allW?Math.round(totC/allW*100):0)+'%</b></div>';
-  h+='<div style="font-size:10px;color:#6c7293;margin-bottom:6px">Last '+days+' days:</div>';
-  var maxVal=1;for(var i=0;i<keys.length;i++){var v=(s[keys[i]].c||0)+(s[keys[i]].w||0);if(v>maxVal)maxVal=v;}
-  for(var i=keys.length-1;i>=0;i--){
-    var d=s[keys[i]],c=d.c||0,w=d.w||0,t=c+w;
-    var cw=t?Math.round(c/t*100):0;
-    var bw=Math.round(t/maxVal*100);
-    var label=keys[i].substring(5);
-    h+='<div class="strow"><div class="stlbl">'+label+'</div><div class="stbar"><div class="stbarf" style="width:'+bw+'%;background:linear-gradient(90deg,#10b981,'+(w?'#ef4444':'#10b981')+')"></div></div><div style="font-size:9px;color:#6c7293;min-width:30px;text-align:right">'+c+'/'+t+'</div></div>';
-  }
-  h+='<div style="margin-top:8px;display:flex;gap:4px">';
-  h+='<button onclick="lsRemove(\'eg_daily_stats\');renderStats()" style="flex:1;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:8px;color:#ef4444;font-size:10px;font-weight:600;padding:6px;cursor:pointer">&#128465; Reset</button>';
-  h+='</div>';
-  document.getElementById(ME_T).innerHTML=h;
-}
-
-// ====== FEATURE: Sort + Export/Import ======
-function toggleSort(){
-  var sel=document.getElementById('sortSel');
-  if(!sel)return;SORT_MODE=sel.value;rd();
+  if(mode=='browse')renderBrowse();
 }
 function toggleSelectMode(){
   SELECT_MODE=!SELECT_MODE;
   if(!SELECT_MODE)SELECTED_WORDS={};
-  
-function renderSyncTo(t){
-  var el=document.getElementById(t);
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
-  var total=0;
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
-  var kb=(total/1024).toFixed(1);
-  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
-  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
-  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
-  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
-  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
-  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
-  h+='</div>';
-  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
-  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
-  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
-  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
-  el.innerHTML=h;
-}
-function exportData(){
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
-  var data={version:1,exported:new Date().toISOString(),data:{}};
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
-  var json=JSON.stringify(data);
-  var blob=new Blob([json],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
-  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
-}
-function importData(e){
-  var file=e.target.files[0];if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(ev){
-    try{
-      var data=JSON.parse(ev.target.result);
-      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
-      var count=0;var keys=Object.keys(data.data);
-      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
-      var dt=new Date(data.exported);
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
-      setTimeout(function(){location.reload();},1200);
-    }catch(ex){
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
-    }
-  };
-  reader.readAsText(file);e.target.value='';
-}
-
-renderBrowse();
+  rd();
 }
 function selWord(el,key){
   if(SELECTED_WORDS[key]){delete SELECTED_WORDS[key];el.classList.remove('sel');var chk=el.querySelector('.chk');if(chk){chk.className='chk';chk.innerHTML='&#11036;';}}
@@ -1508,60 +1058,7 @@ function addSelectedToMyWords(){
   }
   SELECTED_WORDS={};
   alert(count+' words added to My Words!');
-  
-function renderSyncTo(t){
-  var el=document.getElementById(t);
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
-  var total=0;
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
-  var kb=(total/1024).toFixed(1);
-  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
-  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
-  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
-  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
-  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
-  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
-  h+='</div>';
-  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
-  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
-  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
-  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
-  el.innerHTML=h;
-}
-function exportData(){
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
-  var data={version:1,exported:new Date().toISOString(),data:{}};
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
-  var json=JSON.stringify(data);
-  var blob=new Blob([json],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
-  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
-}
-function importData(e){
-  var file=e.target.files[0];if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(ev){
-    try{
-      var data=JSON.parse(ev.target.result);
-      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
-      var count=0;var keys=Object.keys(data.data);
-      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
-      var dt=new Date(data.exported);
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
-      setTimeout(function(){location.reload();},1200);
-    }catch(ex){
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
-    }
-  };
-  reader.readAsText(file);e.target.value='';
-}
-
-renderBrowse();
+  rd();
 }
 function selectAllVisible(){
   var wis=document.querySelectorAll('#wl .wi');
@@ -1592,60 +1089,7 @@ function importWords(input){
         var found=false;for(var j=0;j<G[ci].words.length;j++){if(G[ci].words[j][0]==w.word){found=true;break;}}
         if(!found)G[ci].words.push([w.word,w.translation]);
       }
-      
-function renderSyncTo(t){
-  var el=document.getElementById(t);
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
-  var total=0;
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
-  var kb=(total/1024).toFixed(1);
-  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
-  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
-  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
-  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
-  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
-  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
-  h+='</div>';
-  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
-  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
-  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
-  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
-  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
-  el.innerHTML=h;
-}
-function exportData(){
-  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
-  var data={version:1,exported:new Date().toISOString(),data:{}};
-  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
-  var json=JSON.stringify(data);
-  var blob=new Blob([json],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
-  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
-}
-function importData(e){
-  var file=e.target.files[0];if(!file)return;
-  var reader=new FileReader();
-  reader.onload=function(ev){
-    try{
-      var data=JSON.parse(ev.target.result);
-      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
-      var count=0;var keys=Object.keys(data.data);
-      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
-      var dt=new Date(data.exported);
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
-      setTimeout(function(){location.reload();},1200);
-    }catch(ex){
-      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
-    }
-  };
-  reader.readAsText(file);e.target.value='';
-}
-
-renderBrowse();alert('Imported '+data.length+' words!');
+      renderBrowse();alert('Imported '+data.length+' words!');
     }catch(err){alert('Invalid file: '+err.message);}
   };
   reader.readAsText(file);input.value='';
@@ -1711,14 +1155,14 @@ function ansGEFill(){
 function showReview(){
   var rev=getReviewWords(20);
   var h='<div style="font-size:13px;font-weight:700;color:#ef4444;margin-bottom:6px">&#128221; Words to Review <span style="font-weight:400;color:#6c7293;font-size:10px">('+rev.length+')</span></div>';
-  if(!rev.length){h+='<div class="emp">No words to review! Keep up the good work!</div>';document.getElementById('reviewTab').innerHTML=h;return;}
+  if(!rev.length){h+='<div class="emp">No words to review! Keep up the good work!</div>';document.getElementById(ME_T).innerHTML=h;return;}
   for(var i=0;i<rev.length;i++){
     var w=rev[i],tr=w.r.indexOf(' — ')>-1?w.r.split(' — ')[0].trim():w.r;
     h+='<div class="srem" onclick="speak(\''+w.w.replace(/'/g,"\\'")+'\')">';
     h+='<div class="rw">'+w.w+' <span class="rg">('+w.g+')</span></div>';
     h+='<div class="rr">'+tr+'</div></div>';
   }
-  document.getElementById('reviewTab').innerHTML=h;
+  document.getElementById(ME_T).innerHTML=h;
 }
 // ====== KNOWN WORDS MANAGEMENT (after quiz / practice) ======
 var KNOWN_WORDS_DATA = [];
