@@ -221,6 +221,29 @@ body.light .mbitem .txt .ww{color:#1e293b}
 .mwact{display:flex;gap:4px;margin:4px 0;flex-wrap:wrap}
 .mwact .mk{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);border-radius:8px;color:#10b981;font-size:10px;font-weight:700;padding:6px 10px;cursor:pointer;touch-action:manipulation}
 .mwact .mr{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:8px;color:#ef4444;font-size:10px;font-weight:700;padding:6px 10px;cursor:pointer;touch-action:manipulation}
+/* NOTES */
+.nitem{background:rgba(17,22,46,.5);border:1px solid rgba(124,92,252,.1);border-radius:14px;padding:14px 16px;margin-bottom:8px;cursor:pointer;touch-action:manipulation;transition:all .3s;border-left:3px solid #7c5cfc}
+.nitem:hover{border-color:rgba(124,92,252,.3);transform:translateY(-1px)}
+body.light .nitem{background:rgba(248,250,252,.7);border-color:rgba(226,232,240,.5)}
+.nitem .ntxt{font-size:14px;color:#e8eaf0;line-height:1.5;white-space:pre-wrap;word-break:break-word;max-height:80px;overflow:hidden}
+body.light .nitem .ntxt{color:#1e293b}
+.nitem .ndt{font-size:9px;color:#6c7293;margin-top:6px}
+.nitem .ndel{background:none;border:none;color:#ef4444;font-size:14px;cursor:pointer;padding:2px 6px;float:right;border-radius:6px;transition:all .2s}
+.nitem .ndel:hover{background:rgba(239,68,68,.15)}
+.noverlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;animation:pageIn .3s}
+.nmodal{background:#0f132e;border:1px solid rgba(124,92,252,.25);border-radius:20px;padding:20px;max-width:480px;width:92%;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+body.light .nmodal{background:#f0f4ff;border-color:rgba(99,102,241,.25)}
+.nmodal textarea{width:100%;min-height:160px;background:rgba(10,15,40,.6);border:1px solid rgba(124,92,252,.2);border-radius:12px;color:#e8eaf0;font-size:15px;padding:12px 14px;outline:none;resize:vertical;font-family:inherit;line-height:1.5}
+body.light .nmodal textarea{background:rgba(248,250,252,.8);border-color:rgba(148,163,184,.3);color:#0f172a}
+.nmodal textarea:focus{border-color:#7c5cfc;box-shadow:0 0 20px rgba(124,92,252,.1)}
+body.light .nmodal textarea:focus{border-color:#6366f1}
+.nmodal .nmhd{font-size:16px;font-weight:800;color:#7c5cfc;margin-bottom:12px}
+.nmodal .nmbtns{display:flex;gap:8px;margin-top:10px}
+.nmodal .nmbtn{flex:1;border-radius:12px;font-size:13px;font-weight:700;padding:10px;cursor:pointer;touch-action:manipulation;text-align:center;border:none;transition:all .2s}
+.nmodal .nmbtn:hover{transform:translateY(-1px)}
+.nmodal .nmbtn.nmsave{background:linear-gradient(135deg,#7c5cfc,#10b981);color:#fff}
+.nmodal .nmbtn.nmcancel{background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.15);color:#7c5cfc}
+body.light .nmodal .nmbtn.nmcancel{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.15);color:#6366f1}
 </style>
 </head>
 <body>
@@ -239,6 +262,7 @@ body.light .mbitem .txt .ww{color:#1e293b}
 <div class="page" id="history"></div>
 <div class="page" id="random"></div>
 <div class="page" id="mywords"></div>
+<div class="page" id="notes"></div>
 </div>
 <div class="bnav" id="bnav">
 <a class="act" data-tab="browse" onclick="switchTab('browse')"><span class="ic">&#128214;</span>Browse</a>
@@ -248,6 +272,7 @@ body.light .mbitem .txt .ww{color:#1e293b}
 <a data-tab="history" onclick="switchTab('history')"><span class="ic">&#128202;</span>History</a>
 <a data-tab="random" onclick="switchTab('random')"><span class="ic">&#127922;</span>Random</a>
 <a data-tab="mywords" onclick="switchTab('mywords')"><span class="ic">&#128221;</span>My Words</a>
+<a data-tab="notes" onclick="switchTab('notes')"><span class="ic">&#128221;</span>Notes</a>
 </div>
 <script>
 window.onerror=function(m,u,l){document.body.innerHTML='<div style="color:#ef4444;padding:20px;font-family:monospace;white-space:pre-wrap">Error: '+m+'\nline: '+l+'<br><br>'+u+'</div>'};
@@ -421,6 +446,7 @@ function switchTab(tab){
    else if(tab=='history')renderHistory();
    else if(tab=='random')renderRandom();
    else if(tab=='mywords')renderMyWords();
+   else if(tab=='notes')renderNotes();
 }
 
 function toggleBMK(el){
@@ -450,8 +476,9 @@ function initSwipe(el,onSwipe){
 }
 
 // ====== BROWSE ======
+var LAST_S='';
 function renderBrowse(){
- var s=(document.getElementById('D')?document.getElementById('D').value:'').toLowerCase();
+ var s=LAST_S||'';
  var g=G[CI],wl=g.words;
  var h='<div class="cats">';
   for(var i=0;i<G.length;i++){var a=(i==CI);h+='<button class="cat'+(a?' act':'')+'" style="background:'+(a?CC[G[i].id]:'#181d3a')+';color:'+(a?'#fff':CC[G[i].id])+'" onclick="sw('+i+')">'+G[i].id+' <span style="font-weight:400;font-size:9px">('+G[i].words.length+')</span></button>';}
@@ -459,7 +486,7 @@ function renderBrowse(){
    var totalWords=0;for(var ti=0;ti<G.length;ti++)totalWords+=G[ti].words.length;
    for(var ti=0;ti<G.length;ti++){h+='<span style="color:'+CC[G[ti].id]+'">'+G[ti].id+' <b>'+G[ti].words.length+'</b></span>';if(ti<G.length-1)h+='<span style="color:#1e2350">|</span>';}
    h+='<span style="margin-left:auto;color:#7c5cfc"><b>'+totalWords+'</b> total</span>';
-   h+='</div><div class="srch"><div class="sw"><input id="D" placeholder="Search..." oninput="rd()"/></div></div>';
+   h+='</div><div class="srch"><div class="sw"><input id="D" placeholder="Search all '+totalWords+' words..." value="'+s.replace(/"/g,'&quot;')+'" oninput="LAST_S=this.value;rd()"/></div></div>';
    h+='<div style="display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap"><select id="sortSel" class="srt" onchange="toggleSort()"><option value="default">Default order</option><option value="alpha">A-Z</option><option value="alphaDesc">Z-A</option><option value="level">By level</option></select><button onclick="exportWords()" style="background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.15);border-radius:8px;color:#7c5cfc;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#128230; Export</button><button onclick="document.getElementById(\'wordFile\').click()" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#128229; Import</button><input type="file" id="wordFile" accept=".json" style="display:none" onchange="importWords(this)"/><button onclick="toggleSelectMode()" id="selBtn" style="background:'+(SELECT_MODE?'rgba(234,179,8,.2)':'rgba(124,92,252,.08)')+';border:1px solid '+(SELECT_MODE?'rgba(234,179,8,.3)':'rgba(124,92,252,.15)')+';border-radius:8px;color:'+(SELECT_MODE?'#eab308':'#7c5cfc')+';font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">'+(SELECT_MODE?'&#9989; Selecting':'&#128203; Select')+'</button>'+(SELECT_MODE?'<button onclick="addSelectedToMyWords()" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#10133; Add Sel.</button><button onclick="selectAllVisible()" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#10062; All</button>':'')+'</div>';
    h+='<div class="kfilt" id="kf">';
   h+='<button class="'+(KNOWN_FILTER=='all'?'act':'')+'" onclick="KNOWN_FILTER=\'all\';renderBrowse()">All</button>';
@@ -491,9 +518,47 @@ function renderBrowse(){
   document.getElementById('st').textContent=wl.length+' words | '+tr+' translated | ✓'+knownCount+' ✗'+notKnownCount;
   if(items.length>0)sl(items[0]);else sl(-1);
 }
-function sw(i){CI=i;renderBrowse();}
+function sw(i){CI=i;LAST_S='';renderBrowse();}
+function renderGlobalSearch(s){
+  var results=[];
+  var totalAll=0;
+  for(var gi=0;gi<G.length;gi++){
+    var wl=G[gi].words;totalAll+=wl.length;
+    for(var j=0;j<wl.length;j++){
+      var e=wl[j][0],r=wl[j][1]||'';
+      if(e.toLowerCase().indexOf(s)>-1||r.toLowerCase().indexOf(s)>-1){
+        results.push({word:wl[j],ci:gi,wi:j});
+      }
+    }
+  }
+  var db=document.getElementById('db');if(!db)return;
+  var html='';
+  for(var j=0;j<results.length;j++){
+    var w=results[j].word,ci=results[j].ci,wi=results[j].wi;
+    var tr=w[1]||'';var trText=tr.indexOf(' \u2014 ')>-1?tr.split(' \u2014 ')[0].trim():tr;
+    var esc=w[0].replace(/'/g,"\\'");var wesc=w[0].replace(/"/g,"&quot;");
+    var key=w[0]+'|'+G[ci].id;var c=CC[G[ci].id]||'#7c5cfc';
+    html+='<div class="wi" data-i="'+wi+'" data-ci="'+ci+'" onclick="sl('+wi+','+ci+')">';
+    html+='<span class="rtag" style="background:'+c+';margin-right:8px">'+G[ci].id+'</span>';
+    html+='<span class="we">'+w[0]+'</span>';
+    html+='<span class="tr">'+trText+'</span>';
+    html+='<button class="spk" onclick="event.stopPropagation();speak(\''+esc+'\')">&#9654;</button>';
+    html+='<button class="bmk" data-w="'+wesc+'" data-g="'+G[ci].id+'" onclick="event.stopPropagation();toggleBMK(this)">'+(isStudyWord(w[0],G[ci].id)?'&#11088;':'&#9734;')+'</button>';
+    html+='</div>';
+  }
+  document.getElementById('wl').innerHTML=html;
+  document.getElementById('cnt').textContent=results.length+' found across '+G.length+' groups ('+totalAll+' total words)';
+  var st=document.getElementById('st');if(st)st.textContent='Global search: "'+s+'" — '+results.length+' results';
+  if(results.length>0)sl(results[0].wi,results[0].ci);else{db.innerHTML='<div class="emp">No results for "'+s+'"</div>';}
+  setTimeout(function(){
+    var wis=document.querySelectorAll('#wl .wi');
+    for(var si=0;si<wis.length;si++){(function(el){initSwipe(el,function(dir){var bmk=el.querySelector('.bmk');if(bmk)bmk.click();});})(wis[si]);}
+  },50);
+}
 function rd(){
   var s=(document.getElementById('D')?document.getElementById('D').value:'').toLowerCase();
+  LAST_S=s;
+  if(s.length>0){renderGlobalSearch(s);return;}
   var wl=G[CI].words;
   var sortMode=document.getElementById('sortSel')?document.getElementById('sortSel').value:SORT_MODE;
   var items=[];for(var i=0;i<wl.length;i++){var e=wl[i][0],r=wl[i][1]||'';if((!s||e.toLowerCase().indexOf(s)>-1||r.toLowerCase().indexOf(s)>-1)&&knownFilter(e,G[CI].id))items.push(i)}
@@ -514,14 +579,15 @@ function rd(){
   document.getElementById('cnt').textContent=items.length+' of '+wl.length+' words';
   if(items.length>0)sl(items[0]);else sl(-1);
 }
-function sl(i){
- if(i<0||i>=(G[CI].words||[]).length){document.getElementById('db').innerHTML='<div class="emp">Select a word</div>';return}
- var e=G[CI].words[i][0],r=G[CI].words[i][1];
+function sl(i,sci){
+ var ci=(sci!==undefined)?sci:CI;
+ if(i<0||i>=(G[ci].words||[]).length){document.getElementById('db').innerHTML='<div class="emp">Select a word</div>';return}
+ var e=G[ci].words[i][0],r=G[ci].words[i][1];
  var its=document.getElementById('wl').querySelectorAll('.wi');
  for(var j=0;j<its.length;j++)its[j].classList.remove('act');
- for(var j=0;j<its.length;j++){if(parseInt(its[j].dataset.i)==i){its[j].classList.add('act');its[j].scrollIntoView({block:'nearest'});break;}}
+ for(var j=0;j<its.length;j++){if(parseInt(its[j].dataset.i)==i&&parseInt(its[j].dataset.ci||ci)==ci){its[j].classList.add('act');its[j].scrollIntoView({block:'nearest'});break;}}
  var esc=e.replace(/'/g,"\\'");
- var h='<div class="w">'+e+' <button class="spk" onclick="speak(\''+esc+'\')" style="font-size:20px;vertical-align:middle">&#9654;</button></div><div class="lv">'+G[CI].id+'</div><div class="sep"></div>';
+ var h='<div class="w">'+e+' <button class="spk" onclick="speak(\''+esc+'\')" style="font-size:20px;vertical-align:middle">&#9654;</button></div><div class="lv" style="color:'+(CC[G[ci].id]||'#7c5cfc')+'">'+G[ci].id+'</div><div class="sep"></div>';
   if(!r){h+='<div class="emp">No translation</div>';document.getElementById('db').innerHTML=h;return}
   if(r.indexOf('FORMULA')>-1||r.indexOf('|')>-1){h+='<div class="tr">'+r.replace(/\|/g,'<br>')+'</div>';document.getElementById('db').innerHTML=h;return}
   var es=r.indexOf('\u2014');
@@ -1456,6 +1522,69 @@ showMWRes = function() {
   h+='</div>';
   document.getElementById('mwcard').innerHTML=h;
 };
+
+// ====== NOTES ======
+function getNotes(){return lsGetObj('eg_notes',[]);}
+function saveNotes(a){lsSetObj('eg_notes',a);}
+function renderNotes(){
+  var notes=getNotes();
+  var h='<div style="font-size:13px;font-weight:700;color:#7c5cfc;margin-bottom:6px">&#128221; Notes <span style="font-weight:400;color:#6c7293;font-size:10px">('+notes.length+')</span></div>';
+  h+='<div style="display:flex;gap:6px;margin-bottom:10px"><button onclick="openNoteModal()" style="flex:1;background:linear-gradient(135deg,#7c5cfc,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:10px;cursor:pointer;touch-action:manipulation">&#10133; New Note</button></div>';
+  if(!notes.length){
+    h+='<div style="background:#11162e;border-radius:12px;padding:24px;text-align:center;color:#4a5278;font-size:13px">&#128221; No notes yet<br><span style="font-size:11px">Tap "+ New Note" to create your first note!</span></div>';
+    document.getElementById('notes').innerHTML=h;return;
+  }
+  h+='<div id="noteslist">';
+  for(var i=notes.length-1;i>=0;i--){
+    var n=notes[i];
+    var d=new Date(n.created);var ds=d.toLocaleDateString()+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    var ed='';if(n.edited){var de=new Date(n.edited);ed='edited '+de.toLocaleDateString();}
+    var txt=n.text.length>200?n.text.substring(0,200)+'...':n.text;
+    h+='<div class="nitem" onclick="openNoteModal('+n.id+')">';
+    h+='<button class="ndel" onclick="event.stopPropagation();deleteNote('+n.id+')" title="Delete">&#10060;</button>';
+    h+='<div class="ntxt">'+txt.replace(/</g,'&lt;')+'</div>';
+    h+='<div class="ndt">'+ds+(ed?' &middot; '+ed:'')+'</div>';
+    h+='</div>';
+  }
+  h+='</div>';
+  document.getElementById('notes').innerHTML=h;
+}
+function openNoteModal(id){
+  var existing=document.getElementById('notesOverlay');if(existing)existing.remove();
+  var note=null;
+  if(id){var notes=getNotes();for(var i=0;i<notes.length;i++){if(notes[i].id===id){note=notes[i];break;}}}
+  var title=note?'Edit Note':'New Note';
+  var txt=note?note.text:'';
+  var h='<div id="notesOverlay" class="noverlay" onclick="if(event.target===this)closeNoteModal()">';
+  h+='<div class="nmodal">';
+  h+='<div class="nmhd">'+title+'</div>';
+  h+='<textarea id="noteTxt" placeholder="Write your note here...">'+txt.replace(/</g,'&lt;')+'</textarea>';
+  h+='<div class="nmbtns">';
+  h+='<button class="nmbtn nmcancel" onclick="closeNoteModal()">Cancel</button>';
+  h+='<button class="nmbtn nmsave" onclick="saveNoteModal('+(id?id:'null')+')">&#10004; Save</button>';
+  h+='</div></div></div>';
+  document.body.insertAdjacentHTML('beforeend',h);
+  var ta=document.getElementById('noteTxt');if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}
+}
+function saveNoteModal(id){
+  var ta=document.getElementById('noteTxt');if(!ta)return;
+  var txt=ta.value.trim();
+  if(!txt){alert('Note cannot be empty!');return;}
+  var notes=getNotes();
+  if(id){
+    for(var i=0;i<notes.length;i++){if(notes[i].id===id){notes[i].text=txt;notes[i].edited=new Date().toISOString();break;}}
+  }else{
+    notes.push({id:Date.now(),text:txt,created:new Date().toISOString(),edited:null});
+  }
+  saveNotes(notes);closeNoteModal();renderNotes();
+}
+function deleteNote(id){
+  if(!confirm('Delete this note?'))return;
+  var notes=getNotes();
+  for(var i=0;i<notes.length;i++){if(notes[i].id===id){notes.splice(i,1);break;}}
+  saveNotes(notes);renderNotes();
+}
+function closeNoteModal(){var el=document.getElementById('notesOverlay');if(el)el.remove();}
 
 renderBrowse();
 </script>

@@ -200,6 +200,50 @@ body.light .srem .rw{color:#1e293b}
 .wi.sm .chk.on{color:#10b981}
 .wi.sm.sel{background:rgba(16,185,129,.08);border-color:rgba(16,185,129,.2);border-left-color:#10b981}
 @media(prefers-reduced-motion:reduce){.wi{animation:none}.am{animation:none}.page.on{animation:none}}
+.moverlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;animation:pageIn .3s}
+.mbox{background:#0f132e;border:1px solid rgba(124,92,252,.2);border-radius:20px;padding:20px;max-width:420px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+body.light .mbox{background:#f0f4ff;border-color:rgba(99,102,241,.2)}
+.mbhd{font-size:16px;font-weight:800;color:#10b981;margin-bottom:2px}
+.mbsb{font-size:11px;color:#6c7293;margin-bottom:10px}
+.mbitem{display:flex;align-items:center;background:rgba(17,22,46,.6);border:1px solid rgba(124,92,252,.08);border-radius:10px;padding:8px 10px;margin-bottom:4px;transition:opacity .3s}
+body.light .mbitem{background:rgba(248,250,252,.8);border-color:rgba(148,163,184,.15)}
+.mbitem .txt{flex:1}
+.mbitem .txt .ww{font-weight:600;font-size:13px;color:#e8eaf0}
+body.light .mbitem .txt .ww{color:#1e293b}
+.mbitem .txt .gg{font-size:10px;color:#6c7293}
+.mbitem .txt .trr{font-size:11px;color:#10b981}
+.mbbtns{display:flex;gap:6px;margin-top:8px}
+.mbbtn{flex:1;border-radius:10px;font-size:11px;font-weight:700;padding:8px;cursor:pointer;touch-action:manipulation;text-align:center;transition:all .2s}
+.mbbtn:hover{transform:translateY(-1px)}
+.mbbtn.keep{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);color:#10b981}
+.mbbtn.remove{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);color:#ef4444}
+.mbbtn.close{background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.15);color:#7c5cfc;flex:0;padding:8px 12px}
+.mwact{display:flex;gap:4px;margin:4px 0;flex-wrap:wrap}
+.mwact .mk{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);border-radius:8px;color:#10b981;font-size:10px;font-weight:700;padding:6px 10px;cursor:pointer;touch-action:manipulation}
+.mwact .mr{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:8px;color:#ef4444;font-size:10px;font-weight:700;padding:6px 10px;cursor:pointer;touch-action:manipulation}
+/* NOTES */
+.nitem{background:rgba(17,22,46,.5);border:1px solid rgba(124,92,252,.1);border-radius:14px;padding:14px 16px;margin-bottom:8px;cursor:pointer;touch-action:manipulation;transition:all .3s;border-left:3px solid #7c5cfc}
+.nitem:hover{border-color:rgba(124,92,252,.3);transform:translateY(-1px)}
+body.light .nitem{background:rgba(248,250,252,.7);border-color:rgba(226,232,240,.5)}
+.nitem .ntxt{font-size:14px;color:#e8eaf0;line-height:1.5;white-space:pre-wrap;word-break:break-word;max-height:80px;overflow:hidden}
+body.light .nitem .ntxt{color:#1e293b}
+.nitem .ndt{font-size:9px;color:#6c7293;margin-top:6px}
+.nitem .ndel{background:none;border:none;color:#ef4444;font-size:14px;cursor:pointer;padding:2px 6px;float:right;border-radius:6px;transition:all .2s}
+.nitem .ndel:hover{background:rgba(239,68,68,.15)}
+.noverlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9999;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;animation:pageIn .3s}
+.nmodal{background:#0f132e;border:1px solid rgba(124,92,252,.25);border-radius:20px;padding:20px;max-width:480px;width:92%;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+body.light .nmodal{background:#f0f4ff;border-color:rgba(99,102,241,.25)}
+.nmodal textarea{width:100%;min-height:160px;background:rgba(10,15,40,.6);border:1px solid rgba(124,92,252,.2);border-radius:12px;color:#e8eaf0;font-size:15px;padding:12px 14px;outline:none;resize:vertical;font-family:inherit;line-height:1.5}
+body.light .nmodal textarea{background:rgba(248,250,252,.8);border-color:rgba(148,163,184,.3);color:#0f172a}
+.nmodal textarea:focus{border-color:#7c5cfc;box-shadow:0 0 20px rgba(124,92,252,.1)}
+body.light .nmodal textarea:focus{border-color:#6366f1}
+.nmodal .nmhd{font-size:16px;font-weight:800;color:#7c5cfc;margin-bottom:12px}
+.nmodal .nmbtns{display:flex;gap:8px;margin-top:10px}
+.nmodal .nmbtn{flex:1;border-radius:12px;font-size:13px;font-weight:700;padding:10px;cursor:pointer;touch-action:manipulation;text-align:center;border:none;transition:all .2s}
+.nmodal .nmbtn:hover{transform:translateY(-1px)}
+.nmodal .nmbtn.nmsave{background:linear-gradient(135deg,#7c5cfc,#10b981);color:#fff}
+.nmodal .nmbtn.nmcancel{background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.15);color:#7c5cfc}
+body.light .nmodal .nmbtn.nmcancel{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.15);color:#6366f1}
 </style>
 </head>
 <body>
@@ -218,6 +262,7 @@ body.light .srem .rw{color:#1e293b}
 <div class="page" id="history"></div>
 <div class="page" id="random"></div>
 <div class="page" id="mywords"></div>
+<div class="page" id="notes"></div>
 </div>
 <div class="bnav" id="bnav">
 <a class="act" data-tab="browse" onclick="switchTab('browse')"><span class="ic">&#128214;</span>Browse</a>
@@ -227,6 +272,7 @@ body.light .srem .rw{color:#1e293b}
 <a data-tab="history" onclick="switchTab('history')"><span class="ic">&#128202;</span>History</a>
 <a data-tab="random" onclick="switchTab('random')"><span class="ic">&#127922;</span>Random</a>
 <a data-tab="mywords" onclick="switchTab('mywords')"><span class="ic">&#128221;</span>My Words</a>
+<a data-tab="notes" onclick="switchTab('notes')"><span class="ic">&#128221;</span>Notes</a>
 </div>
 <script>
 window.onerror=function(m,u,l){document.body.innerHTML='<div style="color:#ef4444;padding:20px;font-family:monospace;white-space:pre-wrap">Error: '+m+'\nline: '+l+'<br><br>'+u+'</div>'};
@@ -400,6 +446,7 @@ function switchTab(tab){
    else if(tab=='history')renderHistory();
    else if(tab=='random')renderRandom();
    else if(tab=='mywords')renderMyWords();
+   else if(tab=='notes')renderNotes();
 }
 
 function toggleBMK(el){
@@ -429,8 +476,9 @@ function initSwipe(el,onSwipe){
 }
 
 // ====== BROWSE ======
+var LAST_S='';
 function renderBrowse(){
- var s=(document.getElementById('D')?document.getElementById('D').value:'').toLowerCase();
+ var s=LAST_S||'';
  var g=G[CI],wl=g.words;
  var h='<div class="cats">';
   for(var i=0;i<G.length;i++){var a=(i==CI);h+='<button class="cat'+(a?' act':'')+'" style="background:'+(a?CC[G[i].id]:'#181d3a')+';color:'+(a?'#fff':CC[G[i].id])+'" onclick="sw('+i+')">'+G[i].id+' <span style="font-weight:400;font-size:9px">('+G[i].words.length+')</span></button>';}
@@ -438,7 +486,7 @@ function renderBrowse(){
    var totalWords=0;for(var ti=0;ti<G.length;ti++)totalWords+=G[ti].words.length;
    for(var ti=0;ti<G.length;ti++){h+='<span style="color:'+CC[G[ti].id]+'">'+G[ti].id+' <b>'+G[ti].words.length+'</b></span>';if(ti<G.length-1)h+='<span style="color:#1e2350">|</span>';}
    h+='<span style="margin-left:auto;color:#7c5cfc"><b>'+totalWords+'</b> total</span>';
-   h+='</div><div class="srch"><div class="sw"><input id="D" placeholder="Search..." oninput="rd()"/></div></div>';
+   h+='</div><div class="srch"><div class="sw"><input id="D" placeholder="Search all '+totalWords+' words..." value="'+s.replace(/"/g,'&quot;')+'" oninput="LAST_S=this.value;rd()"/></div></div>';
    h+='<div style="display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap"><select id="sortSel" class="srt" onchange="toggleSort()"><option value="default">Default order</option><option value="alpha">A-Z</option><option value="alphaDesc">Z-A</option><option value="level">By level</option></select><button onclick="exportWords()" style="background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.15);border-radius:8px;color:#7c5cfc;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#128230; Export</button><button onclick="document.getElementById(\'wordFile\').click()" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#128229; Import</button><input type="file" id="wordFile" accept=".json" style="display:none" onchange="importWords(this)"/><button onclick="toggleSelectMode()" id="selBtn" style="background:'+(SELECT_MODE?'rgba(234,179,8,.2)':'rgba(124,92,252,.08)')+';border:1px solid '+(SELECT_MODE?'rgba(234,179,8,.3)':'rgba(124,92,252,.15)')+';border-radius:8px;color:'+(SELECT_MODE?'#eab308':'#7c5cfc')+';font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">'+(SELECT_MODE?'&#9989; Selecting':'&#128203; Select')+'</button>'+(SELECT_MODE?'<button onclick="addSelectedToMyWords()" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#10133; Add Sel.</button><button onclick="selectAllVisible()" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#10062; All</button>':'')+'</div>';
    h+='<div class="kfilt" id="kf">';
   h+='<button class="'+(KNOWN_FILTER=='all'?'act':'')+'" onclick="KNOWN_FILTER=\'all\';renderBrowse()">All</button>';
@@ -470,9 +518,47 @@ function renderBrowse(){
   document.getElementById('st').textContent=wl.length+' words | '+tr+' translated | ✓'+knownCount+' ✗'+notKnownCount;
   if(items.length>0)sl(items[0]);else sl(-1);
 }
-function sw(i){CI=i;renderBrowse();}
+function sw(i){CI=i;LAST_S='';renderBrowse();}
+function renderGlobalSearch(s){
+  var results=[];
+  var totalAll=0;
+  for(var gi=0;gi<G.length;gi++){
+    var wl=G[gi].words;totalAll+=wl.length;
+    for(var j=0;j<wl.length;j++){
+      var e=wl[j][0],r=wl[j][1]||'';
+      if(e.toLowerCase().indexOf(s)>-1||r.toLowerCase().indexOf(s)>-1){
+        results.push({word:wl[j],ci:gi,wi:j});
+      }
+    }
+  }
+  var db=document.getElementById('db');if(!db)return;
+  var html='';
+  for(var j=0;j<results.length;j++){
+    var w=results[j].word,ci=results[j].ci,wi=results[j].wi;
+    var tr=w[1]||'';var trText=tr.indexOf(' \u2014 ')>-1?tr.split(' \u2014 ')[0].trim():tr;
+    var esc=w[0].replace(/'/g,"\\'");var wesc=w[0].replace(/"/g,"&quot;");
+    var key=w[0]+'|'+G[ci].id;var c=CC[G[ci].id]||'#7c5cfc';
+    html+='<div class="wi" data-i="'+wi+'" data-ci="'+ci+'" onclick="sl('+wi+','+ci+')">';
+    html+='<span class="rtag" style="background:'+c+';margin-right:8px">'+G[ci].id+'</span>';
+    html+='<span class="we">'+w[0]+'</span>';
+    html+='<span class="tr">'+trText+'</span>';
+    html+='<button class="spk" onclick="event.stopPropagation();speak(\''+esc+'\')">&#9654;</button>';
+    html+='<button class="bmk" data-w="'+wesc+'" data-g="'+G[ci].id+'" onclick="event.stopPropagation();toggleBMK(this)">'+(isStudyWord(w[0],G[ci].id)?'&#11088;':'&#9734;')+'</button>';
+    html+='</div>';
+  }
+  document.getElementById('wl').innerHTML=html;
+  document.getElementById('cnt').textContent=results.length+' found across '+G.length+' groups ('+totalAll+' total words)';
+  var st=document.getElementById('st');if(st)st.textContent='Global search: "'+s+'" — '+results.length+' results';
+  if(results.length>0)sl(results[0].wi,results[0].ci);else{db.innerHTML='<div class="emp">No results for "'+s+'"</div>';}
+  setTimeout(function(){
+    var wis=document.querySelectorAll('#wl .wi');
+    for(var si=0;si<wis.length;si++){(function(el){initSwipe(el,function(dir){var bmk=el.querySelector('.bmk');if(bmk)bmk.click();});})(wis[si]);}
+  },50);
+}
 function rd(){
   var s=(document.getElementById('D')?document.getElementById('D').value:'').toLowerCase();
+  LAST_S=s;
+  if(s.length>0){renderGlobalSearch(s);return;}
   var wl=G[CI].words;
   var sortMode=document.getElementById('sortSel')?document.getElementById('sortSel').value:SORT_MODE;
   var items=[];for(var i=0;i<wl.length;i++){var e=wl[i][0],r=wl[i][1]||'';if((!s||e.toLowerCase().indexOf(s)>-1||r.toLowerCase().indexOf(s)>-1)&&knownFilter(e,G[CI].id))items.push(i)}
@@ -493,14 +579,15 @@ function rd(){
   document.getElementById('cnt').textContent=items.length+' of '+wl.length+' words';
   if(items.length>0)sl(items[0]);else sl(-1);
 }
-function sl(i){
- if(i<0||i>=(G[CI].words||[]).length){document.getElementById('db').innerHTML='<div class="emp">Select a word</div>';return}
- var e=G[CI].words[i][0],r=G[CI].words[i][1];
+function sl(i,sci){
+ var ci=(sci!==undefined)?sci:CI;
+ if(i<0||i>=(G[ci].words||[]).length){document.getElementById('db').innerHTML='<div class="emp">Select a word</div>';return}
+ var e=G[ci].words[i][0],r=G[ci].words[i][1];
  var its=document.getElementById('wl').querySelectorAll('.wi');
  for(var j=0;j<its.length;j++)its[j].classList.remove('act');
- for(var j=0;j<its.length;j++){if(parseInt(its[j].dataset.i)==i){its[j].classList.add('act');its[j].scrollIntoView({block:'nearest'});break;}}
+ for(var j=0;j<its.length;j++){if(parseInt(its[j].dataset.i)==i&&parseInt(its[j].dataset.ci||ci)==ci){its[j].classList.add('act');its[j].scrollIntoView({block:'nearest'});break;}}
  var esc=e.replace(/'/g,"\\'");
- var h='<div class="w">'+e+' <button class="spk" onclick="speak(\''+esc+'\')" style="font-size:20px;vertical-align:middle">&#9654;</button></div><div class="lv">'+G[CI].id+'</div><div class="sep"></div>';
+ var h='<div class="w">'+e+' <button class="spk" onclick="speak(\''+esc+'\')" style="font-size:20px;vertical-align:middle">&#9654;</button></div><div class="lv" style="color:'+(CC[G[ci].id]||'#7c5cfc')+'">'+G[ci].id+'</div><div class="sep"></div>';
   if(!r){h+='<div class="emp">No translation</div>';document.getElementById('db').innerHTML=h;return}
   if(r.indexOf('FORMULA')>-1||r.indexOf('|')>-1){h+='<div class="tr">'+r.replace(/\|/g,'<br>')+'</div>';document.getElementById('db').innerHTML=h;return}
   var es=r.indexOf('\u2014');
@@ -1017,12 +1104,12 @@ function autoTheme(){
   var theme=lsGet('eg_theme');
   if(theme=='light')document.body.classList.add('light');else document.body.classList.remove('light');
   var btn=document.getElementById('themeBtn');
-  if(btn)btn.textContent=(theme=='light')?'&#9790;':'&#9788;';
+  if(btn)btn.textContent=(theme=='light')?'&#9788;':'&#9790;';
 }
 function toggleTheme(){
   var b=document.body;b.classList.toggle('light');
   var is=b.classList.contains('light');
-  document.getElementById('themeBtn').textContent=is?'&#9790;':'&#9788;';
+  document.getElementById('themeBtn').textContent=is?'&#9788;':'&#9790;';
   lsSet('eg_theme', is?'light':'dark');
   lsSet('eg_theme_man', '1');
 }
@@ -1246,6 +1333,259 @@ function showReview(){
   }
   document.getElementById('reviewTab').innerHTML=h;
 }
+// ====== KNOWN WORDS MANAGEMENT (after quiz / practice) ======
+var KNOWN_WORDS_DATA = [];
+function getCorrectWordsFromQuiz(){
+  var correct=[];
+  for(var i=0;i<QW.length;i++){
+    var found=false;
+    for(var j=0;j<QWW.length;j++){if(QW[i].w===QWW[j].w&&QW[i].g===QWW[j].g){found=true;break;}}
+    if(!found)correct.push(QW[i]);
+  }
+  return correct;
+}
+function promptKnownWordsManagement(){
+  var correct=getCorrectWordsFromQuiz();
+  var inMyWords=[];
+  for(var i=0;i<correct.length;i++){if(isStudyWord(correct[i].w,correct[i].g))inMyWords.push(correct[i]);}
+  if(inMyWords.length===0){alert('No known words found in My Words.');return;}
+  showKnownWordsDialog(inMyWords);
+}
+function showKnownWordsDialog(words){
+  KNOWN_WORDS_DATA=words;
+  var existing=document.getElementById('knownModal');if(existing)existing.remove();
+  var h='<div id="knownModal" class="moverlay"><div class="mbox">';
+  h+='<div class="mbhd">&#10004; Known Words in My Words</div>';
+  h+='<div class="mbsb">You got these right in the quiz. What to do with them?</div>';
+  for(var i=0;i<words.length;i++){
+    var tr=words[i].r.indexOf(' \u2014 ')>-1?words[i].r.split(' \u2014 ')[0].trim():words[i].r;
+    h+='<div id="kw_'+i+'" class="mbitem">';
+    h+='<div class="txt"><span class="ww">'+words[i].w+'</span> <span class="gg">('+words[i].g+')</span><br><span class="trr">'+tr+'</span></div>';
+    h+='<div class="mwact"><button id="kwk_'+i+'" class="mk" onclick="keepKnownWord('+i+')">&#128190; Keep</button>';
+    h+='<button id="kwr_'+i+'" class="mr" onclick="removeKnownWord('+i+')">&#128465; Remove</button></div>';
+    h+='</div>';
+  }
+  h+='<div class="mbbtns">';
+  h+='<button class="mbbtn keep" onclick="keepAllKnownWords()">&#128190; Keep All</button>';
+  h+='<button class="mbbtn remove" onclick="removeAllKnownWords()">&#128465; Remove All</button>';
+  h+='<button class="mbbtn close" onclick="closeKnownModal()">&#10006;</button>';
+  h+='</div></div></div>';
+  document.body.insertAdjacentHTML('beforeend',h);
+}
+function keepKnownWord(i){
+  var el=document.getElementById('kw_'+i);if(el)el.style.opacity='0.4';
+  var btn=document.getElementById('kwk_'+i);if(btn){btn.disabled=true;btn.innerHTML='&#10004; Kept';}
+  var btn2=document.getElementById('kwr_'+i);if(btn2)btn2.disabled=true;
+  if(KNOWN_WORDS_DATA[i])setKnown(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g,true);
+}
+function removeKnownWord(i){
+  var el=document.getElementById('kw_'+i);if(el)el.style.opacity='0.4';
+  var btn=document.getElementById('kwk_'+i);if(btn)btn.disabled=true;
+  var btn2=document.getElementById('kwr_'+i);if(btn2){btn2.disabled=true;btn2.innerHTML='&#10004; Removed';}
+  if(KNOWN_WORDS_DATA[i]){toggleStudyWord(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g);setKnown(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g,null);}
+}
+function keepAllKnownWords(){for(var i=0;i<KNOWN_WORDS_DATA.length;i++)setKnown(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g,true);closeKnownModal();}
+function removeAllKnownWords(){for(var i=0;i<KNOWN_WORDS_DATA.length;i++){toggleStudyWord(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g);setKnown(KNOWN_WORDS_DATA[i].w,KNOWN_WORDS_DATA[i].g,null);}closeKnownModal();}
+function closeKnownModal(){var el=document.getElementById('knownModal');if(el)el.remove();}
+
+// ====== MY WORDS PRACTICE: track correct words for management ======
+var MW_CORRECT_WORDS = [];
+var origAnsMW = ansMW;
+function trackCorrectInMW() {
+  MW_CORRECT_WORDS = [];
+  for (var i = 0; i < MW_WORDS.length; i++) MW_CORRECT_WORDS.push(false);
+}
+function ansMWTracked(c) {
+  if (c) { MW_CORRECT++; MW_CORRECT_WORDS[MW_QI] = true; updateScore(MW_WORDS[MW_QI].w, MW_WORDS[MW_QI].g, true); }
+  else { MW_WRONG++; MW_CORRECT_WORDS[MW_QI] = false; updateScore(MW_WORDS[MW_QI].w, MW_WORDS[MW_QI].g, false); }
+  MW_QI++; showMWQ();
+}
+function promptMWKnownWords() {
+  var inMyWords = [];
+  for (var i = 0; i < MW_WORDS.length; i++) {
+    if (MW_CORRECT_WORDS[i] && isStudyWord(MW_WORDS[i].w, MW_WORDS[i].g)) {
+      inMyWords.push(MW_WORDS[i]);
+    }
+  }
+  if (inMyWords.length === 0) { alert('No known words to manage.'); return; }
+  showKnownWordsDialog(inMyWords);
+}
+// Override ansMW to track correct words
+function startMWQuizTracked() {
+  MW_WORDS = getStudyWordsFull();
+  if (MW_WORDS.length < 2) { alert('Add at least 2 words to practice!'); return; }
+  shuffle(MW_WORDS);
+  MW_QI = 0; MW_CORRECT = 0; MW_WRONG = 0;
+  trackCorrectInMW();
+  showMWQ();
+  // Replace ansMW with tracked version for this session
+  window.ansMW = function(c) { ansMWTracked(c); };
+}
+// ====== MY WORDS KNOWN FILTER ======
+var MW_KNOWN_FILTER = 'all';
+// ====== MODIFY My Words practice buttons to use tracked version ======
+var origRenderMyWords = renderMyWords;
+renderMyWords = function() {
+  var allWords = getStudyWordsFull();
+  var words = [];
+  for(var i=0;i<allWords.length;i++){
+    var k=getKnown(allWords[i].w,allWords[i].g);
+    if(MW_KNOWN_FILTER=='all')words.push(allWords[i]);
+    else if(MW_KNOWN_FILTER=='known'&&k===true)words.push(allWords[i]);
+    else if(MW_KNOWN_FILTER=='notknown'&&k===false)words.push(allWords[i]);
+  }
+  var h = '<div style="font-size:13px;font-weight:700;color:#eab308;margin-bottom:6px">&#128221; My Words <span style="font-weight:400;color:#6c7293;font-size:10px">('+words.length+'/'+allWords.length+')</span></div>';
+  h += '<div style="display:flex;gap:4px;margin-bottom:8px">';
+  h += '<button onclick="startMWQuizTracked()" style="flex:1;background:linear-gradient(135deg,#eab308,#f97316);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:10px;cursor:pointer;touch-action:manipulation">&#9654; Practice All</button>';
+  h += '<button onclick="clearMyWords()" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 10px;cursor:pointer">&#128465;</button>';
+  h += '</div>';
+  h += '<div class="kfilt" id="mwfilt">';
+  h += '<button class="'+(MW_KNOWN_FILTER=='all'?'act':'')+'" onclick="MW_KNOWN_FILTER=\'all\';renderMyWords()">All</button>';
+  h += '<button class="'+(MW_KNOWN_FILTER=='known'?'act':'')+'" onclick="MW_KNOWN_FILTER=\'known\';renderMyWords()">&#10004; Known</button>';
+  h += '<button class="'+(MW_KNOWN_FILTER=='notknown'?'act':'')+'" onclick="MW_KNOWN_FILTER=\'notknown\';renderMyWords()">&#10068; Not known</button>';
+  h += '</div>';
+  if(!words.length){
+    h += '<div style="background:#11162e;border-radius:12px;padding:24px;text-align:center;color:#4a5278;font-size:13px">';
+    if(allWords.length)h+='No words match the filter.';else h+='&#11088; No words yet<br><span style="font-size:11px">Browse words and tap the star &#9734; or swipe right to add them here!</span>';
+    h+='</div>';
+    document.getElementById('mywords').innerHTML = h;
+    return;
+  }
+  h += '<div id="mwlist">';
+  for(var i = 0; i < words.length; i++){
+    var w = words[i], tr = w.r.indexOf(' \u2014 ') > -1 ? w.r.split(' \u2014 ')[0].trim() : w.r;
+    var d = new Date(w.added);
+    var ds = d.toLocaleDateString();
+    var esc = w.w.replace(/'/g,"\\'");
+    var wesc = w.w.replace(/"/g,"&quot;");
+    var kn=getKnown(w.w,w.g);var knc=kn===true?'kno':(kn===false?'knn':'');var knt=kn===true?'✓':(kn===false?'✗':'?');
+    h += '<div class="srem" onclick="speak(\''+esc+'\')">';
+    h += '<div style="display:flex;align-items:center">';
+    h += '<span class="kic '+knc+'" data-w="'+wesc+'" data-g="'+w.g+'" onclick="event.stopPropagation();toggleKnown(this);renderMyWords()" style="flex-shrink:0;margin-right:6px">'+knt+'</span>';
+    h += '<div style="flex:1"><span class="rw">'+w.w+'</span> <span class="rg">('+w.g+')</span></div>';
+    h += '<button class="bmk" data-w="'+wesc+'" data-g="'+w.g+'" onclick="event.stopPropagation();removeMW(this)" style="color:#ef4444;font-size:14px">&#10060;</button>';
+    h += '</div>';
+    h += '<div class="rr">'+tr+'</div>';
+    h += '<div style="font-size:9px;color:#4a5278;margin-top:2px">added '+ds+'</div>';
+    h += '</div>';
+  }
+  h += '</div>';
+  h += '<div id="mwcard" style="margin-top:6px"></div>';
+  document.getElementById('mywords').innerHTML = h;
+};
+
+// ====== MODIFY quiz results to include manage known words button ======
+var origShowQR = showQR;
+showQR = function() {
+  if(QTIMER_ID){clearInterval(QTIMER_ID);QTIMER_ID=0;}
+  var tot=QC+QWR+QSK;var pc=tot?Math.round(QC/tot*100):0;
+  var h='<div class="qcard">';
+  h+='<div style="font-size:22px;font-weight:700">Quiz Complete!</div>';
+  h+='<div style="font-size:28px;color:#00d4aa;margin:8px 0">'+pc+'%</div>';
+  if(QTIMER>0)h+='<div style="font-size:10px;color:#7c5cfc;margin-bottom:4px">&#9202; '+fmtTime(QTIMER)+'</div>';
+  h+='<div style="font-size:12px;color:#8892b0;margin-bottom:8px">&#10004; '+QC+'  &#10008; '+QWR+'  &#9199; '+QSK+'</div>';
+  if(QC>0){
+   h+='<div style="background:#0d1f1a;border-radius:8px;padding:8px 10px;margin-bottom:6px;text-align:left">';
+   h+='<div style="font-size:11px;color:#6c7293;margin-bottom:4px">&#9989; Знаю ('+QC+'):</div>';
+   for(var i=0,n=0;i<QW.length&&n<20;i++){var found=false;for(var j=0;j<QWW.length;j++){if(QW[i].w===QWW[j].w&&QW[i].g===QWW[j].g){found=true;break}}if(!found){var r=QW[i].r.split(' \u2014 ')[0].trim();h+='<div style="font-size:11px;color:#10b981">'+QW[i].w+' — '+r+'</div>';n++}}
+   if(n>=20)h+='<div style="font-size:10px;color:#4a5278">...</div>';
+   h+='</div>';
+  }
+  if(QWW.length>0){
+   h+='<div style="background:#1f0d0d;border-radius:8px;padding:8px 10px;margin-bottom:6px;text-align:left">';
+   h+='<div style="font-size:11px;color:#6c7293;margin-bottom:4px">&#10060; Надо выучить ('+QWW.length+'):</div>';
+   for(var i=0;i<QWW.length;i++){var r=QWW[i].r.split(' \u2014 ')[0].trim();h+='<div style="font-size:12px;color:#f87171;padding:3px 0">'+QWW[i].w+' — <span style="color:#fbbf24">'+r+'</span> <span style="font-size:9px;color:#6c7293">('+QWW[i].g+')</span></div>'}
+   h+='</div>';
+  }
+  if(QC>0){
+   h+='<button onclick="promptKnownWordsManagement()" style="background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.2);border-radius:8px;color:#eab308;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:4px;touch-action:manipulation">&#128203; Manage known words in My Words</button> ';
+  }
+   if(QWW.length>0){h+='<button onclick="addWrongToMW(\'quiz\')" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:4px;touch-action:manipulation">&#10133; Add wrong to My Words</button>';}
+    h+='<button onclick="startQ()" style="background:#7c5cfc;border:none;border-radius:12px;color:#fff;font-size:14px;font-weight:600;padding:10px 24px;cursor:pointer;margin-top:6px;touch-action:manipulation">&#8634; Try Again</button>';
+   h+='</div>';
+   document.getElementById('qcard').innerHTML=h;
+  saveQuizResult();
+};
+
+// ====== MODIFY My Words practice results to include manage known words button ======
+var origShowMWRes = showMWRes;
+showMWRes = function() {
+  var tot=MW_CORRECT+MW_WRONG,pc=tot?Math.round(MW_CORRECT/tot*100):0;
+  var h='<div style="background:#11162e;border:1px solid #1e2350;border-radius:16px;padding:20px;text-align:center">';
+  h+='<div style="font-size:20px;font-weight:700">Practice Done!</div>';
+  h+='<div style="font-size:28px;color:#00d4aa;margin:6px 0">'+pc+'%</div>';
+  h+='<div style="font-size:12px;color:#8892b0">&#10004; '+MW_CORRECT+'  &#10008; '+MW_WRONG+'</div>';
+  if(MW_CORRECT>0){
+    h+='<button onclick="promptMWKnownWords()" style="background:rgba(234,179,8,.12);border:1px solid rgba(234,179,8,.2);border-radius:8px;color:#eab308;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:6px;touch-action:manipulation">&#128203; Manage known words in My Words</button>';
+  }
+  h+='<div style="margin-top:6px"><button onclick="startMWQuizTracked()" style="background:#7c5cfc;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;padding:8px 20px;cursor:pointer;touch-action:manipulation">&#8634; Again</button></div>';
+  h+='</div>';
+  document.getElementById('mwcard').innerHTML=h;
+};
+
+// ====== NOTES ======
+function getNotes(){return lsGetObj('eg_notes',[]);}
+function saveNotes(a){lsSetObj('eg_notes',a);}
+function renderNotes(){
+  var notes=getNotes();
+  var h='<div style="font-size:13px;font-weight:700;color:#7c5cfc;margin-bottom:6px">&#128221; Notes <span style="font-weight:400;color:#6c7293;font-size:10px">('+notes.length+')</span></div>';
+  h+='<div style="display:flex;gap:6px;margin-bottom:10px"><button onclick="openNoteModal()" style="flex:1;background:linear-gradient(135deg,#7c5cfc,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:10px;cursor:pointer;touch-action:manipulation">&#10133; New Note</button></div>';
+  if(!notes.length){
+    h+='<div style="background:#11162e;border-radius:12px;padding:24px;text-align:center;color:#4a5278;font-size:13px">&#128221; No notes yet<br><span style="font-size:11px">Tap "+ New Note" to create your first note!</span></div>';
+    document.getElementById('notes').innerHTML=h;return;
+  }
+  h+='<div id="noteslist">';
+  for(var i=notes.length-1;i>=0;i--){
+    var n=notes[i];
+    var d=new Date(n.created);var ds=d.toLocaleDateString()+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    var ed='';if(n.edited){var de=new Date(n.edited);ed='edited '+de.toLocaleDateString();}
+    var txt=n.text.length>200?n.text.substring(0,200)+'...':n.text;
+    h+='<div class="nitem" onclick="openNoteModal('+n.id+')">';
+    h+='<button class="ndel" onclick="event.stopPropagation();deleteNote('+n.id+')" title="Delete">&#10060;</button>';
+    h+='<div class="ntxt">'+txt.replace(/</g,'&lt;')+'</div>';
+    h+='<div class="ndt">'+ds+(ed?' &middot; '+ed:'')+'</div>';
+    h+='</div>';
+  }
+  h+='</div>';
+  document.getElementById('notes').innerHTML=h;
+}
+function openNoteModal(id){
+  var existing=document.getElementById('notesOverlay');if(existing)existing.remove();
+  var note=null;
+  if(id){var notes=getNotes();for(var i=0;i<notes.length;i++){if(notes[i].id===id){note=notes[i];break;}}}
+  var title=note?'Edit Note':'New Note';
+  var txt=note?note.text:'';
+  var h='<div id="notesOverlay" class="noverlay" onclick="if(event.target===this)closeNoteModal()">';
+  h+='<div class="nmodal">';
+  h+='<div class="nmhd">'+title+'</div>';
+  h+='<textarea id="noteTxt" placeholder="Write your note here...">'+txt.replace(/</g,'&lt;')+'</textarea>';
+  h+='<div class="nmbtns">';
+  h+='<button class="nmbtn nmcancel" onclick="closeNoteModal()">Cancel</button>';
+  h+='<button class="nmbtn nmsave" onclick="saveNoteModal('+(id?id:'null')+')">&#10004; Save</button>';
+  h+='</div></div></div>';
+  document.body.insertAdjacentHTML('beforeend',h);
+  var ta=document.getElementById('noteTxt');if(ta){ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length);}
+}
+function saveNoteModal(id){
+  var ta=document.getElementById('noteTxt');if(!ta)return;
+  var txt=ta.value.trim();
+  if(!txt){alert('Note cannot be empty!');return;}
+  var notes=getNotes();
+  if(id){
+    for(var i=0;i<notes.length;i++){if(notes[i].id===id){notes[i].text=txt;notes[i].edited=new Date().toISOString();break;}}
+  }else{
+    notes.push({id:Date.now(),text:txt,created:new Date().toISOString(),edited:null});
+  }
+  saveNotes(notes);closeNoteModal();renderNotes();
+}
+function deleteNote(id){
+  if(!confirm('Delete this note?'))return;
+  var notes=getNotes();
+  for(var i=0;i<notes.length;i++){if(notes[i].id===id){notes.splice(i,1);break;}}
+  saveNotes(notes);renderNotes();
+}
+function closeNoteModal(){var el=document.getElementById('notesOverlay');if(el)el.remove();}
+
 renderBrowse();
 </script>
 </body>
