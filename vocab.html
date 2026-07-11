@@ -247,6 +247,28 @@ body.light .nmodal .nmbtn.nmcancel{background:rgba(99,102,241,.08);border-color:
 </style>
 </head>
 <body>
+<div id="splash" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#060a14;transition:opacity .6s ease,transform .6s ease">
+<div id="splashStar" style="font-size:56px;color:#7c5cfc;filter:drop-shadow(0 0 20px rgba(124,92,252,.8));animation:splashPulse 1.5s ease-in-out infinite;opacity:0;transform:scale(.5)">&#9733;</div>
+<div id="splashTitle" style="font-size:22px;font-weight:800;background:linear-gradient(135deg,#e8eaf0 20%,#a5b4fc 60%,#7c5cfc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:16px;letter-spacing:-.02em;opacity:0;transform:translateY(10px)">English Galaxy</div>
+<div id="splashSub" style="font-size:10px;color:rgba(124,92,252,.5);margin-top:6px;font-weight:600;letter-spacing:.08em;opacity:0">Loading vocabulary...</div>
+<div id="splashBar" style="width:120px;height:2px;background:rgba(124,92,252,.15);border-radius:2px;margin-top:20px;overflow:hidden;opacity:0">
+<div id="splashBarFill" style="width:0%;height:100%;background:linear-gradient(90deg,#7c5cfc,#10b981);border-radius:2px;transition:width .4s ease"></div>
+</div>
+</div>
+<script>
+(function(){
+var s=document.getElementById('splash'),star=document.getElementById('splashStar'),title=document.getElementById('splashTitle'),sub=document.getElementById('splashSub'),bar=document.getElementById('splashBar'),fill=document.getElementById('splashBarFill');
+setTimeout(function(){star.style.cssText='font-size:56px;color:#7c5cfc;filter:drop-shadow(0 0 20px rgba(124,92,252,.8));animation:splashPulse 1.5s ease-in-out infinite;opacity:1;transform:scale(1);transition:all .5s cubic-bezier(.4,0,.2,1)'},50);
+setTimeout(function(){title.style.cssText='font-size:22px;font-weight:800;background:linear-gradient(135deg,#e8eaf0 20%,#a5b4fc 60%,#7c5cfc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:16px;letter-spacing:-.02em;opacity:1;transform:translateY(0);transition:all .5s cubic-bezier(.4,0,.2,1)'},300);
+setTimeout(function(){sub.style.cssText='font-size:10px;color:rgba(124,92,252,.5);margin-top:6px;font-weight:600;letter-spacing:.08em;opacity:1;transition:opacity .4s ease'},600);
+setTimeout(function(){bar.style.cssText='width:120px;height:2px;background:rgba(124,92,252,.15);border-radius:2px;margin-top:20px;overflow:hidden;opacity:1;transition:opacity .3s ease';fill.style.width='70%'},800);
+setTimeout(function(){fill.style.width='100%'},1200);
+setTimeout(function(){s.style.opacity='0';s.style.transform='scale(1.05)'},2000);
+setTimeout(function(){s.style.display='none'},2600);
+})();
+</script>
+<style>
+@keyframes splashPulse{0%,100%{filter:drop-shadow(0 0 20px rgba(124,92,252,.8))}50%{filter:drop-shadow(0 0 35px rgba(124,92,252,1))}}
 <div class="hdr">
 <span class="star">&#9733;</span>
 <span class="ttl">English Galaxy</span>
