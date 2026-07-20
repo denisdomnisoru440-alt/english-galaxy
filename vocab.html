@@ -531,7 +531,12 @@ function switchTab(tab){
  var navs=document.querySelectorAll('.bnav a');
  for(var i=0;i<navs.length;i++)navs[i].classList.remove('act');
  document.querySelector('.bnav a[data-tab="'+tab+'"]').classList.add('act');
-  if(tab=='browse')
+ if(tab=='browse')renderBrowse();
+ else if(tab=='quiz')renderQuiz();
+ else if(tab=='games')renderGames();
+ else if(tab=='grammar')renderGrammar();
+ else if(tab=='me')renderMe();
+}
 function renderSyncTo(t){
   var el=document.getElementById(t);
   var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
