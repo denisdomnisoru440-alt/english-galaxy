@@ -21,3 +21,7 @@ Desktop.ini
 vocab_settings.json
 galaxy_backups/
 *.log
+
+# Temp analysis scripts
+_*.py
+_*.js
