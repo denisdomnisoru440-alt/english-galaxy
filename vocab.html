@@ -589,12 +589,6 @@ function importData(e){
   reader.readAsText(file);e.target.value='';
 }
 
-renderBrowse();
-  else if(tab=='quiz')renderQuiz();
-  else if(tab=='games')renderGames();
-  else if(tab=='grammar')renderGrammar();
-   else if(tab=='me')renderMe();
-}
 var meSub=null;
 var ME_T='meInner';
 function openMeSub(s){meSub=s;renderMe();}
@@ -748,7 +742,7 @@ function importData(e){
   reader.readAsText(file);e.target.value='';
 }
 
-renderBrowse();}
+renderBrowse();
 function renderGlobalSearch(s){
   var results=[];
   var totalAll=0;
