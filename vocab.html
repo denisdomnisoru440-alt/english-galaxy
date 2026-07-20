@@ -502,23 +502,58 @@ body.theme-light .srch .sw{background:rgba(248,250,252,.8);border-color:rgba(148
 body.theme-light .srch input{color:#0f172a}
 body.theme-light .det{background:rgba(241,245,249,.8);border-color:rgba(148,163,184,.3)}
 body.theme-light .srt{background:rgba(248,250,252,.6);border-color:rgba(148,163,184,.2);color:#0f172a}
-/* Theme-aware accent elements */
-body:not(.theme-light) .hdr{background:rgba(6,10,20,.85);border-color:var(--border)}
-body:not(.theme-light) .bnav{background:rgba(6,10,20,.92)}
-body:not(.theme-light) .xp-wrap{background:rgba(17,22,46,.5);border-color:var(--border)}
+/* Theme-aware accent elements — FULL app theming */
+body:not(.theme-light) .hdr{background:rgba(6,10,20,.88);border-color:var(--border)}
+body:not(.theme-light) .bnav{background:rgba(6,10,20,.94)}
+body:not(.theme-light) .qcard{border-color:var(--border);box-shadow:0 4px 24px rgba(0,0,0,.2)}
+body:not(.theme-light) .det{border-color:var(--border)}
+body:not(.theme-light) .wr{border-color:var(--border)}
+body:not(.theme-light) .srch .sw{border-color:var(--border)}
+body:not(.theme-light) .xp-wrap{border-color:var(--border)}
 body:not(.theme-light) .xp-level .lvl{color:var(--a)}
+body:not(.theme-light) .wod-label{color:var(--a)}
+body:not(.theme-light) .wod-speak{color:var(--a);border-color:var(--border)}
+body:not(.theme-light) .wod-wrap{border-color:var(--border)}
 .xp-barf{background:linear-gradient(90deg,var(--a),var(--a2))}
 body:not(.theme-light) .qbarf{background:linear-gradient(90deg,var(--a),var(--a2))}
 .rbtn{background:linear-gradient(135deg,var(--a),var(--a2))}
-body:not(.theme-light) .cat.act{box-shadow:0 6px 24px rgba(var(--a-rgb),.3)}
-body:not(.theme-light) .cat:hover{opacity:1;transform:translateY(-2px)}
+.qflip{background:linear-gradient(135deg,var(--a),color-mix(in srgb,var(--a),#000 20%))!important}
+body:not(.theme-light) .cat.act{box-shadow:0 4px 16px rgba(var(--a-rgb),.25)}
+body:not(.theme-light) .cat:hover{opacity:1}
 body:not(.theme-light) .wi:hover{border-left-color:var(--a)}
-body:not(.theme-light) .wi.act{border-color:var(--a);border-left-color:var(--a);box-shadow:0 8px 32px rgba(var(--a-rgb),.25)}
+body:not(.theme-light) .wi.act{border-color:rgba(var(--a-rgb),.2);border-left-color:var(--a);box-shadow:0 2px 12px rgba(var(--a-rgb),.1)}
 body:not(.theme-light) .nitem{border-left-color:var(--a)}
 body:not(.theme-light) .spk{color:var(--a)}
 body:not(.theme-light) .type-hint span{color:var(--a)}
 body:not(.theme-light) .ach-badge.locked{opacity:.35;filter:grayscale(1)}
 body:not(.theme-light) .qbtns .qbtn:first-child{background:var(--a2)}
+body:not(.theme-light) .ctx-btn{background:linear-gradient(135deg,var(--a),var(--a2))}
+body:not(.theme-light) .tp-close{background:var(--a)}
+body:not(.theme-light) .swipe-btn.know-btn{box-shadow:0 2px 12px rgba(var(--a-rgb),.2)}
+body:not(.theme-light) .swipe-counter b{color:var(--a)}
+body:not(.theme-light) .mara-dot.correct{box-shadow:0 0 4px rgba(16,185,129,.3)}
+body:not(.theme-light) .mara-hdr .mara-stat b{color:var(--a)}
+body:not(.theme-light) .ctx-result .ctx-added{color:var(--a);border-bottom-color:var(--a)}
+body:not(.theme-light) .ctx-word-chip{border-color:var(--border);color:var(--a)}
+body:not(.theme-light) .srem:hover{border-color:var(--border)}
+/* Light theme full overrides */
+body.theme-light{background:var(--bg)!important;color:var(--txt)}
+body.theme-light .hdr{background:rgba(240,244,250,.88);border-color:var(--border)!important}
+body.theme-light .bnav{background:rgba(240,244,250,.94);border-color:rgba(148,163,184,.15)!important}
+body.theme-light .wr{background:rgba(241,245,249,.5);border-color:rgba(148,163,184,.25)!important}
+body.theme-light .wi{background:rgba(255,255,255,.6);border-color:rgba(226,232,240,.5)!important;box-shadow:none!important}
+body.theme-light .wi:hover{box-shadow:0 2px 8px rgba(0,0,0,.05)!important;border-left-color:var(--a)!important}
+body.theme-light .wi.act{border-color:var(--a)!important;border-left-color:var(--a)!important;background:rgba(238,242,255,.8)!important}
+body.theme-light .qcard{background:rgba(255,255,255,.8);border-color:rgba(200,210,240,.3)!important}
+body.theme-light .det{background:rgba(241,245,249,.7);border-color:rgba(200,210,240,.3)!important}
+body.theme-light .srch .sw{background:rgba(248,250,252,.8);border-color:rgba(148,163,184,.4)!important}
+body.theme-light .srch input{color:#0f172a}
+body.theme-light .srt{background:rgba(248,250,252,.6);border-color:rgba(148,163,184,.25);color:#0f172a}
+body.theme-light .xp-wrap{background:rgba(241,245,249,.6);border-color:rgba(148,163,184,.2)}
+body.theme-light .wod-wrap{background:linear-gradient(135deg,rgba(99,102,241,.06),rgba(16,185,129,.04));border-color:rgba(148,163,184,.2)}
+body.theme-light .spk{color:var(--a)}
+body.theme-light .wod-speak{color:var(--a)}
+body.theme-light .nitem{border-left-color:var(--a)}
 /* Theme picker */
 .tp-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:9999;display:flex;align-items:center;justify-content:center;animation:pageIn .2s}
 .tp-box{background:var(--bg2,#0a0f28);border:1px solid var(--border,rgba(124,92,252,.15));border-radius:20px;padding:20px;max-width:300px;width:90%;text-align:center}
@@ -528,11 +563,28 @@ body:not(.theme-light) .qbtns .qbtn:first-child{background:var(--a2)}
 .tp-dot{width:40px;height:40px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .25s;position:relative}
 .tp-dot:hover{transform:scale(1.15)}
 .tp-dot.sel{border-color:#fff;box-shadow:0 0 20px rgba(var(--a-rgb),.5)}
-.tp-dot.sel::after{content:'\2713';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800}
+.tp-dot.sel::after{content:'\\2713';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800}
 .tp-close{background:var(--a,#7c5cfc);border:none;border-radius:12px;color:#fff;font-size:12px;font-weight:700;padding:8px 20px;cursor:pointer}
 /* Phonetic in word list */
 .wi .phon{font-size:11px;color:var(--txt2,#6c7293);font-style:italic;margin-left:6px;opacity:.7}
 body.theme-light .wi .phon{color:#94a3b8}
+/* Conversation practice */
+.conv-msg{background:rgba(17,22,46,.5);border:1px solid rgba(124,92,252,.1);border-radius:14px;padding:10px 14px;margin-bottom:8px}
+.conv-msg.user{background:rgba(124,92,252,.12);border-color:rgba(124,92,252,.2);margin-left:40px}
+.conv-msg.bot{margin-right:40px}
+.conv-ru{font-size:12px;color:#10b981;margin-top:4px}
+.conv-input{width:100%;background:rgba(10,15,40,.5);border:1px solid rgba(124,92,252,.15);border-radius:12px;color:#e8eaf0;font-size:14px;padding:12px;outline:none;font-family:inherit}
+.conv-hint{background:rgba(124,92,252,.1);border:1px solid rgba(124,92,252,.2);border-radius:10px;padding:8px 14px;font-size:13px;color:#a78bfa;cursor:pointer;display:inline-block;margin-top:8px;transition:all .2s}
+.conv-hint:hover{background:rgba(124,92,252,.2)}
+/* Media center */
+.media-card{background:rgba(17,22,46,.5);border:1px solid rgba(124,92,252,.08);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;transition:all .2s}
+.media-card:hover{border-color:var(--border);transform:translateY(-1px)}
+body.theme-light .media-card{background:rgba(248,250,252,.7);border-color:rgba(226,232,240,.4)}
+/* Enhanced dictionary */
+.dict-stats{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.dict-stat{background:rgba(17,22,46,.5);border:1px solid rgba(124,92,252,.08);border-radius:10px;padding:8px 12px;text-align:center;flex:1;min-width:60px}
+.dict-stat .ds-num{font-size:18px;font-weight:800;color:var(--a)}
+.dict-stat .ds-lbl{font-size:9px;color:var(--txt2);margin-top:2px}
 </style>
 </head>
 <body>
@@ -1113,14 +1165,14 @@ function showQR(){
  if(QC>0){
   h+='<div style="background:#0d1f1a;border-radius:8px;padding:8px 10px;margin-bottom:6px;text-align:left">';
   h+='<div style="font-size:11px;color:#6c7293;margin-bottom:4px">&#9989; Знаю ('+QC+'):</div>';
-  for(var i=0,n=0;i<QW.length&&n<20;i++){var found=false;for(var j=0;j<QWW.length;j++){if(QW[i].w===QWW[j].w&&QW[i].g===QWW[j].g){found=true;break}}if(!found){var r=QW[i].r.split(' \u2014 ')[0].trim();h+='<div style="font-size:11px;color:#10b981">'+QW[i].w+' — '+r+'</div>';n++}}
+  for(var i=0,n=0;i<QW.length&&n<20;i++){var found=false;for(var j=0;j<QWW.length;j++){if(QW[i].w===QWW[j].w&&QW[i].g===QWW[j].g){found=true;break}}if(!found){var r=QW[i].r.split(' \u2014 ')[0].trim();var qrph=(QW[i].r.match(/\[([^\]]+)\]/)||[])[1]||'';h+='<div style="font-size:11px;color:#10b981">'+QW[i].w+(qrph?' <span style="color:#6c7293;font-style:italic;font-size:10px">['+qrph+']</span>':'')+' — '+r+'</div>';n++}}
   if(n>=20)h+='<div style="font-size:10px;color:#4a5278">...</div>';
   h+='</div>';
  }
  if(QWW.length>0){
   h+='<div style="background:#1f0d0d;border-radius:8px;padding:8px 10px;margin-bottom:6px;text-align:left">';
   h+='<div style="font-size:11px;color:#6c7293;margin-bottom:4px">&#10060; Надо выучить ('+QWW.length+'):</div>';
-  for(var i=0;i<QWW.length;i++){var r=QWW[i].r.split(' \u2014 ')[0].trim();h+='<div style="font-size:12px;color:#f87171;padding:3px 0">'+QWW[i].w+' — <span style="color:#fbbf24">'+r+'</span> <span style="font-size:9px;color:#6c7293">('+QWW[i].g+')</span></div>'}
+  for(var i=0;i<QWW.length;i++){var r=QWW[i].r.split(' \u2014 ')[0].trim();var qwph=(QWW[i].r.match(/\[([^\]]+)\]/)||[])[1]||'';h+='<div style="font-size:12px;color:#f87171;padding:3px 0">'+QWW[i].w+(qwph?' <span style="color:#6c7293;font-style:italic;font-size:10px">['+qwph+']</span>':'')+' — <span style="color:#fbbf24">'+r+'</span> <span style="font-size:9px;color:#6c7293">('+QWW[i].g+')</span></div>'}
   h+='</div>';
  }
   if(QWW.length>0){h+='<button onclick="addWrongToMW(\'quiz\')" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 12px;cursor:pointer;margin-top:4px">&#10133; Add wrong to My Words</button>';}
@@ -2207,14 +2259,14 @@ showQR = function() {
   if(QC>0){
    h+='<div style="background:#0d1f1a;border-radius:8px;padding:8px 10px;margin-bottom:6px;text-align:left">';
    h+='<div style="font-size:11px;color:#6c7293;margin-bottom:4px">&#9989; Знаю ('+QC+'):</div>';
-   for(var i=0,n=0;i<QW.length&&n<20;i++){var found=false;for(var j=0;j<QWW.length;j++){if(QW[i].w===QWW[j].w&&QW[i].g===QWW[j].g){found=true;break}}if(!found){var r=QW[i].r.split(' \u2014 ')[0].trim();h+='<div style="font-size:11px;color:#10b981">'+QW[i].w+' — '+r+'</div>';n++}}
+   for(var i=0,n=0;i<QW.length&&n<20;i++){var found=false;for(var j=0;j<QWW.length;j++){if(QW[i].w===QWW[j].w&&QW[i].g===QWW[j].g){found=true;break}}if(!found){var r=QW[i].r.split(' \u2014 ')[0].trim();var qrph=(QW[i].r.match(/\[([^\]]+)\]/)||[])[1]||'';h+='<div style="font-size:11px;color:#10b981">'+QW[i].w+(qrph?' <span style="color:#6c7293;font-style:italic;font-size:10px">['+qrph+']</span>':'')+' — '+r+'</div>';n++}}
    if(n>=20)h+='<div style="font-size:10px;color:#4a5278">...</div>';
    h+='</div>';
   }
   if(QWW.length>0){
    h+='<div style="background:#1f0d0d;border-radius:8px;padding:8px 10px;margin-bottom:6px;text-align:left">';
    h+='<div style="font-size:11px;color:#6c7293;margin-bottom:4px">&#10060; Надо выучить ('+QWW.length+'):</div>';
-   for(var i=0;i<QWW.length;i++){var r=QWW[i].r.split(' \u2014 ')[0].trim();h+='<div style="font-size:12px;color:#f87171;padding:3px 0">'+QWW[i].w+' — <span style="color:#fbbf24">'+r+'</span> <span style="font-size:9px;color:#6c7293">('+QWW[i].g+')</span></div>'}
+   for(var i=0;i<QWW.length;i++){var r=QWW[i].r.split(' \u2014 ')[0].trim();var qwph=(QWW[i].r.match(/\[([^\]]+)\]/)||[])[1]||'';h+='<div style="font-size:12px;color:#f87171;padding:3px 0">'+QWW[i].w+(qwph?' <span style="color:#6c7293;font-style:italic;font-size:10px">['+qwph+']</span>':'')+' — <span style="color:#fbbf24">'+r+'</span> <span style="font-size:9px;color:#6c7293">('+QWW[i].g+')</span></div>'}
    h+='</div>';
   }
   if(QC>0){
@@ -2575,7 +2627,7 @@ function getDueWords(catId){
         var nr=new Date(entry.nextReview);
         if(nr<=now){
           var trans=tr.indexOf(' \u2014 ')>-1?tr.split(' \u2014 ')[0].trim():tr;
-          due.push({en:w[0],ru:trans,g:G[gi].id,interval:entry.interval,count:entry.count,overdue:Math.round((now-nr)/(86400000))});
+          var ph=(tr.match(/\[([^\]]+)\]/)||[])[1]||'';due.push({en:w[0],ru:trans,g:G[gi].id,ph:ph,interval:entry.interval,count:entry.count,overdue:Math.round((now-nr)/(86400000))});
         }
       }
     }
@@ -2630,7 +2682,7 @@ function showSRSCard(){
   h+='<div class="qcard">';
   h+='<div style="font-size:10px;color:#06b6d4;font-weight:700;margin-bottom:2px">'+w.g+'</div>';
   h+='<div style="font-size:9px;color:#6c7293;margin-bottom:6px">Reviewed '+w.count+'x | every '+w.interval+'d</div>';
-  h+='<div style="font-size:28px;font-weight:800;margin-bottom:8px">'+w.en+'</div>';
+  h+='<div style="font-size:28px;font-weight:800;margin-bottom:6px">'+w.en+'</div>';h+='<div style="font-size:12px;color:var(--txt2,#6c7293);font-style:italic;margin-bottom:8px">'+(w.ph?'['+w.ph+']':'')+'</div>';
   h+='<div id="srsAnswer" style="display:none;background:rgba(24,29,58,.6);border-radius:14px;padding:14px 16px;width:100%;border:1px solid rgba(16,185,129,.15);margin:8px 0">';
   h+='<div style="font-size:16px;color:#10b981;font-weight:600">'+w.ru+'</div>';
   h+='</div>';
@@ -2706,7 +2758,7 @@ function getGameWords(catId,count){
       if(!tr)continue;
       var trans=tr.indexOf(' \u2014 ')>-1?tr.split(' \u2014 ')[0].trim():tr;
       if(trans.indexOf('FORMULA')>-1||trans.indexOf('|')>-1)continue;
-      words.push({en:w[0],ru:trans,g:G[gi].id});
+      var ph=(tr.match(/\[([^\]]+)\]/)||[])[1]||'';words.push({en:w[0],ru:trans,g:G[gi].id,ph:ph});
     }
   }
   shuffle(words);
@@ -2759,7 +2811,7 @@ function renderGames(){
   if(dueCount>3){
     h+='<div style="display:flex;gap:4px;margin-bottom:4px;flex-wrap:wrap">';
     for(var i=0;i<Math.min(dueCount,6);i++){
-      h+='<span style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:8px;padding:4px 8px;font-size:9px;color:#f87171">'+due[i].en+' <span style="color:#6c7293">('+due[i].interval+'d)</span></span>';
+      h+='<span style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:8px;padding:4px 8px;font-size:9px;color:#f87171">'+due[i].en+(due[i].ph?' <span style="color:#6c7293;font-style:italic">['+due[i].ph+']</span>':'')+' <span style="color:#6c7293">('+due[i].interval+'d)</span></span>';
     }
     if(dueCount>6)h+='<span style="font-size:9px;color:#6c7293;padding:4px">+'+((dueCount-6))+' more</span>';
     h+='</div>';
@@ -2796,7 +2848,7 @@ function startMemory(){
   for(var i=0;i<pairs.length;i++){
     h+='<div class="mem-card" data-i="'+i+'" onclick="flipMem('+i+')">';
     h+='<div class="mem-front">?</div>';
-    h+='<div class="mem-back">'+(pairs[i].type==='en'?pairs[i].en:pairs[i].ru)+'</div>';
+    h+='<div class="mem-back">'+(pairs[i].type==='en'?pairs[i].en:pairs[i].ru)+'</div>'+(pairs[i].type==='en'&&pairs[i].ph?'<div style="font-size:9px;color:#6c7293;margin-top:2px">['+pairs[i].ph+']</div>':'');
     h+='</div>';
   }
   h+='</div>';
@@ -2869,7 +2921,7 @@ function startMatch(){
   h+='</div>';
   h+='<div class="match-grid"><div class="match-col" id="mtLeft">';
   for(var i=0;i<MATCH_LEFT.length;i++){
-    h+='<div class="match-item" data-i="'+i+'" onclick="matchPickL('+i+')">'+MATCH_LEFT[i].en+'</div>';
+    h+='<div class="match-item" data-i="'+i+'" onclick="matchPickL('+i+')">'+MATCH_LEFT[i].en+(MATCH_LEFT[i].ph?'<div style="font-size:9px;color:#6c7293;margin-top:2px">['+MATCH_LEFT[i].ph+']</div>':'')+'</div>';
   }
   h+='</div><div class="match-col" id="mtRight">';
   for(var i=0;i<MATCH_RIGHT.length;i++){
@@ -2950,7 +3002,7 @@ function showGuessQ(){
   h+='<div style="font-size:22px;font-weight:800;margin-bottom:10px;color:#10b981">'+q.ru+'</div>';
   h+='<div class="guess-opts" id="gwOpts">';
   for(var i=0;i<opts.length;i++){
-    h+='<button class="guess-opt" onclick="guessAnswer(this,\''+opts[i].en.replace(/'/g,"\\'")+'\','+(opts[i].en===q.en)+')">'+opts[i].en+'</button>';
+    h+='<button class="guess-opt" onclick="guessAnswer(this,\''+opts[i].en.replace(/'/g,"\\'")+'\','+(opts[i].en===q.en)+')">'+opts[i].en+(opts[i].ph?'<div style="font-size:10px;color:#6c7293;margin-top:2px;font-style:italic">['+opts[i].ph+']</div>':'')+'</button>';
   }
   h+='</div></div>';
   area.innerHTML=h;
@@ -3206,7 +3258,7 @@ function showSwipeCard(){
   h+='<div class="swipe-label know" id="swipeKnow">&#10004; KNOW</div>';
   h+='<div class="swipe-label skip" id="swipeSkip">&#10008; SKIP</div>';
   h+='<div class="swipe-card" id="swipeCard">';
-  h+='<div class="sw-en">'+w.en+'</div>';
+  h+='<div class="sw-en">'+w.en+'</div>';h+='<div class="sw-phonetic">'+(w.ph?'['+w.ph+']':'')+'</div>';
   h+='<div class="sw-divider"></div>';
   h+='<div style="font-size:11px;color:#6c7293;margin-bottom:8px">tap to reveal</div>';
   h+='<div class="sw-ru" id="swipeRu" style="display:none">'+trText+'</div>';
@@ -3297,7 +3349,7 @@ function showMarathonQ(){
   var h='<div class="mara-wrap">';
   h+='<div class="mara-hdr"><span class="mara-title">&#127942; Marathon</span><span class="mara-stat">Score: <b>'+MAR_CORRECT+'</b> / '+(MAR_CORRECT+MAR_WRONG)+' &middot; Streak: <b>'+MAR_STREAK+'</b></span></div>';
   h+='<div class="mara-card">';
-  h+='<div class="mara-word">'+w.en+'</div>';
+  h+='<div class="mara-word">'+w.en+'</div>';h+='<div style="font-size:12px;color:var(--txt2,#6c7293);font-style:italic;margin-bottom:6px">'+(w.ph?'['+w.ph+']':'')+'</div>';
   h+='<div class="mara-sub">type the translation in Russian</div>';
   h+='<input class="mara-input" id="marInput" placeholder="..." autocomplete="off" autocapitalize="off" spellcheck="false">';
   h+='<div class="mara-feedback" id="marFeedback"></div>';
