@@ -244,32 +244,107 @@ body.light .nmodal textarea:focus{border-color:#6366f1}
 .nmodal .nmbtn.nmsave{background:linear-gradient(135deg,#7c5cfc,#10b981);color:#fff}
 .nmodal .nmbtn.nmcancel{background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.15);color:#7c5cfc}
 body.light .nmodal .nmbtn.nmcancel{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.15);color:#6366f1}
+
+/* ====== GAMES & GAMIFICATION ====== */
+.games-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.gcard{border-radius:16px;padding:18px 14px;text-align:center;cursor:pointer;touch-action:manipulation;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.gcard:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.3)}
+.gcard:active{transform:scale(.97)}
+.gcard .gicon{font-size:32px;margin-bottom:6px;display:block}
+.gcard .gname{font-size:12px;font-weight:700;color:#fff}
+.gcard .gdesc{font-size:9px;color:rgba(255,255,255,.6);margin-top:2px}
+.gcard .gxp{font-size:8px;color:rgba(255,255,255,.5);margin-top:4px;font-weight:600}
+.xp-wrap{background:rgba(17,22,46,.5);border:1px solid rgba(124,92,252,.1);border-radius:14px;padding:12px 14px;margin-bottom:12px}
+body.light .xp-wrap{background:rgba(241,245,249,.6);border-color:rgba(148,163,184,.2)}
+.xp-level{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.xp-level .lvl{font-size:22px;font-weight:800;color:#7c5cfc;min-width:40px;text-align:center}
+body.light .xp-level .lvl{color:#6366f1}
+.xp-level .lvlinfo{flex:1}
+.xp-level .lvlname{font-size:12px;font-weight:700;color:#e8eaf0}
+body.light .xp-level .lvlname{color:#1e293b}
+.xp-level .xptxt{font-size:9px;color:#6c7293}
+.xp-bar{height:8px;background:rgba(10,15,40,.5);border-radius:6px;overflow:hidden}
+body.light .xp-bar{background:rgba(203,213,225,.4)}
+.xp-barf{height:8px;border-radius:6px;background:linear-gradient(90deg,#7c5cfc,#a78bfa);transition:width .8s cubic-bezier(.4,0,.2,1);position:relative}
+.xp-barf::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.2),transparent);border-radius:6px 6px 0 0}
+/* Match game */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.match-col{display:flex;flex-direction:column;gap:6px}
+.match-item{background:rgba(17,22,46,.6);border:1px solid rgba(124,92,252,.12);border-radius:12px;padding:10px 12px;font-size:13px;color:#e8eaf0;cursor:pointer;touch-action:manipulation;text-align:center;transition:all .25s;min-height:44px;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-user-select:none}
+body.light .match-item{background:rgba(248,250,252,.7);border-color:rgba(226,232,240,.5);color:#1e293b}
+.match-item:hover{border-color:rgba(124,92,252,.3)}
+.match-item.sel{border-color:#7c5cfc;background:rgba(124,92,252,.15);box-shadow:0 0 16px rgba(124,92,252,.15)}
+.match-item.correct{border-color:#10b981;background:rgba(16,185,129,.12);color:#10b981;pointer-events:none}
+.match-item.wrong{border-color:#ef4444;background:rgba(239,68,68,.12);color:#ef4444;animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.match-item.done{opacity:.4;pointer-events:none}
+/* Memory game */
+.mem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+.mem-card{background:linear-gradient(135deg,#1e2350,#2a2f6e);border:1px solid rgba(124,92,252,.15);border-radius:12px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;font-size:13px;font-weight:700;color:#fff;transition:all .3s;user-select:none;-webkit-user-select:none;position:relative}
+body.light .mem-card{background:linear-gradient(135deg,#c7d2fe,#e0e7ff);border-color:rgba(99,102,241,.2);color:#1e293b}
+.mem-card.flipped{background:rgba(16,185,129,.15);border-color:#10b981}
+.mem-card.matched{background:rgba(16,185,129,.25);border-color:#10b981;pointer-events:none}
+.mem-card .mem-front{font-size:18px}
+.mem-card .mem-back{font-size:11px;text-align:center;padding:2px;line-height:1.2;display:none}
+.mem-card.flipped .mem-front,.mem-card.matched .mem-front{display:none}
+.mem-card.flipped .mem-back,.mem-card.matched .mem-back{display:block}
+/* Guess word */
+.guess-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.guess-opt{background:rgba(17,22,46,.6);border:1px solid rgba(124,92,252,.12);border-radius:14px;padding:14px;font-size:14px;font-weight:600;color:#e8eaf0;cursor:pointer;touch-action:manipulation;text-align:center;transition:all .25s}
+body.light .guess-opt{background:rgba(248,250,252,.7);border-color:rgba(226,232,240,.5);color:#1e293b}
+.guess-opt:hover{border-color:rgba(124,92,252,.3);transform:translateY(-1px)}
+.guess-opt.correct{border-color:#10b981;background:rgba(16,185,129,.15);color:#10b981}
+.guess-opt.wrong{border-color:#ef4444;background:rgba(239,68,68,.1);color:#ef4444}
+.guess-opt:disabled{cursor:default;opacity:.8}
+/* Typing */
+.type-input{width:100%;background:rgba(10,15,40,.6);border:2px solid rgba(124,92,252,.2);border-radius:14px;color:#e8eaf0;font-size:20px;font-weight:700;padding:14px;text-align:center;outline:none;transition:all .3s;font-family:inherit}
+body.light .type-input{background:rgba(248,250,252,.8);border-color:rgba(148,163,184,.3);color:#0f172a}
+.type-input:focus{border-color:#7c5cfc;box-shadow:0 0 20px rgba(124,92,252,.15)}
+.type-input.correct{border-color:#10b981;background:rgba(16,185,129,.08)}
+.type-input.wrong{border-color:#ef4444;background:rgba(239,68,68,.08);animation:shake .4s}
+.type-hint{font-size:11px;color:#6c7293;margin-top:6px}
+.type-hint span{color:#7c5cfc;font-weight:600}
+/* Timer bar */
+.timer-bar{height:5px;background:rgba(10,15,40,.5);border-radius:4px;overflow:hidden;margin-bottom:8px}
+body.light .timer-bar{background:rgba(203,213,225,.4)}
+.timer-barf{height:5px;border-radius:4px;transition:width .1s linear;background:linear-gradient(90deg,#10b981,#eab308,#ef4444)}
+/* Confetti */
+#confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999}
+/* XP popup */
+.xp-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(15,19,46,.95);border:2px solid #7c5cfc;border-radius:20px;padding:20px 30px;text-align:center;z-index:10000;animation:xpPop .5s cubic-bezier(.4,0,.2,1);box-shadow:0 0 60px rgba(124,92,252,.3)}
+@keyframes xpPop{from{opacity:0;transform:translate(-50%,-50%) scale(.5)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.xp-popup .xpbig{font-size:32px;font-weight:800;color:#7c5cfc}
+.xp-popup .xpmsg{font-size:14px;color:#e8eaf0;margin-top:4px}
+.xp-popup .xplbl{font-size:10px;color:#6c7293;margin-top:2px}
+/* Daily challenges */
+.chal-item{background:rgba(17,22,46,.5);border:1px solid rgba(124,92,252,.08);border-radius:12px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:center;gap:10px;transition:all .3s}
+body.light .chal-item{background:rgba(248,250,252,.6);border-color:rgba(226,232,240,.3)}
+.chal-item.done{opacity:.5;border-color:rgba(16,185,129,.3)}
+.chal-item .chal-icon{font-size:20px;flex-shrink:0}
+.chal-item .chal-info{flex:1}
+.chal-item .chal-name{font-size:12px;font-weight:600;color:#e8eaf0}
+body.light .chal-item .chal-name{color:#1e293b}
+.chal-item .chal-prog{font-size:9px;color:#6c7293;margin-top:2px}
+.chal-item .chal-reward{font-size:10px;font-weight:700;color:#eab308;flex-shrink:0}
+.chal-item .chal-check{font-size:16px;color:#10b981;flex-shrink:0}
+/* Achievement badge */
+.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}
+.ach-badge{background:rgba(17,22,46,.5);border:1px solid rgba(124,92,252,.08);border-radius:12px;padding:10px 6px;text-align:center;transition:all .3s}
+body.light .ach-badge{background:rgba(248,250,252,.6);border-color:rgba(226,232,240,.3)}
+.ach-badge.locked{opacity:.35;filter:grayscale(1)}
+.ach-badge .ach-icon{font-size:24px;margin-bottom:4px}
+.ach-badge .ach-name{font-size:9px;font-weight:700;color:#e8eaf0}
+body.light .ach-badge .ach-name{color:#1e293b}
+.ach-badge .ach-desc{font-size:8px;color:#6c7293;margin-top:2px}
+/* Score popup animation */
+.score-fly{position:fixed;pointer-events:none;z-index:10000;font-size:16px;font-weight:800;animation:flyUp 1s ease-out forwards}
+@keyframes flyUp{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-60px) scale(1.3)}}
+/* Streak fire pulse */
+@keyframes firePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.streak-fire{display:inline-block;animation:firePulse 1s ease-in-out infinite}
 </style>
 </head>
 <body>
-<div id="splash" style="position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#060a14;transition:opacity .6s ease,transform .6s ease">
-<div id="splashStar" style="font-size:56px;color:#7c5cfc;filter:drop-shadow(0 0 20px rgba(124,92,252,.8));animation:splashPulse 1.5s ease-in-out infinite;opacity:0;transform:scale(.5)">&#9733;</div>
-<div id="splashTitle" style="font-size:22px;font-weight:800;background:linear-gradient(135deg,#e8eaf0 20%,#a5b4fc 60%,#7c5cfc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:16px;letter-spacing:-.02em;opacity:0;transform:translateY(10px)">English Galaxy</div>
-<div id="splashSub" style="font-size:10px;color:rgba(124,92,252,.5);margin-top:6px;font-weight:600;letter-spacing:.08em;opacity:0">Loading vocabulary...</div>
-<div id="splashBar" style="width:120px;height:2px;background:rgba(124,92,252,.15);border-radius:2px;margin-top:20px;overflow:hidden;opacity:0">
-<div id="splashBarFill" style="width:0%;height:100%;background:linear-gradient(90deg,#7c5cfc,#10b981);border-radius:2px;transition:width .4s ease"></div>
-</div>
-</div>
-<script>
-(function(){
-var s=document.getElementById('splash'),star=document.getElementById('splashStar'),title=document.getElementById('splashTitle'),sub=document.getElementById('splashSub'),bar=document.getElementById('splashBar'),fill=document.getElementById('splashBarFill');
-setTimeout(function(){star.style.cssText='font-size:56px;color:#7c5cfc;filter:drop-shadow(0 0 20px rgba(124,92,252,.8));animation:splashPulse 1.5s ease-in-out infinite;opacity:1;transform:scale(1);transition:all .5s cubic-bezier(.4,0,.2,1)'},50);
-setTimeout(function(){title.style.cssText='font-size:22px;font-weight:800;background:linear-gradient(135deg,#e8eaf0 20%,#a5b4fc 60%,#7c5cfc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:16px;letter-spacing:-.02em;opacity:1;transform:translateY(0);transition:all .5s cubic-bezier(.4,0,.2,1)'},300);
-setTimeout(function(){sub.style.cssText='font-size:10px;color:rgba(124,92,252,.5);margin-top:6px;font-weight:600;letter-spacing:.08em;opacity:1;transition:opacity .4s ease'},600);
-setTimeout(function(){bar.style.cssText='width:120px;height:2px;background:rgba(124,92,252,.15);border-radius:2px;margin-top:20px;overflow:hidden;opacity:1;transition:opacity .3s ease';fill.style.width='70%'},800);
-setTimeout(function(){fill.style.width='100%'},1200);
-setTimeout(function(){s.style.opacity='0';s.style.transform='scale(1.05)'},2000);
-setTimeout(function(){s.style.display='none'},2600);
-})();
-</script>
-<style>
-@keyframes splashPulse{0%,100%{filter:drop-shadow(0 0 20px rgba(124,92,252,.8))}50%{filter:drop-shadow(0 0 35px rgba(124,92,252,1))}}
-</style>
 <div class="hdr">
 <span class="star">&#9733;</span>
 <span class="ttl">English Galaxy</span>
@@ -280,6 +355,7 @@ setTimeout(function(){s.style.display='none'},2600);
 <div class="scr">
 <div class="page on" id="browse"></div>
 <div class="page" id="quiz"></div>
+<div class="page" id="games"></div>
 <div class="page" id="grammar"></div>
 
 <div class="page" id="me"></div>
@@ -287,6 +363,7 @@ setTimeout(function(){s.style.display='none'},2600);
 <div class="bnav" id="bnav">
 <a class="act" data-tab="browse" onclick="switchTab('browse')"><span class="ic">&#128214;</span>Browse</a>
 <a data-tab="quiz" onclick="switchTab('quiz')"><span class="ic">&#9989;</span>Quiz</a>
+<a data-tab="games" onclick="switchTab('games')"><span class="ic">&#127918;</span>Games</a>
 <a data-tab="grammar" onclick="switchTab('grammar')"><span class="ic">&#127891;</span>Grammar</a>
 
 <a data-tab="me" onclick="switchTab('me')"><span class="ic">&#128100;</span>Me</a>
@@ -453,8 +530,62 @@ function switchTab(tab){
  var navs=document.querySelectorAll('.bnav a');
  for(var i=0;i<navs.length;i++)navs[i].classList.remove('act');
  document.querySelector('.bnav a[data-tab="'+tab+'"]').classList.add('act');
- if(tab=='browse')renderBrowse();
+  if(tab=='browse')
+function renderSyncTo(t){
+  var el=document.getElementById(t);
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
+  var total=0;
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
+  var kb=(total/1024).toFixed(1);
+  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
+  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
+  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
+  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
+  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
+  h+='</div>';
+  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
+  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
+  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
+  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
+  el.innerHTML=h;
+}
+function exportData(){
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
+  var data={version:1,exported:new Date().toISOString(),data:{}};
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
+  var json=JSON.stringify(data);
+  var blob=new Blob([json],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
+}
+function importData(e){
+  var file=e.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      var data=JSON.parse(ev.target.result);
+      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
+      var count=0;var keys=Object.keys(data.data);
+      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
+      var dt=new Date(data.exported);
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
+      setTimeout(function(){location.reload();},1200);
+    }catch(ex){
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
+    }
+  };
+  reader.readAsText(file);e.target.value='';
+}
+
+renderBrowse();
   else if(tab=='quiz')renderQuiz();
+  else if(tab=='games')renderGames();
   else if(tab=='grammar')renderGrammar();
    else if(tab=='me')renderMe();
 }
@@ -466,12 +597,12 @@ function renderMe(){
   if(!meSub){
     var h='<div style="font-size:13px;font-weight:700;color:#8c93b8;margin-bottom:10px">&#128100; Me</div>';
     h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
-    h+='<div onclick="openMeSub(\'stats\')" style="background:linear-gradient(135deg,#6366f1,#818cf8);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128200;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Stats</div></div>';
-    h+='<div onclick="openMeSub(\'history\')" style="background:linear-gradient(135deg,#ef4444,#f97316);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128202;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">History</div></div>';
-    h+='<div onclick="openMeSub(\'mywords\')" style="background:linear-gradient(135deg,#22c55e,#10b981);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128156;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">My Words</div></div>';
-    h+='<div onclick="openMeSub(\'random\')" style="background:linear-gradient(135deg,#f97316,#eab308);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#127922;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Random</div></div>';
-    h+='<div onclick="openMeSub(\'notes\')" style="background:linear-gradient(135deg,#7c5cfc,#a78bfa);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128221;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Notes</div></div>';
-    h+='<div onclick="openMeSub(\'sync\')" style="background:linear-gradient(135deg,#06b6d4,#22d3ee);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128260;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Sync</div></div>';
+    h+='<div onclick="openMeSub('stats')" style="background:linear-gradient(135deg,#6366f1,#818cf8);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128200;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Stats</div></div>';
+    h+='<div onclick="openMeSub('history')" style="background:linear-gradient(135deg,#ef4444,#f97316);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128202;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">History</div></div>';
+    h+='<div onclick="openMeSub('mywords')" style="background:linear-gradient(135deg,#22c55e,#10b981);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128156;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">My Words</div></div>';
+    h+='<div onclick="openMeSub('random')" style="background:linear-gradient(135deg,#f97316,#eab308);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#127922;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Random</div></div>';
+    h+='<div onclick="openMeSub('notes')" style="background:linear-gradient(135deg,#7c5cfc,#a78bfa);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128221;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Notes</div></div>';
+    h+='<div onclick="openMeSub('sync')" style="background:linear-gradient(135deg,#06b6d4,#22d3ee);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128260;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Sync</div></div>';
     h+='</div>';
     d.innerHTML=h;return;
   }
@@ -526,7 +657,7 @@ function renderBrowse(){
    var totalWords=0;for(var ti=0;ti<G.length;ti++)totalWords+=G[ti].words.length;
    for(var ti=0;ti<G.length;ti++){h+='<span style="color:'+CC[G[ti].id]+'">'+G[ti].id+' <b>'+G[ti].words.length+'</b></span>';if(ti<G.length-1)h+='<span style="color:#1e2350">|</span>';}
    h+='<span style="margin-left:auto;color:#7c5cfc"><b>'+totalWords+'</b> total</span>';
-   h+='</div><div class="srch"><div class="sw"><input id="D" placeholder="Search all '+totalWords+' words..." value="'+s.replace(/"/g,'&quot;')+'" oninput="LAST_S=this.value;if(window._sd)cancelAnimationFrame(window._sd);window._sd=requestAnimationFrame(rd)"/></div></div>';
+   h+='</div><div class="srch"><div class="sw"><input id="D" placeholder="Search all '+totalWords+' words..." value="'+s.replace(/"/g,'&quot;')+'" oninput="LAST_S=this.value;rd()"/></div></div>';
    h+='<div style="display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap"><select id="sortSel" class="srt" onchange="toggleSort()"><option value="default">Default order</option><option value="alpha">A-Z</option><option value="alphaDesc">Z-A</option><option value="level">By level</option></select><button onclick="exportWords()" style="background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.15);border-radius:8px;color:#7c5cfc;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#128230; Export</button><button onclick="document.getElementById(\'wordFile\').click()" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#128229; Import</button><input type="file" id="wordFile" accept=".json" style="display:none" onchange="importWords(this)"/><button onclick="toggleSelectMode()" id="selBtn" style="background:'+(SELECT_MODE?'rgba(234,179,8,.2)':'rgba(124,92,252,.08)')+';border:1px solid '+(SELECT_MODE?'rgba(234,179,8,.3)':'rgba(124,92,252,.15)')+';border-radius:8px;color:'+(SELECT_MODE?'#eab308':'#7c5cfc')+';font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">'+(SELECT_MODE?'&#9989; Selecting':'&#128203; Select')+'</button>'+(SELECT_MODE?'<button onclick="addSelectedToMyWords()" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.2);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#10133; Add Sel.</button><button onclick="selectAllVisible()" style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:8px;color:#10b981;font-size:11px;font-weight:600;padding:6px 10px;cursor:pointer;touch-action:manipulation;white-space:nowrap">&#10062; All</button>':'')+'</div>';
    h+='<div class="kfilt" id="kf">';
   h+='<button class="'+(KNOWN_FILTER=='all'?'act':'')+'" onclick="KNOWN_FILTER=\'all\';renderBrowse()">All</button>';
@@ -558,8 +689,60 @@ function renderBrowse(){
   document.getElementById('st').textContent=wl.length+' words | '+tr+' translated | ✓'+knownCount+' ✗'+notKnownCount;
   if(items.length>0)sl(items[0]);else sl(-1);
 }
-function sw(i){CI=i;LAST_S='';renderBrowse();}
+function sw(i){CI=i;LAST_S='';
+function renderSyncTo(t){
+  var el=document.getElementById(t);
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
+  var total=0;
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
+  var kb=(total/1024).toFixed(1);
+  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
+  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
+  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
+  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
+  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
+  h+='</div>';
+  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
+  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
+  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
+  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
+  el.innerHTML=h;
+}
+function exportData(){
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
+  var data={version:1,exported:new Date().toISOString(),data:{}};
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
+  var json=JSON.stringify(data);
+  var blob=new Blob([json],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
+}
+function importData(e){
+  var file=e.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      var data=JSON.parse(ev.target.result);
+      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
+      var count=0;var keys=Object.keys(data.data);
+      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
+      var dt=new Date(data.exported);
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
+      setTimeout(function(){location.reload();},1200);
+    }catch(ex){
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
+    }
+  };
+  reader.readAsText(file);e.target.value='';
+}
 
+renderBrowse();}
 function renderGlobalSearch(s){
   var results=[];
   var totalAll=0;
@@ -764,7 +947,9 @@ function saveQuizResult(){
 }
 
 function renderHistory(){
-  var h='';
+  var h='<div class="sttab"><button class="act" id="htab0" onclick="switchHTab(0)">&#128202; Stats</button><button id="htab1" onclick="switchHTab(1)">&#128221; Review</button><button id="htab2" onclick="switchHTab(2)">&#128214; History</button></div>';
+  h+='<div id="statsTab"></div><div id="reviewTab" class="hid"></div>';
+  h+='<div id="histList">';
   var history=lsGetObj('eg_quiz_history', []);
   h+='<div style="font-size:13px;font-weight:700;color:#7c5cfc;margin-bottom:6px">Quiz History';
   if(history.length)h+=' <span style="font-weight:400;font-size:10px;color:#6c7293">('+history.length+')</span>';
@@ -802,7 +987,15 @@ function renderHistory(){
     h+='<button onclick="if(confirm(\'Clear all history?\')){lsRemove(\'eg_quiz_history\');renderHistory()}" style="flex:0;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:10px;color:#ef4444;font-size:11px;font-weight:700;padding:8px 10px;cursor:pointer">&#128465;</button>';
     h+='</div>';
   }
+  h+='</div>';
   document.getElementById(ME_T).innerHTML=h;
+}
+function switchHTab(i){
+  document.getElementById(ME_T).style.display=i===0?'block':'none';
+  document.getElementById('reviewTab').style.display=i===1?'block':'none';
+  document.getElementById('histList').style.display=i===2?'block':'none';
+  var btns=document.querySelectorAll('.sttab button');
+  for(var b=0;b<btns.length;b++)btns[b].classList.toggle('act',b===i);
 }
 
 function exportHistory(){
@@ -1055,16 +1248,120 @@ function removeMW(el){
   var w=el.dataset.w,g=el.dataset.g;
   toggleStudyWord(w,g);
   renderMyWords();
-  if(mode=='browse')renderBrowse();
+  if(mode=='browse')
+function renderSyncTo(t){
+  var el=document.getElementById(t);
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
+  var total=0;
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
+  var kb=(total/1024).toFixed(1);
+  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
+  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
+  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
+  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
+  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
+  h+='</div>';
+  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
+  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
+  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
+  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
+  el.innerHTML=h;
+}
+function exportData(){
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
+  var data={version:1,exported:new Date().toISOString(),data:{}};
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
+  var json=JSON.stringify(data);
+  var blob=new Blob([json],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
+}
+function importData(e){
+  var file=e.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      var data=JSON.parse(ev.target.result);
+      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
+      var count=0;var keys=Object.keys(data.data);
+      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
+      var dt=new Date(data.exported);
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
+      setTimeout(function(){location.reload();},1200);
+    }catch(ex){
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
+    }
+  };
+  reader.readAsText(file);e.target.value='';
 }
 
+renderBrowse();
+}
 function clearMyWords(){
   if(!confirm('Remove all words from My Words?'))return;
   saveStudyWords([]);
   renderMyWords();
-  if(mode=='browse')renderBrowse();
+  if(mode=='browse')
+function renderSyncTo(t){
+  var el=document.getElementById(t);
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
+  var total=0;
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
+  var kb=(total/1024).toFixed(1);
+  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
+  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
+  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
+  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
+  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
+  h+='</div>';
+  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
+  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
+  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
+  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
+  el.innerHTML=h;
+}
+function exportData(){
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
+  var data={version:1,exported:new Date().toISOString(),data:{}};
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
+  var json=JSON.stringify(data);
+  var blob=new Blob([json],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
+}
+function importData(e){
+  var file=e.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      var data=JSON.parse(ev.target.result);
+      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
+      var count=0;var keys=Object.keys(data.data);
+      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
+      var dt=new Date(data.exported);
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
+      setTimeout(function(){location.reload();},1200);
+    }catch(ex){
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
+    }
+  };
+  reader.readAsText(file);e.target.value='';
 }
 
+renderBrowse();
+}
 function startMWQuiz(){
   MW_WORDS=getStudyWordsFull();
   if(MW_WORDS.length<2){alert('Add at least 2 words to practice!');return;}
@@ -1244,7 +1541,60 @@ function toggleSort(){
 function toggleSelectMode(){
   SELECT_MODE=!SELECT_MODE;
   if(!SELECT_MODE)SELECTED_WORDS={};
-  rd();
+  
+function renderSyncTo(t){
+  var el=document.getElementById(t);
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
+  var total=0;
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
+  var kb=(total/1024).toFixed(1);
+  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
+  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
+  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
+  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
+  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
+  h+='</div>';
+  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
+  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
+  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
+  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
+  el.innerHTML=h;
+}
+function exportData(){
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
+  var data={version:1,exported:new Date().toISOString(),data:{}};
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
+  var json=JSON.stringify(data);
+  var blob=new Blob([json],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
+}
+function importData(e){
+  var file=e.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      var data=JSON.parse(ev.target.result);
+      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
+      var count=0;var keys=Object.keys(data.data);
+      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
+      var dt=new Date(data.exported);
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
+      setTimeout(function(){location.reload();},1200);
+    }catch(ex){
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
+    }
+  };
+  reader.readAsText(file);e.target.value='';
+}
+
+renderBrowse();
 }
 function selWord(el,key){
   if(SELECTED_WORDS[key]){delete SELECTED_WORDS[key];el.classList.remove('sel');var chk=el.querySelector('.chk');if(chk){chk.className='chk';chk.innerHTML='&#11036;';}}
@@ -1259,7 +1609,60 @@ function addSelectedToMyWords(){
   }
   SELECTED_WORDS={};
   alert(count+' words added to My Words!');
-  rd();
+  
+function renderSyncTo(t){
+  var el=document.getElementById(t);
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
+  var total=0;
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
+  var kb=(total/1024).toFixed(1);
+  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
+  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
+  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
+  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
+  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
+  h+='</div>';
+  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
+  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
+  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
+  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
+  el.innerHTML=h;
+}
+function exportData(){
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
+  var data={version:1,exported:new Date().toISOString(),data:{}};
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
+  var json=JSON.stringify(data);
+  var blob=new Blob([json],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
+}
+function importData(e){
+  var file=e.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      var data=JSON.parse(ev.target.result);
+      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
+      var count=0;var keys=Object.keys(data.data);
+      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
+      var dt=new Date(data.exported);
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
+      setTimeout(function(){location.reload();},1200);
+    }catch(ex){
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
+    }
+  };
+  reader.readAsText(file);e.target.value='';
+}
+
+renderBrowse();
 }
 function selectAllVisible(){
   var wis=document.querySelectorAll('#wl .wi');
@@ -1290,7 +1693,60 @@ function importWords(input){
         var found=false;for(var j=0;j<G[ci].words.length;j++){if(G[ci].words[j][0]==w.word){found=true;break;}}
         if(!found)G[ci].words.push([w.word,w.translation]);
       }
-      renderBrowse();alert('Imported '+data.length+' words!');
+      
+function renderSyncTo(t){
+  var el=document.getElementById(t);
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes'];
+  var total=0;
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)total+=v.length;}
+  var kb=(total/1024).toFixed(1);
+  var h='<div style="font-size:13px;font-weight:700;color:#06b6d4;margin-bottom:8px">&#128260; Data Sync</div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-bottom:10px">';
+  h+='<div style="color:#8c93b8;font-size:11px;margin-bottom:8px">Export all your data to a file, then import on another device.</div>';
+  h+='<div style="color:#5a6190;font-size:10px">Data size: '+kb+' KB</div></div>';
+  h+='<div style="display:flex;gap:8px;margin-bottom:10px">';
+  h+='<button onclick="exportData()" style="flex:1;background:linear-gradient(135deg,#06b6d4,#10b981);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128228; Export</button>';
+  h+='<button onclick="document.getElementById(\'importFile\').click()" style="flex:1;background:linear-gradient(135deg,#f97316,#ef4444);border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:700;padding:12px;cursor:pointer;touch-action:manipulation">&#128229; Import</button>';
+  h+='</div>';
+  h+='<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">';
+  h+='<div id="syncStatus" style="color:#8c93b8;font-size:10px;text-align:center;margin-top:6px"></div>';
+  h+='<div style="background:#11162e;border-radius:12px;padding:14px;margin-top:10px">';
+  h+='<div style="color:#7c5cfc;font-size:11px;font-weight:700;margin-bottom:6px">&#128161; How to sync:</div>';
+  h+='<div style="color:#5a6190;font-size:10px;line-height:1.6">1. Export on device A<br>2. Send file to device B<br>3. Import on device B<br>4. All data appears!</div></div>';
+  el.innerHTML=h;
+}
+function exportData(){
+  var keys=['eg_known','eg_study_words','eg_quiz_history','eg_grammar_history','eg_scores','eg_daily_stats','eg_notes','eg_theme','eg_theme_man'];
+  var data={version:1,exported:new Date().toISOString(),data:{}};
+  for(var i=0;i<keys.length;i++){var v=lsGet(keys[i]);if(v)data.data[keys[i]]=v;}
+  var json=JSON.stringify(data);
+  var blob=new Blob([json],{type:'application/json'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;a.download='english-galaxy-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Exported!</span>';
+}
+function importData(e){
+  var file=e.target.files[0];if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      var data=JSON.parse(ev.target.result);
+      if(!data||!data.data){var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Invalid file</span>';return;}
+      var count=0;var keys=Object.keys(data.data);
+      for(var i=0;i<keys.length;i++){lsSet(keys[i],data.data[keys[i]]);count++;}
+      var dt=new Date(data.exported);
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#10b981">&#10004; Imported! '+count+' keys</span>';
+      setTimeout(function(){location.reload();},1200);
+    }catch(ex){
+      var s=document.getElementById('syncStatus');if(s)s.innerHTML='<span style="color:#ef4444">&#10060; Error</span>';
+    }
+  };
+  reader.readAsText(file);e.target.value='';
+}
+
+renderBrowse();alert('Imported '+data.length+' words!');
     }catch(err){alert('Invalid file: '+err.message);}
   };
   reader.readAsText(file);input.value='';
@@ -1356,14 +1812,14 @@ function ansGEFill(){
 function showReview(){
   var rev=getReviewWords(20);
   var h='<div style="font-size:13px;font-weight:700;color:#ef4444;margin-bottom:6px">&#128221; Words to Review <span style="font-weight:400;color:#6c7293;font-size:10px">('+rev.length+')</span></div>';
-  if(!rev.length){h+='<div class="emp">No words to review! Keep up the good work!</div>';document.getElementById(ME_T).innerHTML=h;return;}
+  if(!rev.length){h+='<div class="emp">No words to review! Keep up the good work!</div>';document.getElementById('reviewTab').innerHTML=h;return;}
   for(var i=0;i<rev.length;i++){
     var w=rev[i],tr=w.r.indexOf(' — ')>-1?w.r.split(' — ')[0].trim():w.r;
     h+='<div class="srem" onclick="speak(\''+w.w.replace(/'/g,"\\'")+'\')">';
     h+='<div class="rw">'+w.w+' <span class="rg">('+w.g+')</span></div>';
     h+='<div class="rr">'+tr+'</div></div>';
   }
-  document.getElementById(ME_T).innerHTML=h;
+  document.getElementById('reviewTab').innerHTML=h;
 }
 // ====== KNOWN WORDS MANAGEMENT (after quiz / practice) ======
 var KNOWN_WORDS_DATA = [];
@@ -1671,7 +2127,794 @@ function importData(e){
   reader.readAsText(file);e.target.value='';
 }
 
+// ====== SOUND EFFECTS (Web Audio API) ======
+var _audioCtx=null;
+function getAudioCtx(){if(!_audioCtx){try{_audioCtx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}return _audioCtx;}
+function playTone(freq,dur,type,vol){
+  var ctx=getAudioCtx();if(!ctx)return;
+  var o=ctx.createOscillator(),g=ctx.createGain();
+  o.type=type||'sine';o.frequency.value=freq;
+  g.gain.setValueAtTime(vol||.15,ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+dur);
+  o.connect(g);g.connect(ctx.destination);
+  o.start();o.stop(ctx.currentTime+dur);
+}
+function sndCorrect(){playTone(523,.08,'sine',.12);setTimeout(function(){playTone(659,.08,'sine',.12);},60);setTimeout(function(){playTone(784,.12,'sine',.1);},120);}
+function sndWrong(){playTone(220,.15,'sawtooth',.08);setTimeout(function(){playTone(180,.2,'sawtooth',.06);},80);}
+function sndClick(){playTone(880,.04,'sine',.06);}
+function sndLevelUp(){playTone(523,.1,'sine',.1);setTimeout(function(){playTone(659,.1,'sine',.1);},80);setTimeout(function(){playTone(784,.1,'sine',.1);},160);setTimeout(function(){playTone(1047,.2,'sine',.12);},240);}
+function sndAchieve(){playTone(784,.1,'triangle',.1);setTimeout(function(){playTone(988,.1,'triangle',.1);},100);setTimeout(function(){playTone(1175,.15,'triangle',.1);},200);}
+function sndFlip(){playTone(600,.04,'sine',.05);}
+function sndMatch(){playTone(659,.06,'sine',.1);setTimeout(function(){playTone(880,.1,'sine',.1);},60);}
+
+// ====== CONFETTI SYSTEM ======
+var _confettiPieces=[];
+var _confettiCanvas=null;
+var _confettiRAF=0;
+function initConfetti(){
+  if(_confettiCanvas)return;
+  _confettiCanvas=document.createElement('canvas');
+  _confettiCanvas.id='confetti-canvas';
+  _confettiCanvas.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999';
+  document.body.appendChild(_confettiCanvas);
+}
+function spawnConfetti(count){
+  initConfetti();
+  var c=_confettiCanvas;c.width=window.innerWidth;c.height=window.innerHeight;
+  var colors=['#7c5cfc','#10b981','#eab308','#f97316','#ef4444','#06b6d4','#a78bfa','#f472b6'];
+  for(var i=0;i<(count||60);i++){
+    _confettiPieces.push({
+      x:Math.random()*c.width,y:-20-Math.random()*60,
+      vx:(Math.random()-.5)*6,vy:Math.random()*4+2,
+      w:Math.random()*8+4,h:Math.random()*6+3,
+      rot:Math.random()*360,rotV:(Math.random()-.5)*12,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      life:1,decay:Math.random()*.005+.003
+    });
+  }
+  if(!_confettiRAF)animConfetti();
+}
+function animConfetti(){
+  var c=_confettiCanvas;if(!c)return;
+  var ctx=c.getContext('2d');
+  ctx.clearRect(0,0,c.width,c.height);
+  for(var i=_confettiPieces.length-1;i>=0;i--){
+    var p=_confettiPieces[i];
+    p.x+=p.vx;p.y+=p.vy;p.vy+=.08;p.rot+=p.rotV;p.life-=p.decay;
+    if(p.life<=0||p.y>c.height+50){_confettiPieces.splice(i,1);continue;}
+    ctx.save();ctx.globalAlpha=p.life;ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
+    ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();
+  }
+  if(_confettiPieces.length>0){_confettiRAF=requestAnimationFrame(animConfetti);}
+  else{_confettiRAF=0;var c2=_confettiCanvas;if(c2)c2.getContext('2d').clearRect(0,0,c2.width,c2.height);}
+}
+
+// ====== XP & LEVEL SYSTEM ======
+function getXpData(){return lsGetObj('eg_xp',{xp:0,totalCorrect:0,totalWrong:0,gamesPlayed:0});}
+function saveXpData(d){lsSetObj('eg_xp',d);}
+function getXP(){return getXpData().xp;}
+function getLevel(){return Math.floor(getXP()/100)+1;}
+function getXPInLevel(){return getXP()%100;}
+function getXPForNext(){return 100;}
+var LEVEL_NAMES=['Newcomer','Learner','Explorer','Scholar','Student','Speaker','Fluent','Master','Sage','Legend','Galaxy Hero'];
+function getLevelName(){var l=getLevel()-1;return LEVEL_NAMES[Math.min(l,LEVEL_NAMES.length-1)];}
+function addXP(amount){
+  var d=getXpData();var oldLvl=getLevel();
+  d.xp+=amount;saveXpData(d);
+  var newLvl=getLevel();
+  showXPPopup(amount);
+  if(newLvl>oldLvl){
+    setTimeout(function(){sndLevelUp();spawnConfetti(80);showLevelUpPopup(newLvl);},800);
+  }
+  updateXPBar();
+}
+function showXPPopup(amount){
+  var el=document.createElement('div');el.className='xp-popup';
+  el.innerHTML='<div class="xpbig">+'+amount+' XP</div><div class="xplbl">Experience Points</div>';
+  document.body.appendChild(el);
+  setTimeout(function(){el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(function(){el.remove();},300);},1200);
+}
+function showLevelUpPopup(lvl){
+  var el=document.createElement('div');el.className='xp-popup';
+  el.innerHTML='<div style="font-size:32px;margin-bottom:4px">&#127881;</div><div class="xpbig" style="color:#eab308">Level '+lvl+'!</div><div class="xpmsg">'+getLevelName()+'</div>';
+  document.body.appendChild(el);
+  setTimeout(function(){el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(function(){el.remove();},300);},2500);
+}
+function updateXPBar(){
+  var bars=document.querySelectorAll('.xp-barf');
+  for(var i=0;i<bars.length;i++){bars[i].style.width=getXPInLevel()+'%';}
+  var lvlEls=document.querySelectorAll('.xp-lvl-num');
+  for(var i=0;i<lvlEls.length;i++){lvlEls[i].textContent=getLevel();}
+  var xpEls=document.querySelectorAll('.xp-cur-num');
+  for(var i=0;i<xpEls.length;i++){xpEls[i].textContent=getXPInLevel()+'/100';}
+}
+function scoreFly(el,text,color){
+  var r=el.getBoundingClientRect();
+  var f=document.createElement('div');f.className='score-fly';
+  f.style.left=(r.left+r.width/2-15)+'px';f.style.top=r.top+'px';
+  f.style.color=color||'#7c5cfc';f.textContent=text;
+  document.body.appendChild(f);
+  setTimeout(function(){f.remove();},1000);
+}
+
+// ====== ACHIEVEMENTS ======
+var ACHIEVEMENTS=[
+  {id:'first_word',name:'First Steps',desc:'Learn your first word',icon:'&#127793;',check:function(d){return d.totalCorrect>=1;}},
+  {id:'ten_words',name:'Getting Smart',desc:'Get 10 words correct',icon:'&#128218;',check:function(d){return d.totalCorrect>=10;}},
+  {id:'fifty_words',name:'Bookworm',desc:'Get 50 words correct',icon:'&#128214;',check:function(d){return d.totalCorrect>=50;}},
+  {id:'hundred_words',name:'Century',desc:'Get 100 words correct',icon:'&#127942;',check:function(d){return d.totalCorrect>=100;}},
+  {id:'first_game',name:'Game On',desc:'Play your first game',icon:'&#127918;',check:function(d){return d.gamesPlayed>=1;}},
+  {id:'ten_games',name:'Gamer',desc:'Play 10 games',icon:'&#127920;',check:function(d){return d.gamesPlayed>=10;}},
+  {id:'level5',name:'Rising Star',desc:'Reach level 5',icon:'&#11088;',check:function(d){return getLevel()>=5;}},
+  {id:'level10',name:'Expert',desc:'Reach level 10',icon:'&#128142;',check:function(d){return getLevel()>=10;}},
+  {id:'streak3',name:'On Fire',desc:'3 day streak',icon:'&#128293;',check:function(d){return getStreak()>=3;}},
+  {id:'streak7',name:'Unstoppable',desc:'7 day streak',icon:'&#127775;',check:function(d){return getStreak()>=7;}},
+  {id:'perfect_memory',name:'Perfect Memory',desc:'Memory game with no mistakes',icon:'&#129504;',check:function(d){return lsGetObj('eg_perfect_memory',false);}},
+  {id:'speed_demon',name:'Speed Demon',desc:'Complete typing under 5 seconds',icon:'&#9889;',check:function(d){return lsGetObj('eg_speed_demon',false);}},
+  {id:'match_master',name:'Match Master',desc:'Complete match game with no errors',icon:'&#128141;',check:function(d){return lsGetObj('eg_match_master',false);}}
+];
+function getUnlockedAch(){return lsGetObj('eg_achievements',[]);}
+function checkAchievements(){
+  var d=getXpData();var unlocked=getUnlockedAch();var newOnes=[];
+  for(var i=0;i<ACHIEVEMENTS.length;i++){
+    var a=ACHIEVEMENTS[i];var found=false;
+    for(var j=0;j<unlocked.length;j++){if(unlocked[j]===a.id){found=true;break;}}
+    if(!found&&a.check(d)){unlocked.push(a.id);newOnes.push(a);}
+  }
+  if(newOnes.length){
+    saveXpData(d);lsSetObj('eg_achievements',unlocked);
+    for(var i=0;i<newOnes.length;i++){
+      setTimeout(function(a){return function(){
+        sndAchieve();spawnConfetti(40);
+        var el=document.createElement('div');el.className='xp-popup';
+        el.innerHTML='<div style="font-size:28px">'+a.icon+'</div><div class="xpmsg">'+a.name+'</div><div class="xplbl">'+a.desc+'</div>';
+        document.body.appendChild(el);
+        setTimeout(function(){el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(function(){el.remove();},300);},2000);
+      };}(newOnes[i]),i*2500);
+    }
+  }
+}
+
+// ====== DAILY CHALLENGES ======
+function getDailyChallenges(){
+  var today=getDayKey();
+  var saved=lsGetObj('eg_daily_challenges',{date:'',challenges:[]});
+  if(saved.date===today)return saved.challenges;
+  var pool=[
+    {id:'quiz_10',name:'Complete a quiz (10+ questions)',target:10,icon:'&#128220;',reward:15,progress:0,done:false,type:'quiz'},
+    {id:'correct_20',name:'Get 20 words correct',target:20,icon:'&#10004;',reward:20,progress:0,done:false,type:'correct'},
+    {id:'play_3_games',name:'Play 3 mini-games',target:3,icon:'&#127918;',reward:25,progress:0,done:false,type:'games'},
+    {id:'streak_today',name:'Study today (any activity)',target:1,icon:'&#128293;',reward:10,progress:0,done:false,type:'study'}
+  ];
+  var challenges=pool.slice(0,3);
+  lsSetObj('eg_daily_challenges',{date:today,challenges:challenges});
+  return challenges;
+}
+function updateDailyChallenge(type,amount){
+  var today=getDayKey();var saved=lsGetObj('eg_daily_challenges',{date:'',challenges:[]});
+  if(saved.date!==today)return;
+  for(var i=0;i<saved.challenges.length;i++){
+    var c=saved.challenges[i];
+    if(!c.done&&c.type===type){
+      c.progress=Math.min(c.progress+amount,c.target);
+      if(c.progress>=c.target){c.done=true;addXP(c.reward);}
+    }
+  }
+  lsSetObj('eg_daily_challenges',saved);
+}
+
+// ====== ANKI-STYLE SPACED REPETITION ======
+// Schedule intervals: 1d, 3d, 7d, 14d, 30d, 60d, 120d...
+var SRS_INTERVALS=[1,3,7,14,30,60,120];
+function getSchedule(){return lsGetObj('eg_srs',{});}
+function saveSchedule(s){lsSetObj('eg_srs',s);}
+function getSRSKey(w,g){return g+'::'+w;}
+function scheduleWord(w,g,quality){
+  // quality: 0=Again, 1=Hard, 2=Good, 3=Easy
+  var s=getSchedule();var k=getSRSKey(w,g);
+  var cur=s[k]||{interval:0,nextReview:null,count:0,ease:2.5};
+  if(quality<=0){
+    cur.interval=1;cur.ease=Math.max(1.3,cur.ease-.2);
+  }else if(quality===1){
+    cur.interval=Math.max(1,Math.round(cur.interval*1.2));
+  }else if(quality===2){
+    if(cur.interval===0)cur.interval=1;
+    else cur.interval=Math.round(cur.interval*cur.ease);
+    cur.ease=Math.min(3.0,cur.ease+.1);
+  }else{
+    if(cur.interval===0)cur.interval=3;
+    else cur.interval=Math.round(cur.interval*cur.ease*1.3);
+    cur.ease=Math.min(3.0,cur.ease+.15);
+  }
+  cur.count++;
+  var next=new Date();next.setDate(next.getDate()+cur.interval);
+  cur.nextReview=next.toISOString();
+  s[k]=cur;saveSchedule(s);
+}
+function getDueWords(catId){
+  var s=getSchedule();var now=new Date();var due=[];
+  for(var gi=0;gi<G.length;gi++){
+    if(catId&&catId!=='all'&&G[gi].id!==catId)continue;
+    for(var j=0;j<G[gi].words.length;j++){
+      var w=G[gi].words[j],tr=w[1]||'';if(!tr)continue;
+      var k=getSRSKey(w[0],G[gi].id);
+      var entry=s[k];
+      if(entry&&entry.nextReview){
+        var nr=new Date(entry.nextReview);
+        if(nr<=now){
+          var trans=tr.indexOf(' \u2014 ')>-1?tr.split(' \u2014 ')[0].trim():tr;
+          due.push({en:w[0],ru:trans,g:G[gi].id,interval:entry.interval,count:entry.count,overdue:Math.round((now-nr)/(86400000))});
+        }
+      }
+    }
+  }
+  due.sort(function(a,b){return b.overdue-a.overdue||b.count-a.count;});
+  return due;
+}
+function getNewWordsCount(catId){
+  var s=getSchedule();var count=0;
+  for(var gi=0;gi<G.length;gi++){
+    if(catId&&catId!=='all'&&G[gi].id!==catId)continue;
+    for(var j=0;j<G[gi].words.length;j++){
+      var w=G[gi].words[j],tr=w[1]||'';if(!tr)continue;
+      if(tr.indexOf('FORMULA')>-1||tr.indexOf('|')>-1)continue;
+      var k=getSRSKey(w[0],G[gi].id);
+      if(!s[k])count++;
+    }
+  }
+  return count;
+}
+function getLearnedCount(catId){
+  var s=getSchedule();var count=0;
+  for(var gi=0;gi<G.length;gi++){
+    if(catId&&catId!=='all'&&G[gi].id!==catId)continue;
+    for(var j=0;j<G[gi].words.length;j++){
+      var w=G[gi].words[j];
+      var k=getSRSKey(w[0],G[gi].id);
+      if(s[k]&&s[k].interval>=7)count++;
+    }
+  }
+  return count;
+}
+// SRS Review session
+var SRS_QUEUE=[],SRS_QI=0,SRS_CORRECT=0,SRS_WRONG=0,SRS_CAT='all';
+function startSRSReview(catId){
+  SRS_CAT=catId||'all';
+  SRS_QUEUE=getDueWords(SRS_CAT);
+  if(SRS_QUEUE.length===0){
+    document.getElementById('gameArea').innerHTML='<div style="background:#0d1f1a;border-radius:12px;padding:20px;text-align:center;margin-top:8px"><div style="font-size:18px;font-weight:700;color:#10b981">&#10004; All caught up!</div><div style="font-size:12px;color:#8892b0;margin-top:4px">No words due for review. Come back later or learn new words!</div></div>';
+    return;
+  }
+  SRS_QI=0;SRS_CORRECT=0;SRS_WRONG=0;
+  showSRSCard();
+}
+function showSRSCard(){
+  if(SRS_QI>=SRS_QUEUE.length){srsComplete();return;}
+  var w=SRS_QUEUE[SRS_QI];
+  var area=document.getElementById('gameArea');
+  var h='<div style="font-size:12px;font-weight:700;color:#06b6d4;margin-bottom:6px">&#128260; Review Session</div>';
+  h+='<div class="qbar"><div class="qbarf" style="width:'+(SRS_QI/SRS_QUEUE.length*100)+'%;background:#06b6d4"></div></div>';
+  h+='<div style="font-size:10px;color:#6c7293;text-align:right;margin-bottom:4px">'+(SRS_QI+1)+'/'+SRS_QUEUE.length+' | &#10004;'+SRS_CORRECT+' &#10008;'+SRS_WRONG+'</div>';
+  h+='<div class="qcard">';
+  h+='<div style="font-size:10px;color:#06b6d4;font-weight:700;margin-bottom:2px">'+w.g+'</div>';
+  h+='<div style="font-size:9px;color:#6c7293;margin-bottom:6px">Reviewed '+w.count+'x | every '+w.interval+'d</div>';
+  h+='<div style="font-size:28px;font-weight:800;margin-bottom:8px">'+w.en+'</div>';
+  h+='<div id="srsAnswer" style="display:none;background:rgba(24,29,58,.6);border-radius:14px;padding:14px 16px;width:100%;border:1px solid rgba(16,185,129,.15);margin:8px 0">';
+  h+='<div style="font-size:16px;color:#10b981;font-weight:600">'+w.ru+'</div>';
+  h+='</div>';
+  h+='<button id="srsShowBtn" onclick="srsShowAnswer()" class="qflip">&#9654; Show Answer</button>';
+  h+='<div id="srsGrade" style="display:none;margin-top:10px;width:100%">';
+  h+='<div style="font-size:10px;color:#6c7293;margin-bottom:6px;text-align:center">How well did you know it?</div>';
+  h+='<div style="display:flex;gap:4px;width:100%">';
+  h+='<button onclick="srsGrade(0)" style="flex:1;background:#ef4444;border:none;border-radius:10px;color:#fff;font-size:11px;font-weight:700;padding:10px 4px;cursor:pointer;touch-action:manipulation">Again<br><span style="font-size:8px;opacity:.7">1 day</span></button>';
+  h+='<button onclick="srsGrade(1)" style="flex:1;background:#f97316;border:none;border-radius:10px;color:#fff;font-size:11px;font-weight:700;padding:10px 4px;cursor:pointer;touch-action:manipulation">Hard<br><span style="font-size:8px;opacity:.7">'+Math.max(1,Math.round(w.interval*1.2))+'d</span></button>';
+  var nextGood=Math.round(w.interval*w.ease||w.interval*2.5);if(nextGood<=0)nextGood=1;
+  h+='<button onclick="srsGrade(2)" style="flex:1;background:#10b981;border:none;border-radius:10px;color:#fff;font-size:11px;font-weight:700;padding:10px 4px;cursor:pointer;touch-action:manipulation">Good<br><span style="font-size:8px;opacity:.7">'+nextGood+'d</span></button>';
+  var nextEasy=Math.round(nextGood*1.3);
+  h+='<button onclick="srsGrade(3)" style="flex:1;background:#7c5cfc;border:none;border-radius:10px;color:#fff;font-size:11px;font-weight:700;padding:10px 4px;cursor:pointer;touch-action:manipulation">Easy<br><span style="font-size:8px;opacity:.7">'+nextEasy+'d</span></button>';
+  h+='</div></div></div>';
+  h+='<button onclick="startSRSReview(\''+SRS_CAT+'\')" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:10px;color:#ef4444;font-size:11px;font-weight:600;padding:8px 16px;cursor:pointer;margin-top:4px">&#128260; Back</button>';
+  area.innerHTML=h;
+}
+function srsShowAnswer(){
+  var ans=document.getElementById('srsAnswer');
+  var btn=document.getElementById('srsShowBtn');
+  var grade=document.getElementById('srsGrade');
+  if(ans){ans.style.display='block';ans.classList.add('qtrans-show');}
+  if(btn)btn.style.display='none';
+  if(grade)grade.style.display='block';
+  sndFlip();
+}
+function srsGrade(quality){
+  var w=SRS_QUEUE[SRS_QI];
+  scheduleWord(w.en,w.g,quality);
+  if(quality>=2){SRS_CORRECT++;sndCorrect();addXP(2);}
+  else if(quality===1){SRS_CORRECT++;sndCorrect();addXP(1);}
+  else{SRS_WRONG++;sndWrong();}
+  var d=getXpData();d.totalCorrect++;saveXpData(d);
+  updateDailyChallenge('correct',1);
+  SRS_QI++;
+  showSRSCard();
+}
+function srsComplete(){
+  var total=SRS_CORRECT+SRS_WRONG;
+  var d=getXpData();d.gamesPlayed++;saveXpData(d);
+  updateDailyChallenge('study',1);
+  checkAchievements();
+  var area=document.getElementById('gameArea');
+  var h='<div style="background:#11162e;border:1px solid #1e2350;border-radius:16px;padding:20px;text-align:center;margin-top:8px">';
+  h+='<div style="font-size:22px;font-weight:700;color:#06b6d4">&#128260; Review Done!</div>';
+  h+='<div style="font-size:14px;color:#8892b0;margin:6px 0">';
+  h+='&#10004; '+SRS_CORRECT+' knew it | &#10008; '+SRS_WRONG+' need practice</div>';
+  h+='<div style="font-size:11px;color:#6c7293;margin-bottom:8px">Words will come back based on how well you knew them.</div>';
+  h+='<button onclick="startSRSReview(\''+SRS_CAT+'\')" style="background:#06b6d4;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;padding:10px 20px;cursor:pointer;margin-top:4px">&#8634; Review Again</button>';
+  h+='<button onclick="renderGames()" style="background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.15);border-radius:12px;color:#06b6d4;font-size:12px;font-weight:600;padding:8px 16px;cursor:pointer;margin-top:4px;margin-left:8px">Back</button>';
+  h+='</div>';
+  if(SRS_WRONG===0&&SRS_CORRECT>5)spawnConfetti(40);
+  area.innerHTML=h;
+}
+// Integrate SRS: after quiz/game, schedule reviewed words
+var _origSRSQuizSave=saveQuizResult;
+saveQuizResult=function(){
+  _origSRSQuizSave();
+  for(var i=0;i<QW.length;i++){
+    var found=false;
+    for(var j=0;j<QWW.length;j++){if(QW[i].w===QWW[j].w&&QW[i].g===QWW[j].g){found=true;break;}}
+    scheduleWord(QW[i].w,QW[i].g,found?0:2);
+  }
+};
+
+// ====== HELPER: get words for games ======
+function getGameWords(catId,count){
+  var words=[];
+  for(var gi=0;gi<G.length;gi++){
+    if(catId&&catId!=='all'&&G[gi].id!==catId)continue;
+    for(var j=0;j<G[gi].words.length;j++){
+      var w=G[gi].words[j],tr=w[1]||'';
+      if(!tr)continue;
+      var trans=tr.indexOf(' \u2014 ')>-1?tr.split(' \u2014 ')[0].trim():tr;
+      if(trans.indexOf('FORMULA')>-1||trans.indexOf('|')>-1)continue;
+      words.push({en:w[0],ru:trans,g:G[gi].id});
+    }
+  }
+  shuffle(words);
+  return words.slice(0,count||16);
+}
+
+// ====== GAMES PAGE ======
+var GAMES_CAT='all';
+function renderGames(){
+  var xp=getXP();var lvl=getLevel();var xpIn=getXPInLevel();
+  var d=getXpData();var streak=getStreak();
+  var h='<div style="font-size:13px;font-weight:700;color:#eab308;margin-bottom:8px">&#127918; Games</div>';
+  h+='<div class="xp-wrap">';
+  h+='<div class="xp-level"><div class="lvl"><span class="xp-lvl-num">'+lvl+'</span></div><div class="lvlinfo"><div class="lvlname">'+getLevelName()+'</div><div class="xptxt"><span class="xp-cur-num">'+xpIn+'</span>/100 XP to next level</div></div>';
+  if(streak>0)h+='<div style="font-size:12px;color:#eab308;font-weight:700"><span class="streak-fire">&#128293;</span> '+streak+'</div>';
+  h+='</div>';
+  h+='<div class="xp-bar"><div class="xp-barf" style="width:'+xpIn+'%"></div></div>';
+  h+='<div style="font-size:9px;color:#6c7293;margin-top:4px">Total: '+xp+' XP</div>';
+  h+='</div>';
+  h+='<div style="font-size:11px;font-weight:700;color:#8892b0;margin-bottom:6px">MINI-GAMES</div>';
+  h+='<div class="games-grid">';
+  h+='<div class="gcard" style="background:linear-gradient(135deg,#10b981,#059669)" onclick="startGame(\'memory\')"><span class="gicon">&#129522;</span><span class="gname">Memory</span><span class="gdesc">Flip & match pairs</span><span class="gxp">+5-15 XP</span></div>';
+  h+='<div class="gcard" style="background:linear-gradient(135deg,#7c5cfc,#6d4ff2)" onclick="startGame(\'match\')"><span class="gicon">&#128279;</span><span class="gname">Match</span><span class="gdesc">Connect pairs</span><span class="gxp">+5-15 XP</span></div>';
+  h+='<div class="gcard" style="background:linear-gradient(135deg,#f97316,#ea580c)" onclick="startGame(\'guess\')"><span class="gicon">&#128161;</span><span class="gname">Guess Word</span><span class="gdesc">Pick the right word</span><span class="gxp">+3-10 XP</span></div>';
+  h+='<div class="gcard" style="background:linear-gradient(135deg,#ef4444,#dc2626)" onclick="startGame(\'typing\')"><span class="gicon">&#9000;</span><span class="gname">Typing</span><span class="gdesc">Type fast!</span><span class="gxp">+5-20 XP</span></div>';
+  h+='</div>';
+  var due=getDueWords('all');var dueCount=due.length;var newCount=getNewWordsCount('all');var learned=getLearnedCount('all');
+  h+='<div style="font-size:11px;font-weight:700;color:#8892b0;margin:10px 0 6px">SPACED REPETITION (Anki-style)</div>';
+  h+='<div style="display:flex;gap:6px;margin-bottom:8px">';
+  h+='<div style="flex:1;background:rgba(17,22,46,.5);border:1px solid rgba(6,182,212,.1);border-radius:12px;padding:10px;text-align:center">';
+  h+='<div style="font-size:20px;font-weight:800;color:#ef4444">'+dueCount+'</div><div style="font-size:9px;color:#6c7293">Due</div></div>';
+  h+='<div style="flex:1;background:rgba(17,22,46,.5);border:1px solid rgba(16,185,129,.1);border-radius:12px;padding:10px;text-align:center">';
+  h+='<div style="font-size:20px;font-weight:800;color:#10b981">'+learned+'</div><div style="font-size:9px;color:#6c7293">Learned</div></div>';
+  h+='<div style="flex:1;background:rgba(17,22,46,.5);border:1px solid rgba(234,179,8,.1);border-radius:12px;padding:10px;text-align:center">';
+  h+='<div style="font-size:20px;font-weight:800;color:#eab308">'+newCount+'</div><div style="font-size:9px;color:#6c7293">New</div></div>';
+  h+='</div>';
+  if(dueCount>0){
+    h+='<div style="background:linear-gradient(135deg,rgba(239,68,68,.12),rgba(249,115,22,.08));border:1px solid rgba(239,68,68,.2);border-radius:14px;padding:14px;margin-bottom:8px;cursor:pointer;touch-action:manipulation" onclick="startSRSReview(\'all\')">';
+    h+='<div style="display:flex;align-items:center;gap:10px">';
+    h+='<div style="font-size:28px">&#128260;</div>';
+    h+='<div style="flex:1"><div style="font-size:14px;font-weight:700;color:#ef4444">'+dueCount+' words due for review!</div>';
+    h+='<div style="font-size:10px;color:#8892b0">Review now to keep them in memory</div></div>';
+    h+='<div style="font-size:20px;color:#ef4444">&#8250;</div>';
+    h+='</div></div>';
+  }else{
+    h+='<div style="background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.15);border-radius:14px;padding:14px;margin-bottom:8px;text-align:center">';
+    h+='<div style="font-size:14px;font-weight:600;color:#10b981">&#10004; All caught up!</div>';
+    h+='<div style="font-size:10px;color:#8892b0;margin-top:2px">No words due. Learn new words or play games!</div></div>';
+  }
+  if(dueCount>3){
+    h+='<div style="display:flex;gap:4px;margin-bottom:4px;flex-wrap:wrap">';
+    for(var i=0;i<Math.min(dueCount,6);i++){
+      h+='<span style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:8px;padding:4px 8px;font-size:9px;color:#f87171">'+due[i].en+' <span style="color:#6c7293">('+due[i].interval+'d)</span></span>';
+    }
+    if(dueCount>6)h+='<span style="font-size:9px;color:#6c7293;padding:4px">+'+((dueCount-6))+' more</span>';
+    h+='</div>';
+  }
+  h+='<div id="gameArea"></div>';
+  document.getElementById('games').innerHTML=h;
+}
+
+// ====== MEMORY GAME ======
+var MEM_CARDS=[],MEM_FLIPPED=[],MEM_MATCHED=[],MEM_MOVES=0,MEM_ERRORS=0,MEM_LOCKED=false;
+function startGame(type){
+  sndClick();
+  if(type=='memory')startMemory();
+  else if(type=='match')startMatch();
+  else if(type=='guess')startGuess();
+  else if(type=='typing')startTyping();
+}
+function startMemory(){
+  var words=getGameWords(GAMES_CAT,8);
+  if(words.length<4){document.getElementById('gameArea').innerHTML='<div class="emp">Not enough words. Browse more categories!</div>';return;}
+  MEM_CARDS=[];MEM_FLIPPED=[];MEM_MATCHED=[];MEM_MOVES=0;MEM_ERRORS=0;MEM_LOCKED=false;
+  var pairs=[];
+  for(var i=0;i<words.length;i++){pairs.push({id:i,en:words[i].en,ru:words[i].ru,type:'en'});pairs.push({id:i,en:words[i].en,ru:words[i].ru,type:'ru'});}
+  shuffle(pairs);
+  MEM_CARDS=pairs;
+  var area=document.getElementById('gameArea');
+  var h='<div style="font-size:12px;font-weight:700;color:#10b981;margin-bottom:6px">&#129522; Memory Game</div>';
+  h+='<div style="display:flex;justify-content:space-between;margin-bottom:6px">';
+  h+='<span style="font-size:10px;color:#6c7293">Moves: <b id="memMoves">0</b></span>';
+  h+='<span style="font-size:10px;color:#6c7293">Errors: <b id="memErr" style="color:#ef4444">0</b></span>';
+  h+='<span style="font-size:10px;color:#6c7293">Matched: <b id="memMatch" style="color:#10b981">0</b>/'+words.length+'</span>';
+  h+='</div>';
+  h+='<div class="mem-grid" id="memGrid">';
+  for(var i=0;i<pairs.length;i++){
+    h+='<div class="mem-card" data-i="'+i+'" onclick="flipMem('+i+')">';
+    h+='<div class="mem-front">?</div>';
+    h+='<div class="mem-back">'+(pairs[i].type==='en'?pairs[i].en:pairs[i].ru)+'</div>';
+    h+='</div>';
+  }
+  h+='</div>';
+  h+='<button onclick="renderGames()" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:10px;color:#ef4444;font-size:11px;font-weight:600;padding:8px 16px;cursor:pointer;margin-top:4px">&#128260; Back</button>';
+  area.innerHTML=h;
+}
+function flipMem(i){
+  if(MEM_LOCKED)return;
+  var card=document.querySelector('.mem-card[data-i="'+i+'"]');
+  if(!card||card.classList.contains('flipped')||card.classList.contains('matched'))return;
+  sndFlip();
+  card.classList.add('flipped');
+  MEM_FLIPPED.push(i);
+  if(MEM_FLIPPED.length===2){
+    MEM_LOCKED=true;MEM_MOVES++;
+    var a=MEM_CARDS[MEM_FLIPPED[0]],b=MEM_CARDS[MEM_FLIPPED[1]];
+    var isMatch=a.id===b.id&&a.type!==b.type;
+    if(isMatch){
+      sndMatch();
+      var c1=document.querySelector('.mem-card[data-i="'+MEM_FLIPPED[0]+'"]');
+      var c2=document.querySelector('.mem-card[data-i="'+MEM_FLIPPED[1]+'"]');
+      setTimeout(function(){c1.classList.add('matched');c2.classList.add('matched');c1.classList.remove('flipped');c2.classList.remove('flipped');},300);
+      MEM_MATCHED.push(a.id);
+      document.getElementById('memMatch').textContent=MEM_MATCHED.length;
+      MEM_FLIPPED=[];MEM_LOCKED=false;
+      var el=document.getElementById('memMatch');if(el)scoreFly(el,'+2','#10b981');
+      if(MEM_MATCHED.length===MEM_CARDS.length/2)memComplete();
+    }else{
+      MEM_ERRORS++;
+      document.getElementById('memErr').textContent=MEM_ERRORS;
+      sndWrong();
+      var c1=document.querySelector('.mem-card[data-i="'+MEM_FLIPPED[0]+'"]');
+      var c2=document.querySelector('.mem-card[data-i="'+MEM_FLIPPED[1]+'"]');
+      setTimeout(function(){c1.classList.remove('flipped');c2.classList.remove('flipped');MEM_FLIPPED=[];MEM_LOCKED=false;},600);
+    }
+    document.getElementById('memMoves').textContent=MEM_MOVES;
+  }
+}
+function memComplete(){
+  var xpReward=Math.max(5,15-MEM_ERRORS*2);
+  addXP(xpReward);
+  var d=getXpData();d.gamesPlayed++;d.totalCorrect+=MEM_MATCHED.length;d.totalWrong+=MEM_ERRORS;saveXpData(d);
+  updateDailyChallenge('games',1);
+  if(MEM_ERRORS===0){lsSetObj('eg_perfect_memory',true);checkAchievements();}
+  checkAchievements();
+  var area=document.getElementById('gameArea');
+  var h='<div style="background:#11162e;border:1px solid #1e2350;border-radius:16px;padding:20px;text-align:center;margin-top:8px">';
+  h+='<div style="font-size:22px;font-weight:700;color:#10b981">&#127881; Complete!</div>';
+  h+='<div style="font-size:14px;color:#8892b0;margin:6px 0">Moves: '+MEM_MOVES+' | Errors: '+MEM_ERRORS+'</div>';
+  h+='<div style="font-size:16px;color:#eab308;font-weight:700">+'+xpReward+' XP</div>';
+  h+='<button onclick="startMemory()" style="background:#10b981;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;padding:10px 20px;cursor:pointer;margin-top:8px">&#8634; Play Again</button>';
+  h+='<button onclick="renderGames()" style="background:rgba(124,92,252,.1);border:1px solid rgba(124,92,252,.15);border-radius:12px;color:#7c5cfc;font-size:12px;font-weight:600;padding:8px 16px;cursor:pointer;margin-top:4px;margin-left:8px">Back</button>';
+  h+='</div>';
+  spawnConfetti(40);
+  area.innerHTML=h;
+}
+
+// ====== MATCH GAME ======
+var MATCH_LEFT=[],MATCH_RIGHT=[],MATCH_SEL_LEFT=-1,MATCH_DONE=0,MATCH_ERRORS=0;
+function startMatch(){
+  var words=getGameWords(GAMES_CAT,6);
+  if(words.length<3){document.getElementById('gameArea').innerHTML='<div class="emp">Not enough words.</div>';return;}
+  MATCH_LEFT=words.slice();MATCH_RIGHT=words.slice();
+  shuffle(MATCH_RIGHT);MATCH_SEL_LEFT=-1;MATCH_DONE=0;MATCH_ERRORS=0;
+  var area=document.getElementById('gameArea');
+  var h='<div style="font-size:12px;font-weight:700;color:#7c5cfc;margin-bottom:6px">&#128279; Match Game</div>';
+  h+='<div style="display:flex;justify-content:space-between;margin-bottom:6px">';
+  h+='<span style="font-size:10px;color:#6c7293">Matched: <b id="mtDone" style="color:#10b981">0</b>/'+words.length+'</span>';
+  h+='<span style="font-size:10px;color:#6c7293">Errors: <b id="mtErr" style="color:#ef4444">0</b></span>';
+  h+='</div>';
+  h+='<div class="match-grid"><div class="match-col" id="mtLeft">';
+  for(var i=0;i<MATCH_LEFT.length;i++){
+    h+='<div class="match-item" data-i="'+i+'" onclick="matchPickL('+i+')">'+MATCH_LEFT[i].en+'</div>';
+  }
+  h+='</div><div class="match-col" id="mtRight">';
+  for(var i=0;i<MATCH_RIGHT.length;i++){
+    h+='<div class="match-item" data-i="'+i+'" onclick="matchPickR('+i+')">'+MATCH_RIGHT[i].ru+'</div>';
+  }
+  h+='</div></div>';
+  h+='<button onclick="renderGames()" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:10px;color:#ef4444;font-size:11px;font-weight:600;padding:8px 16px;cursor:pointer;margin-top:4px">&#128260; Back</button>';
+  area.innerHTML=h;
+}
+function matchPickL(i){
+  if(document.querySelector('#mtLeft .match-item[data-i="'+i+'"]').classList.contains('done'))return;
+  sndClick();
+  var items=document.querySelectorAll('#mtLeft .match-item');
+  for(var j=0;j<items.length;j++)items[j].classList.remove('sel');
+  items[i].classList.add('sel');
+  MATCH_SEL_LEFT=i;
+}
+function matchPickR(i){
+  if(MATCH_SEL_LEFT<0)return;
+  var rEl=document.querySelector('#mtRight .match-item[data-i="'+i+'"]');
+  if(rEl.classList.contains('done'))return;
+  var lEl=document.querySelector('#mtLeft .match-item[data-i="'+MATCH_SEL_LEFT+'"]');
+  if(MATCH_LEFT[MATCH_SEL_LEFT].en===MATCH_RIGHT[i].en){
+    sndMatch();lEl.classList.add('correct');rEl.classList.add('correct');
+    scoreFly(lEl,'+2','#10b981');
+    setTimeout(function(){lEl.classList.add('done');rEl.classList.add('done');lEl.classList.remove('sel');},400);
+    MATCH_DONE++;
+    document.getElementById('mtDone').textContent=MATCH_DONE;
+    if(MATCH_DONE===MATCH_LEFT.length)matchComplete();
+  }else{
+    sndWrong();MATCH_ERRORS++;lEl.classList.add('wrong');rEl.classList.add('wrong');
+    document.getElementById('mtErr').textContent=MATCH_ERRORS;
+    setTimeout(function(){lEl.classList.remove('wrong','sel');rEl.classList.remove('wrong');},500);
+  }
+  MATCH_SEL_LEFT=-1;
+}
+function matchComplete(){
+  var xpReward=Math.max(5,15-MATCH_ERRORS*2);addXP(xpReward);
+  var d=getXpData();d.gamesPlayed++;d.totalCorrect+=MATCH_LEFT.length;d.totalWrong+=MATCH_ERRORS;saveXpData(d);
+  updateDailyChallenge('games',1);
+  if(MATCH_ERRORS===0){lsSetObj('eg_match_master',true);checkAchievements();}
+  checkAchievements();
+  var area=document.getElementById('gameArea');
+  var h='<div style="background:#11162e;border:1px solid #1e2350;border-radius:16px;padding:20px;text-align:center;margin-top:8px">';
+  h+='<div style="font-size:22px;font-weight:700;color:#7c5cfc">&#128141; Matched!</div>';
+  h+='<div style="font-size:14px;color:#8892b0;margin:6px 0">Errors: '+MATCH_ERRORS+'</div>';
+  h+='<div style="font-size:16px;color:#eab308;font-weight:700">+'+xpReward+' XP</div>';
+  h+='<button onclick="startMatch()" style="background:#7c5cfc;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;padding:10px 20px;cursor:pointer;margin-top:8px">&#8634; Play Again</button>';
+  h+='<button onclick="renderGames()" style="background:rgba(124,92,252,.1);border:1px solid rgba(124,92,252,.15);border-radius:12px;color:#7c5cfc;font-size:12px;font-weight:600;padding:8px 16px;cursor:pointer;margin-top:4px;margin-left:8px">Back</button>';
+  h+='</div>';
+  spawnConfetti(40);
+  area.innerHTML=h;
+}
+
+// ====== GUESS WORD GAME ======
+var GW_WORDS=[],GW_QI=0,GW_CORRECT=0,GW_WRONG=0,GW_STREAK=0;
+function startGuess(){
+  GW_WORDS=getGameWords(GAMES_CAT,12);
+  if(GW_WORDS.length<4){document.getElementById('gameArea').innerHTML='<div class="emp">Not enough words.</div>';return;}
+  GW_QI=0;GW_CORRECT=0;GW_WRONG=0;GW_STREAK=0;
+  showGuessQ();
+}
+function showGuessQ(){
+  if(GW_QI>=GW_WORDS.length){guessComplete();return;}
+  var q=GW_WORDS[GW_QI],pct=GW_QI/GW_WORDS.length*100;
+  var opts=[q];
+  var pool=[];for(var i=0;i<GW_WORDS.length;i++){if(i!==GW_QI)pool.push(GW_WORDS[i]);}
+  shuffle(pool);for(var i=0;i<3&&i<pool.length;i++)opts.push(pool[i]);
+  shuffle(opts);
+  var area=document.getElementById('gameArea');
+  var h='<div style="font-size:12px;font-weight:700;color:#f97316;margin-bottom:6px">&#128161; Guess the Word</div>';
+  h+='<div class="timer-bar"><div id="gwTimer" class="timer-barf" style="width:100%"></div></div>';
+  h+='<div class="qbar"><div class="qbarf" style="width:'+pct+'%;background:#f97316"></div></div>';
+  h+='<div style="font-size:10px;color:#6c7293;text-align:right;margin-bottom:4px">'+(GW_QI+1)+'/'+GW_WORDS.length+' | &#10004;'+GW_CORRECT+' &#10008;'+GW_WRONG+(GW_STREAK>=3?' | &#128293;'+GW_STREAK:'')+'</div>';
+  h+='<div class="qcard">';
+  h+='<div style="font-size:10px;color:#f97316;font-weight:700;margin-bottom:4px">'+q.g+'</div>';
+  h+='<div style="font-size:11px;color:#8892b0;margin-bottom:6px">What is the English word for:</div>';
+  h+='<div style="font-size:22px;font-weight:800;margin-bottom:10px;color:#10b981">'+q.ru+'</div>';
+  h+='<div class="guess-opts" id="gwOpts">';
+  for(var i=0;i<opts.length;i++){
+    h+='<button class="guess-opt" onclick="guessAnswer(this,\''+opts[i].en.replace(/'/g,"\\'")+'\','+(opts[i].en===q.en)+')">'+opts[i].en+'</button>';
+  }
+  h+='</div></div>';
+  area.innerHTML=h;
+  GW_TIMER=15;GW_TIMER_INT=setInterval(function(){
+    GW_TIMER--;
+    var bar=document.getElementById('gwTimer');
+    if(bar)bar.style.width=Math.max(0,GW_TIMER/15*100)+'%';
+    if(GW_TIMER<=0){clearInterval(GW_TIMER_INT);guessAnswer(null,'',false);}
+  },1000);
+}
+var GW_TIMER=15,GW_TIMER_INT=0;
+function guessAnswer(el,answer,isCorrect){
+  if(GW_TIMER_INT){clearInterval(GW_TIMER_INT);GW_TIMER_INT=0;}
+  var btns=document.querySelectorAll('#gwOpts .guess-opt');
+  for(var i=0;i<btns.length;i++){btns[i].disabled=true;
+    if(btns[i].textContent===GW_WORDS[GW_QI].en)btns[i].classList.add('correct');
+    else btns[i].style.opacity='.4';
+  }
+  if(isCorrect){
+    GW_CORRECT++;GW_STREAK++;
+    var bonus=GW_STREAK>=5?5:GW_STREAK>=3?3:0;
+    addXP(3+bonus);
+    sndCorrect();if(el)el.classList.add('correct');
+    updateDailyChallenge('correct',1);
+  }else{
+    GW_WRONG++;GW_STREAK=0;sndWrong();
+    if(el)el.classList.add('wrong');
+    var d=getXpData();d.totalWrong++;saveXpData(d);
+  }
+  var d=getXpData();if(isCorrect)d.totalCorrect++;saveXpData(d);
+  GW_QI++;
+  setTimeout(showGuessQ,1000);
+}
+function guessComplete(){
+  var total=GW_CORRECT+GW_WRONG;var pc=total?Math.round(GW_CORRECT/total*100):0;
+  var d=getXpData();d.gamesPlayed++;saveXpData(d);
+  updateDailyChallenge('games',1);checkAchievements();
+  var area=document.getElementById('gameArea');
+  var h='<div style="background:#11162e;border:1px solid #1e2350;border-radius:16px;padding:20px;text-align:center;margin-top:8px">';
+  h+='<div style="font-size:22px;font-weight:700;color:#f97316">Guess Complete!</div>';
+  h+='<div style="font-size:28px;color:#10b981;margin:6px 0">'+pc+'%</div>';
+  h+='<div style="font-size:12px;color:#8892b0">&#10004; '+GW_CORRECT+'  &#10008; '+GW_WRONG+'</div>';
+  h+='<button onclick="startGuess()" style="background:#f97316;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;padding:10px 20px;cursor:pointer;margin-top:8px">&#8634; Play Again</button>';
+  h+='<button onclick="renderGames()" style="background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.15);border-radius:12px;color:#f97316;font-size:12px;font-weight:600;padding:8px 16px;cursor:pointer;margin-top:4px;margin-left:8px">Back</button>';
+  h+='</div>';
+  if(pc>=80)spawnConfetti(30);
+  area.innerHTML=h;
+}
+
+// ====== TYPING GAME ======
+var TY_WORDS=[],TY_QI=0,TY_CORRECT=0,TY_WRONG=0,TY_TIME=0,TY_START=0,TY_HINT_TIMER=0;
+function startTyping(){
+  TY_WORDS=getGameWords(GAMES_CAT,10);
+  if(TY_WORDS.length<3){document.getElementById('gameArea').innerHTML='<div class="emp">Not enough words.</div>';return;}
+  TY_QI=0;TY_CORRECT=0;TY_WRONG=0;
+  showTypingQ();
+}
+function showTypingQ(){
+  if(TY_QI>=TY_WORDS.length){typingComplete();return;}
+  var q=TY_WORDS[TY_QI],pct=TY_QI/TY_WORDS.length*100;
+  var area=document.getElementById('gameArea');
+  var h='<div style="font-size:12px;font-weight:700;color:#ef4444;margin-bottom:6px">&#9000; Typing Challenge</div>';
+  h+='<div class="qbar"><div class="qbarf" style="width:'+pct+'%;background:#ef4444"></div></div>';
+  h+='<div style="font-size:10px;color:#6c7293;text-align:right;margin-bottom:4px">'+(TY_QI+1)+'/'+TY_WORDS.length+' | &#10004;'+TY_CORRECT+' &#10008;'+TY_WRONG+'</div>';
+  h+='<div class="qcard">';
+  h+='<div style="font-size:10px;color:#ef4444;font-weight:700;margin-bottom:4px">'+q.g+'</div>';
+  h+='<div style="font-size:11px;color:#8892b0;margin-bottom:4px">Type the English word for:</div>';
+  h+='<div style="font-size:22px;font-weight:800;margin-bottom:10px;color:#10b981">'+q.ru+'</div>';
+  h+='<input type="text" id="tyInput" class="type-input" placeholder="Type here..." autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"/>';
+  h+='<div class="type-hint" id="tyHint">Hint will appear in 3 seconds...</div>';
+  h+='<button onclick="checkTyping()" style="background:#ef4444;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;padding:10px 24px;cursor:pointer;margin-top:8px">&#10004; Check</button>';
+  h+='</div>';
+  area.innerHTML=h;
+  TY_START=Date.now();
+  var inp=document.getElementById('tyInput');
+  if(inp){inp.focus();inp.onkeydown=function(e){if(e.key==='Enter')checkTyping();};}
+  TY_HINT_TIMER=setTimeout(function(){
+    var hint=document.getElementById('tyHint');
+    if(hint&&TY_QI<TY_WORDS.length){
+      var w=TY_WORDS[TY_QI].en;
+      hint.innerHTML='First letter: <span>'+w[0]+'</span> ... <span>'+w[w.length-1]+'</span> ('+w.length+' letters)';
+    }
+  },3000);
+}
+function checkTyping(){
+  if(TY_HINT_TIMER){clearTimeout(TY_HINT_TIMER);TY_HINT_TIMER=0;}
+  var inp=document.getElementById('tyInput');if(!inp)return;
+  var user=inp.value.trim().toLowerCase();
+  var correct=TY_WORDS[TY_QI].en.toLowerCase();
+  var isRight=user===correct;
+  inp.classList.add(isRight?'correct':'wrong');
+  inp.disabled=true;
+  var elapsed=((Date.now()-TY_START)/1000).toFixed(1);
+  if(isRight){
+    TY_CORRECT++;sndCorrect();
+    var xpReward=elapsed<5?20:elapsed<10?12:elapsed<20?8:5;
+    addXP(xpReward);
+    var d=getXpData();d.totalCorrect++;saveXpData(d);
+    updateDailyChallenge('correct',1);
+    if(parseFloat(elapsed)<5){lsSetObj('eg_speed_demon',true);checkAchievements();}
+    scoreFly(inp,'+'+xpReward+' XP ('+elapsed+'s)','#10b981');
+  }else{
+    TY_WRONG++;sndWrong();
+    var d=getXpData();d.totalWrong++;saveXpData(d);
+    var hint=document.getElementById('tyHint');if(hint)hint.innerHTML='Answer: <span>'+TY_WORDS[TY_QI].en+'</span>';
+  }
+  TY_QI++;
+  setTimeout(showTypingQ,1200);
+}
+function typingComplete(){
+  var d=getXpData();d.gamesPlayed++;saveXpData(d);
+  updateDailyChallenge('games',1);checkAchievements();
+  var total=TY_CORRECT+TY_WRONG;var pc=total?Math.round(TY_CORRECT/total*100):0;
+  var area=document.getElementById('gameArea');
+  var h='<div style="background:#11162e;border:1px solid #1e2350;border-radius:16px;padding:20px;text-align:center;margin-top:8px">';
+  h+='<div style="font-size:22px;font-weight:700;color:#ef4444">Typing Done!</div>';
+  h+='<div style="font-size:28px;color:#10b981;margin:6px 0">'+pc+'%</div>';
+  h+='<div style="font-size:12px;color:#8892b0">&#10004; '+TY_CORRECT+'  &#10008; '+TY_WRONG+'</div>';
+  h+='<button onclick="startTyping()" style="background:#ef4444;border:none;border-radius:12px;color:#fff;font-size:13px;font-weight:600;padding:10px 20px;cursor:pointer;margin-top:8px">&#8634; Play Again</button>';
+  h+='<button onclick="renderGames()" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.15);border-radius:12px;color:#ef4444;font-size:12px;font-weight:600;padding:8px 16px;cursor:pointer;margin-top:4px;margin-left:8px">Back</button>';
+  h+='</div>';
+  if(pc>=80)spawnConfetti(30);
+  area.innerHTML=h;
+}
+
+// ====== PATCH: Add XP to Quiz & Grammar correct answers ======
+var _origAnsQ=ansQ;
+ansQ=function(c){
+  var was=QC;
+  _origAnsQ(c);
+  if(c&&!was&&QC>0){
+    var xpReward=c?3:0;
+    if(GW_STREAK>=3)xpReward+=2;
+    addXP(xpReward);
+    var d=getXpData();d.totalCorrect++;saveXpData(d);
+    updateDailyChallenge('correct',1);
+  }else if(!c){
+    var d=getXpData();d.totalWrong++;saveXpData(d);
+  }
+};
+var _origSaveQuizResult=saveQuizResult;
+saveQuizResult=function(){
+  _origSaveQuizResult();
+  updateDailyChallenge('quiz',QW.length);
+  updateDailyChallenge('study',1);
+  checkAchievements();
+};
+
+// ====== UPDATE Me page to show XP/Level ======
+var _origRenderMe=renderMe;
+renderMe=function(){
+  if(!meSub){
+    var xp=getXP();var lvl=getLevel();var xpIn=getXPInLevel();
+    var d=getXpData();var streak=getStreak();
+    var h='<div style="font-size:13px;font-weight:700;color:#8c93b8;margin-bottom:10px">&#128100; Me</div>';
+    h+='<div class="xp-wrap" style="margin-bottom:12px">';
+    h+='<div class="xp-level"><div class="lvl"><span class="xp-lvl-num">'+lvl+'</span></div><div class="lvlinfo"><div class="lvlname">'+getLevelName()+'</div><div class="xptxt"><span class="xp-cur-num">'+xpIn+'</span>/100 XP | Total: '+xp+' XP</div></div>';
+    if(streak>0)h+='<div style="font-size:14px;color:#eab308;font-weight:700"><span class="streak-fire">&#128293;</span> '+streak+'</div>';
+    h+='</div><div class="xp-bar"><div class="xp-barf" style="width:'+xpIn+'%"></div></div></div>';
+    h+='<div style="font-size:11px;font-weight:700;color:#8892b0;margin-bottom:6px">DAILY CHALLENGES</div>';
+    var chals=getDailyChallenges();
+    for(var i=0;i<chals.length;i++){
+      var c=chals[i];
+      h+='<div class="chal-item'+(c.done?' done':'')+'">';
+      h+='<span class="chal-icon">'+c.icon+'</span>';
+      h+='<div class="chal-info"><div class="chal-name">'+c.name+'</div><div class="chal-prog">'+Math.min(c.progress,c.target)+'/'+c.target+'</div></div>';
+      h+='<span class="chal-reward">'+c.reward+' XP</span>';
+      if(c.done)h+='<span class="chal-check">&#10004;</span>';
+      h+='</div>';
+    }
+    h+='<div style="font-size:11px;font-weight:700;color:#8892b0;margin:10px 0 6px">ACHIEVEMENTS <span style="font-weight:400;font-size:9px;color:#6c7293">('+getUnlockedAch().length+'/'+ACHIEVEMENTS.length+')</span></div>';
+    h+='<div class="ach-grid">';
+    var unlocked=getUnlockedAch();
+    for(var i=0;i<ACHIEVEMENTS.length;i++){
+      var a=ACHIEVEMENTS[i];var has=false;
+      for(var j=0;j<unlocked.length;j++){if(unlocked[j]===a.id){has=true;break;}}
+      h+='<div class="ach-badge'+(has?'':' locked')+'">';
+      h+='<div class="ach-icon">'+a.icon+'</div>';
+      h+='<div class="ach-name">'+a.name+'</div>';
+      h+='<div class="ach-desc">'+a.desc+'</div>';
+      h+='</div>';
+    }
+    h+='</div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">';
+    h+='<div onclick="openMeSub(\'stats\')" style="background:linear-gradient(135deg,#6366f1,#818cf8);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128200;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Stats</div></div>';
+    h+='<div onclick="openMeSub(\'history\')" style="background:linear-gradient(135deg,#ef4444,#f97316);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128202;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">History</div></div>';
+    h+='<div onclick="openMeSub(\'mywords\')" style="background:linear-gradient(135deg,#22c55e,#10b981);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128156;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">My Words</div></div>';
+    h+='<div onclick="openMeSub(\'random\')" style="background:linear-gradient(135deg,#f97316,#eab308);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#127922;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Random</div></div>';
+    h+='<div onclick="openMeSub(\'notes\')" style="background:linear-gradient(135deg,#7c5cfc,#a78bfa);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128221;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Notes</div></div>';
+    h+='<div onclick="openMeSub(\'sync\')" style="background:linear-gradient(135deg,#06b6d4,#22d3ee);border-radius:12px;padding:16px;text-align:center;cursor:pointer;touch-action:manipulation"><div style="font-size:24px">&#128260;</div><div style="color:#fff;font-size:12px;font-weight:700;margin-top:4px">Sync</div></div>';
+    h+='</div>';
+    document.getElementById('me').innerHTML=h;return;
+  }
+  _origRenderMe();
+};
+
 renderBrowse();
-</script>
 </body>
 </html>
