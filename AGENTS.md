@@ -33,3 +33,35 @@ Use these instead of raw localStorage calls:
 - `getGrammarCat()` — shortcut for `getCat('Grammar')`
 
 Do NOT use hardcoded indices like `G[8]` — always use `getCat('Grammar')`.
+
+## Navigation Tabs
+
+5 tabs: Browse, Quiz, Games, Grammar, Me. `switchTab(tab)` handles routing. Games tab: `renderGames()`.
+
+## XP & Gamification
+
+- `getXP()`, `getLevel()`, `getLevelName()`, `addXP(n)` — XP system (100 XP per level, 11 levels)
+- `ACHIEVEMENTS[]` — 13 achievements, `checkAchievements()` auto-unlocks
+- `getDailyChallenges()` — 3 daily challenges with XP rewards
+- Sound effects: `playSound(type)` — correct, wrong, click, levelup, achieve, flip, match
+- `spawnConfetti(n)` — canvas particle animation
+- `scoreFly(el, text, color)` — floating XP popup on correct answer
+
+## Mini-Games
+
+4 games on Games tab: Memory, Match Words, Guess Word, Typing. Each `start*Game()` renders into `#games`. XP awarded per game.
+
+## Spaced Repetition (SRS)
+
+- `scheduleWord(word, group, quality)` — schedule next review (Again=0, Hard=1, Good=2, Easy=3)
+- Intervals: 1d → 3d → 7d → 14d → 30d → 60d → 120d
+- `startSRSReview(catId)` — review due words from a category
+- SRS auto-integrated: `saveQuizResult` override schedules words after quiz
+- Games page shows Due/Learned/New counts per category
+
+## Git Remotes & Deployment
+
+- `origin` = GitLab, `github` = GitHub
+- GitLab CI: `.gitlab-ci.yml` copies `vocab.html` → `public/index.html`
+- GitHub Pages: serves `index.html` from `master` branch
+- SW cache: `eg-cache-v6` (network-first strategy)
