@@ -1,4 +1,4 @@
-var C='eg-cache-v6';
+var C='eg-cache-v7';
 var URLS=['index.html','sw.js'];
 self.addEventListener('install',function(e){
   e.waitUntil(caches.open(C).then(function(c){return c.addAll(URLS)}));
