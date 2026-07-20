@@ -1,4 +1,4 @@
-var C='eg-cache-v5';
+var C='eg-cache-v6';
 var URLS=['index.html','sw.js'];
 self.addEventListener('install',function(e){
   e.waitUntil(caches.open(C).then(function(c){return c.addAll(URLS)}));
@@ -10,14 +10,14 @@ self.addEventListener('activate',function(e){
 });
 self.addEventListener('fetch',function(e){
   e.respondWith(
-    caches.match(e.request).then(function(r){
-      return r||fetch(e.request).then(function(res){
-        if(res&&res.ok&&res.type=='basic'){
-          var c2=caches.open(C);
-          c2.then(function(c){c.put(e.request,res.clone())});
-        }
-        return res;
-      });
+    fetch(e.request).then(function(res){
+      if(res&&res.ok&&res.type=='basic'){
+        var c2=caches.open(C);
+        c2.then(function(c){c.put(e.request,res.clone())});
+      }
+      return res;
+    }).catch(function(){
+      return caches.match(e.request);
     })
   );
 });
